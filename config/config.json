@@ -2,7 +2,7 @@
   "development": {
     "username": "foo",
     "password": "bar",
-    "database": "boilerplate_db",
+    "database": "quizwiz_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

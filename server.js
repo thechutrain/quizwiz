@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 // Create express App ------------------------- /
-const app = express();
+const app = module.exports = express(); // for testing purposes 
 const PORT = process.env.PORT || 3000;
 
 // require models ------------------------- /
@@ -22,10 +22,17 @@ app.use(bodyParser.json());
 app.use('/api', apiRouter);
 
 // Start server ---------------------------------- /
-db.sequelize.sync().then(() => {
-  console.info('Databases are all synced!');
+if (process.env.NODE_ENV == 'development'){
+  db.sequelize.sync().then(() => {
+    console.info('Databases are all synced!');
+    app.listen(PORT, (err) => {
+      if (err) console.log(err);
+      console.info(`DEVELOPMENT ENV: Listening on port: ${PORT}`);
+    });
+  }).catch((err) => console.error(err));
+} else {
   app.listen(PORT, (err) => {
     if (err) console.log(err);
     console.info(`Listening on port: ${PORT}`);
   });
-}).catch((err) => logger.error(err));
+}

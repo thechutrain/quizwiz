@@ -28,5 +28,4 @@ db.sequelize.sync().then(() => {
     if (err) console.log(err);
     console.info(`Listening on port: ${PORT}`);
   });
-
 }).catch((err) => logger.error(err));

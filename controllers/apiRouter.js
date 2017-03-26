@@ -1,23 +1,13 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const query = require('./apiController');
+const query = require('./apiQuery');
 
 // ============ EXAMPLE ================
 router.get('/test', (req, res) => {
-  // promise-based
-  query.test()
-  .then((results) =>{
+  query.test().then((results) =>{
     res.json(results);
   })
-
-  // cb based
-  // query.test(function(result){
-  //   res.json(result);
-  // })
-
-  // cb based w. anony func
-  // query.test((result) => { res.json(result) });
 })
 
 /** ========== Routes Related to User ============

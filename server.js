@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 // require models ------------------------- /
 const db = require('./models');
-const apiController = require('./controllers/apiController');
+const apiRouter = require('./controllers/apiRouter');
 
 // Logger ------------------------- /
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms')); // for logging
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Route config -------------------------------------------/
-app.use('/api', apiController);
+app.use('/api', apiRouter);
 
 // Start server ---------------------------------- /
 db.sequelize.sync().then(() => {

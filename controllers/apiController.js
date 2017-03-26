@@ -1,9 +1,12 @@
-'use strict';
-const express = require('express');
-const router = express.Router();
+const db = require('../models');
 
-router.get('/', (req, res) => {
-  res.json({ 'test': true });
-})
-
-module.exports = router;
+module.exports = {
+  test: function(cb){
+    db.user.findAll({}).then((results) => {
+      cb(results);
+    });
+  }
+  // findAllUsers: function(){
+  //   return db.user.findAll({}).then
+  // }
+}

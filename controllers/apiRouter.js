@@ -14,6 +14,7 @@ router.get('/test', (req, res) => {
  *  GET /user --> gets all users
  *  GET /user/:id --> gets a specified user based on their id
  *  POST /user --> makes a new user
+ *  TODO  .... PUT /user/:id --> TO DO
  */
 router.get('/user', (req, res) => {
   query.findUser().then((users) => {

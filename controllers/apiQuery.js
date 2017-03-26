@@ -5,10 +5,6 @@ const db = require('../models');
 // const user_req_fields = ['username'];
 
 module.exports = {
-  // test: function() {
-  //   return db.user.findAll({});
-  // },
-
   findUser: (id) => (id ? db.user.findOne({ where: { id }}) : db.user.findAll()),
 
   addUser: (userObj) => {

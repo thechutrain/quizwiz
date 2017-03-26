@@ -15,6 +15,7 @@ describe('"user" model', () => {
       done();
     })
   });
+
   it('emptied user table; should be an empty array', (done) => {
     query.findUser().then((results) => {
       expect(results).to.be.a('array');
@@ -22,10 +23,22 @@ describe('"user" model', () => {
       done();
     })
   });
+
   it('search for non-existent user', (done) => {
     query.findUser(-99).then((results) => {
       // console.log(results);
       expect(results).to.be.a('null');
+      done();
+    })
+  });
+  
+  it('can create a new user', (done) => {
+    let username = 'testing123';
+    let password = 'password';
+    query.addUser({ username, password }).then((result) => {
+      // console.log(result); // --> huge sequelize object
+      expect(result[0]).to.have.deep.property('dataValues.username', username);
+      expect(result[0]).to.have.deep.property('dataValues.password', password);
       done();
     })
   });

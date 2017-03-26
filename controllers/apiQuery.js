@@ -10,13 +10,7 @@ module.exports = {
     return db.user.findAll({});
   },
 
-  // test_v2: function(){
-  //   return new Promise((resolve, reject) => {
-  //     resolve();
-  //   })
-  // },
-
-  // findAllUsers: function(){
-  //   return db.user.findAll({}).then
-  // }
+  findUser: function(id){
+    return id ? db.user.findOne({ where: { id }}) : db.user.findAll();
+  }
 }

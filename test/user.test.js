@@ -16,12 +16,20 @@ describe('"user" model', () => {
     })
   });
   it('emptied user table; should be an empty array', (done) => {
-    query.test().then((results) => {
+    query.findUser().then((results) => {
       expect(results).to.be.a('array');
       expect(results).to.have.lengthOf(0);
       done();
     })
   });
+  it('search for non-existent user', (done) => {
+    query.findUser(-99).then((results) => {
+      // console.log(results);
+      expect(results).to.be.a('null');
+      done();
+    })
+  });
+  
   // it('should be able to get a new user')
 })
 

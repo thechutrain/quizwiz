@@ -46,7 +46,7 @@ describe(title, () => {
 
   it('should be able to insert a new quiz', (done) => {
     query.addQuiz({ name, description }).spread((result, created) => {
-      console.log(`New quiz??? ${created}`);
+      // console.log(`New quiz??? ${created}`);
       // console.log(result);
       try {
         expect(result).to.have.deep.property('dataValues.name', name);
@@ -61,7 +61,7 @@ describe(title, () => {
 
   it('won\'t create the same user again', (done) => {
     query.addQuiz({ name, description }).spread((result, created) => {
-      console.log(`New user??? ${created}`);
+      // console.log(`New user??? ${created}`);
       try {
         expect(result).to.have.deep.property('dataValues.name', name);
         expect(result).to.have.deep.property('dataValues.description', description);

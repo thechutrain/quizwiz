@@ -9,7 +9,12 @@ const expect = require('chai').expect;
 const db = require('../models');
 const query = require('../controllers/apiQuery');
 
-describe('"user" model', () => {
+const title = `
+===============================
+Unit test on "user" model
+===============================`
+
+describe(title, () => {
   before((done)=>{
     db.sequelize.sync({ force: true }).then((result) => {
       done();

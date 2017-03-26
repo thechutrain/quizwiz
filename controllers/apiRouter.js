@@ -6,9 +6,10 @@ const query = require('./apiController');
 // ============ EXAMPLE ================
 router.get('/test', (req, res) => {
   // promise-based
-  // query.test().then((result) =>{
-  //   res.json(result);
-  // })
+  query.test()
+  .then((results) =>{
+    res.json(results);
+  })
 
   // cb based
   // query.test(function(result){
@@ -16,7 +17,7 @@ router.get('/test', (req, res) => {
   // })
 
   // cb based w. anony func
-  query.test((result) => { res.json(result) });
+  // query.test((result) => { res.json(result) });
 })
 
 /** ========== Routes Related to User ============

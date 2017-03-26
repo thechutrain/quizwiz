@@ -1,7 +1,6 @@
 // App dependencies ---------------------------- /
 const express = require('express');
 const bodyParser = require('body-parser');
-const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 
 // Create express App ------------------------- /

@@ -14,6 +14,16 @@ module.exports = {
   // Quiz related queries
   findQuiz: (id) => (id ? db.quiz.findOne({ where: { id }}) : db.quiz.findAll()),
   addQuiz: (quizObj) => {
-    return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: userObj });
-  } 
+    return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj });
+  }, 
+
+  // Vote related queries
+  vote: (voteObj) => {
+    // first find if user_id + quiz_id pair exists
+    db.vote.find({ where: { user_id: voteObj.user_id, quiz_id: voteObj.quiz_id } })
+    .then((result) => {
+      return result;
+    })
+    // 
+  }
 }

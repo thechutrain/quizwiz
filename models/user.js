@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User',
+  var user = sequelize.define('user',
     // columns of table
     {
       username: {
@@ -20,9 +20,10 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods: {
         associate: function(models) {
-          // make associates here later!
+          user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'user_id' });
+          user.hasMany(models.userquiz);
         }
       } // end classMethods
     }); // end .define
-  return User;
+  return user;
 };

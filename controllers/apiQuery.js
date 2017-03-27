@@ -19,6 +19,11 @@ module.exports = {
 
   // Vote related queries
   vote: (voteObj) => {
-    db.vote.find({ where: { user_id: voteObj.user_id, quiz_id: voteObj.quiz_id } })
+    db.vote.find({ 
+      where: { 
+        user_id: voteObj.user_id, 
+        quiz_id: voteObj.quiz_id
+      }
+    })
   },
 }

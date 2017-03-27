@@ -6,8 +6,8 @@ const expect = require('chai').expect;
 // const server = require('../server');
 
 // require the database models
-const db = require('../models');
-const query = require('../controllers/apiQuery');
+const db = require('../../models');
+const query = require('../../controllers/apiQuery');
 
 const title = `
 ===============================

@@ -2,8 +2,8 @@ const chai = require('chai')
 const assert = require('chai').assert
 const expect = require('chai').expect
 
-const db = require('../models')
-const query = require('../controllers/apiQuery')
+const db = require('../../models')
+const query = require('../../controllers/apiQuery')
 
 const title = `
 ===============================
@@ -20,7 +20,8 @@ describe(title, () => {
       return Promise.all([
         query.addUser(user_a),
         query.addUser(user_b),
-        query.addQuiz(quiz_1)
+        query.addQuiz(quiz_1),
+        query.addQuiz(quiz_2)
       ])
     }).then(() => {
     // .spread(([user, u_created], [quiz, q_created]) => {
@@ -35,16 +36,16 @@ describe(title, () => {
       query.findUser(),
       query.findQuiz()
     ]).then((resultArray) => {
-      // console.log(resultArray[0].length);
       let first_user = resultArray[0][0].dataValues;
       let second_user = resultArray[0][1].dataValues;
       let first_quiz = resultArray[1][0].dataValues;
       let second_quiz = resultArray[1][1].dataValues;
-      console.log(first_user);
-      console.log('--------');
-      console.log(second_user);
-      // console.log(quiz);
-      done();
+      try {
+        assert.equal(first_user, user_a, 'should be the same user');
+        done();
+      } catch(e) {
+        done(e);
+      }
     })
 
     // return Promise.all([

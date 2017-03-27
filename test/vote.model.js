@@ -11,68 +11,55 @@ Unit Testing the "vote" model
 ===============================`;
 
 describe(title, () => {
+  let user_a = { username: 'adam', password: 'pass' };
+  let user_b = { username: 'brian', password: 'not_pass' };
+  let quiz_1 = { name: 'first quiz', description: 'this is a description of first quiz' };
+  let quiz_2 = { name: 'second quiz', description: 'this is a description of the second' };
   before((done) => {
-    // WORKING WAY
-    // db.sequelize.sync({ force: true }).then(()=> {
-    //   return query.addUser({ username: 'adam', password: 'pass' });
-    // }).then(() => {
-    //   return query.addQuiz({ name: 'test123' })
-    // }).then(() => {
-    //   done();
-    // })
-
     db.sequelize.sync({ force: true }).then(()=> {
       return Promise.all([
-        query.addUser({ username: 'adam', password: 'pass' }),
-        query.addQuiz({ name: 'test123' })
+        query.addUser(user_a),
+        query.addUser(user_b),
+        query.addQuiz(quiz_1)
       ])
-    }).spread(([user, u_created], [quiz, q_created]) => {
+    }).then(() => {
+    // .spread(([user, u_created], [quiz, q_created]) => {
       // console.log(`Was the user created?? ${u_created}`);
       // console.log(`Was the quiz created?? ${q_created}`);
       done();
-    })
-  }) // end of the before
+    });
+  }); // end of the before
 
   it('should have a user and a quiz, proper set up', (done) => {
     Promise.all([
       query.findUser(),
       query.findQuiz()
-    ]).then((user, quiz) => {
-      try {
-        // console.log(user)
-        done();
-      } catch(e) {
-        done(e)
-      }
+    ]).then((resultArray) => {
+      // console.log(resultArray[0].length);
+      let first_user = resultArray[0][0].dataValues;
+      let second_user = resultArray[0][1].dataValues;
+      let first_quiz = resultArray[1][0].dataValues;
+      let second_quiz = resultArray[1][1].dataValues;
+      console.log(first_user);
+      console.log('--------');
+      console.log(second_user);
+      // console.log(quiz);
+      done();
     })
-  });
-  // it('there should be a user and quiz', (done) => {
-  //   try {
-  //     done();
-  //     // Promise.all([
-  //     //   query.findUser(),
-  //     //   query.findQuiz()
-  //     // ]).then((user, quiz) => {
-  //     //   // console.log(user[0]);
-  //     //   // console.log('----------');
-  //     //   // console.log(quiz[0]);
-  //     //   done();
-  //     // })
-  //   } catch(e) {
-  //     done(e)
-  //   }
-  // });
 
-  // it('should be an emptied quiz table', (done) => {
-  //   query.findQuiz().then((results) => {
-  //     try {
-  //       expect(results).to.be.a('array')
-  //       expect(results).to.have.lengthOf(0)
-  //       done()
-  //     } catch(e) {
-  //       done(e)
-  //     }
-  //   })
-  // }) // end emptied quiz table
+    // return Promise.all([
+    //   query.findUser(),
+    //   query.findQuiz()
+    // ]).then(([user, quiz]) => {
+    //   try {
+    //     console.log(user);
+    //     console.log(quiz);
+    //     done();
+    //   } catch(e) {
+    //     done(e)
+    //   }
+    // })
+  });
+
 
 })

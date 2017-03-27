@@ -19,11 +19,6 @@ module.exports = {
 
   // Vote related queries
   vote: (voteObj) => {
-    // first find if user_id + quiz_id pair exists
     db.vote.find({ where: { user_id: voteObj.user_id, quiz_id: voteObj.quiz_id } })
-    .then((result) => {
-      return result;
-    })
-    // 
-  }
+  },
 }

@@ -1,5 +1,5 @@
 {
-  "name": "express_handlebars_sequelize_boilerplate",
+  "name": "quizwiz_api",
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
@@ -7,7 +7,8 @@
     "prestart": "sequelize db:migrate",
     "start": "node server.js",
     "dev": "NODE_ENV='development' nodemon server.js",
-    "test": "NODE_ENV='test' node_modules/.bin/mocha"
+    "test": "NODE_ENV='test'node_modules/.bin/mocha",
+    "travis-test": "NODE_ENV='travisTest'node_modules/.bin/mocha"
   },
   "dependencies": {
     "body-parser": "^1.17.1",

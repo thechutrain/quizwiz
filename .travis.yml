@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 6.9.1
+env:
+  - NODE_ENV = 'travisTest'
 services:
   - mysql
 before_install:

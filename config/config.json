@@ -15,7 +15,7 @@
     "logging": false
   },
   "travisTest": {
-    "username": "travis",
+    "username": "root",
     "password": null,
     "database": "quizwiz_travis_db",
     "host": "127.0.0.1",

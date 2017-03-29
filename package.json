@@ -7,7 +7,7 @@
     "prestart": "sequelize db:migrate",
     "start": "node server.js",
     "dev": "NODE_ENV='development' nodemon server.js",
-    "test": "NODE_ENV='test'node_modules/.bin/mocha",
+    "test": "NODE_ENV='test' find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "travis-test": "NODE_ENV='travisTest'node_modules/.bin/mocha"
   },
   "dependencies": {

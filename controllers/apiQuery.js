@@ -18,12 +18,16 @@ module.exports = {
   }, 
 
   // Vote related queries
-  vote: (voteObj) => {
-    db.vote.find({ 
+  vote: (voteObj) => {  
+    db.vote.findOne({ 
       where: { 
         user_id: voteObj.user_id, 
         quiz_id: voteObj.quiz_id
       }
     })
+  },
+  findAllVotes: () => {
+    // TO DO find votes by a quiz id
+    return db.vote.findAll()
   },
 }

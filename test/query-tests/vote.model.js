@@ -19,9 +19,7 @@ describe(title, () => {
     db.sequelize.sync({ force: true }).then(()=> {
       return Promise.all([
         query.addUser(user_a),
-        // query.addUser(user_b),
         query.addQuiz(quiz_1),
-        // query.addQuiz(quiz_2)
       ])
     }).then(() => {
       return Promise.all([
@@ -29,14 +27,11 @@ describe(title, () => {
         query.addQuiz(quiz_2)
       ])
     }).then(() => {
-    // .spread(([user, u_created], [quiz, q_created]) => {
-      // console.log(`Was the user created?? ${u_created}`);
-      // console.log(`Was the quiz created?? ${q_created}`);
       done();
     });
   }); // end of the before
 
-  it('should have a user and a quiz, proper set up', (done) => {
+  it('should have 2 users and 2 quizzes, proper set up', (done) => {
     Promise.all([
       query.findUser(),
       query.findQuiz()
@@ -44,10 +39,7 @@ describe(title, () => {
       let first_user = resultArray[0][0].dataValues;
       let second_user = resultArray[0][1].dataValues;
       let first_quiz = resultArray[1][0].dataValues;
-      // console.log(first_quiz);
       let second_quiz = resultArray[1][1].dataValues;
-      // console.log('second quiz');
-      // console.log(second_quiz);
       try {
         // ?? is there a method to check object are the same??
         assert.equal(first_user.username, user_a.username, 'should be the same username for user a');
@@ -60,21 +52,28 @@ describe(title, () => {
       } catch(e) {
         done(e);
       }
-    })
-
-    // return Promise.all([
-    //   query.findUser(),
-    //   query.findQuiz()
-    // ]).then(([user, quiz]) => {
-    //   try {
-    //     console.log(user);
-    //     console.log(quiz);
-    //     done();
-    //   } catch(e) {
-    //     done(e)
-    //   }
-    // })
+    }) // end of then
   });
+
+  it('should not have any votes in the table', (done) => {
+    query.findAllVotes().then((result) => {
+      // check that its empty
+      done();
+    })
+  });
+
+  it('should be able to enter a single vote in the table', (done) => {
+    done();
+  });
+
+  it('should not be able to enter the same vote in the table', (done) => {
+
+  });
+
+  it('should be able to update the vote in the table', (done) => {
+    done();
+  })
+
 
 
 })

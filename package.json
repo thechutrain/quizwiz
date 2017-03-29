@@ -8,7 +8,7 @@
     "start": "node server.js",
     "dev": "NODE_ENV='development' nodemon server.js",
     "test": "export NODE_ENV='test'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
-    "travis-test": "export NODE_ENV='test'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive"
+    "travis-test": "find ./test -name '*.js' | node_modules/.bin/mocha --recursive"
   },
   "dependencies": {
     "body-parser": "^1.17.1",

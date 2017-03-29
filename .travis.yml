@@ -8,3 +8,5 @@ before_install:
 script:
   - npm run travis-test
   - echo $NODE_ENV
+dist: trusty
+sudo: false

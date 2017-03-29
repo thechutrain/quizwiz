@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/thechutrain/quizwiz.svg?branch=master)](https://travis-ci.org/thechutrain/quizwiz)
+
 # Express-API-Boilerplate
 > boilerplate minimal REST api that uses sequelize, and sequelize-router beta for quick deployment
 

@@ -35,4 +35,22 @@ router.post('/user', (req, res) => {
   })
 })
 
+/** =========== Routes Related to Quiz ==========
+ * GET /quiz 
+ * GET /quiz/:id
+ * POST /quiz
+ * 
+ */
+router.get('/quiz', (req, res) => {
+  query.findQuiz().then((result) => {
+    res.json(result);
+  })
+})
+
+router.post('/quiz', (req, res) => {
+  query.addQuiz(req.body).spread((user, created) => {
+    res.json({user, created});
+  })
+})
+
 module.exports = router

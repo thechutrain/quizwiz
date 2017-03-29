@@ -6,8 +6,8 @@ const expect = require('chai').expect;
 // const server = require('../server');
 
 // require the database models
-const db = require('../models');
-const query = require('../controllers/apiQuery');
+const db = require('../../models');
+const query = require('../../controllers/apiQuery');
 
 const title = `
 ===============================
@@ -49,7 +49,7 @@ describe(title, () => {
   let password = 'password';
   it('should be able to create a new user', (done) => {
     query.addUser({ username, password }).spread((result, created) => {
-      console.log(`New user??? ${created}`);
+      // console.log(`New user??? ${created}`);
       try {
         expect(result).to.have.deep.property('dataValues.username', username);
         expect(result).to.have.deep.property('dataValues.password', password);
@@ -63,7 +63,7 @@ describe(title, () => {
 
   it('won\'t create the same user again', (done) => {
     query.addUser({ username, password }).spread((result, created) => {
-      console.log(`New user??? ${created}`);
+      // console.log(`New user??? ${created}`);
       try {
         expect(result).to.have.deep.property('dataValues.username', username);
         expect(result).to.have.deep.property('dataValues.password', password);

@@ -8,5 +8,5 @@ services:
 before_install:
   - mysql -e 'CREATE DATABASE quizwiz_travis_db'
 script:
-  - echo $NODE_ENV
   - npm run travis-test
+  - echo $NODE_ENV

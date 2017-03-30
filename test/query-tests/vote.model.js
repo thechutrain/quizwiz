@@ -8,7 +8,8 @@ const query = require('../../controllers/apiQuery')
 const title = `
 ===============================
 Unit Testing the "vote" model
-===============================`;
+===============================
+`
 
 describe(title, () => {
   let user_a = { username: 'adam', password: 'pass' };
@@ -58,7 +59,12 @@ describe(title, () => {
   it('should not have any votes in the table', (done) => {
     query.findAllVotes().then((result) => {
       // check that its empty
-      done();
+      try {
+        expect(result).to.be.a('array');
+        done();  
+      } catch(e) {
+        done(e);
+      }
     })
   });
 
@@ -67,7 +73,7 @@ describe(title, () => {
   });
 
   it('should not be able to enter the same vote in the table', (done) => {
-
+    done();
   });
 
   it('should be able to update the vote in the table', (done) => {

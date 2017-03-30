@@ -19,11 +19,16 @@ module.exports = {
 
   // Vote related queries
   vote: (voteObj) => {  
-    db.vote.findOne({ 
-      where: { 
-        user_id: voteObj.user_id, 
-        quiz_id: voteObj.quiz_id
-      }
+    return new Promise((resolve, reject) => {
+    // first search if there is a vote
+      db.vote.findOne({ 
+        where: { 
+          user_id: voteObj.user_id, 
+          quiz_id: voteObj.quiz_id
+        }
+      }).then((vote) => {
+        resolve(vote);
+      })
     })
   },
   findAllVotes: () => {

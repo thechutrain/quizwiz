@@ -76,7 +76,7 @@ describe(title, () => {
   })
 
   it('should be able to enter a single vote in the table', (done) => {
-    
+    done();
   })
 
   it('should not be able to enter the same vote in the table', (done) => {

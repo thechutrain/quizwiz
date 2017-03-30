@@ -12,11 +12,14 @@ Unit Testing the "vote" model
 ===============================
 `
 
+// Testing Objects
+let userAdam = { username: 'adam', password: 'pass' }
+let userBrian = { username: 'brian', password: 'not_pass' }
+let quiz1 = { name: 'first quiz', description: 'this is a description of first quiz' }
+let quiz2 = { name: 'second quiz', description: 'this is a description of the second' }
+// let vote1 = { quizid: 1, }
+
 describe(title, () => {
-  let userAdam = { username: 'adam', password: 'pass' }
-  let userBrian = { username: 'brian', password: 'not_pass' }
-  let quiz1 = { name: 'first quiz', description: 'this is a description of first quiz' }
-  let quiz2 = { name: 'second quiz', description: 'this is a description of the second' }
   before((done) => {
     db.sequelize.sync({ force: true }).then(() => {
       return Promise.all([
@@ -50,7 +53,8 @@ describe(title, () => {
         assert.equal(secondUser.password, userBrian.password, 'should be the same password for user b')
         assert.equal(firstQuiz.name, quiz1.name, 'should be the same quiz name for quiz 1')
         assert.equal(firstQuiz.description, quiz1.description, 'should be the same description of quiz1')
-        assert.equal(secondQuiz.name, quiz2.description)
+        assert.equal(secondQuiz.name, quiz2.name, 'should be the same name for quiz 2')
+        assert.equal(secondQuiz.description, quiz2.description, 'should be the same description for quiz 2')
         done()
       } catch (e) {
         done(e)
@@ -63,6 +67,7 @@ describe(title, () => {
       // check that its empty
       try {
         expect(result).to.be.a('array')
+        expect(result).to.be.empty
         done()
       } catch (e) {
         done(e)

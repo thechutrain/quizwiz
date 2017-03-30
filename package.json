@@ -8,6 +8,7 @@
     "start": "node server.js",
     "dev": "NODE_ENV='development' nodemon server.js",
     "test": "export NODE_ENV='test'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
+    "travis-migrate": "sequelize db:migrate",
     "travis-test": "find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "lint": "node_modules/.bin/standard",
     "lint-fix": "node_modules/.bin/standard --fix"

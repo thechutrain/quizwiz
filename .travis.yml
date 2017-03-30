@@ -10,7 +10,7 @@ services:
 #   - sudo apt-get update -q
 #   - sudo apt-get install -q --force-yes -o Dpkg::Options::=--force-confnew mysql-server
 #   - sudo mysql_upgrade
-#   - mysql -u root -e "CREATE DATABASE quizwiz_travis_db"
+  - mysql -u root -e "CREATE DATABASE quizwiz_travis_db"
 script:
   - npm run travis-test
   - echo $NODE_ENV

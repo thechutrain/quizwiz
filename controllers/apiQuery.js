@@ -27,7 +27,7 @@ module.exports = {
           quiz_id: voteObj.quiz_id
         }
       }).then((vote) => {
-        resolve(vote)
+        vote ? resolve(vote) : resolve(null)
       })
     })
   },

@@ -66,10 +66,7 @@ describe(title, () => {
 
   it('should not have any votes in the table', (done) => {
     query.findAllVotes().then((result) => {
-      // check that its empty
       try {
-        // expect(result).to.be.a('array')
-        // expect(result).to.be.empty
         assert.deepEqual(result, [], 'should be an empty array of votes')
         done()
       } catch (e) {
@@ -79,7 +76,7 @@ describe(title, () => {
   })
 
   it('should be able to enter a single vote in the table', (done) => {
-    done()
+    
   })
 
   it('should not be able to enter the same vote in the table', (done) => {

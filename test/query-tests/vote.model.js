@@ -55,6 +55,8 @@ describe(title, () => {
         assert.equal(firstQuiz.description, quiz1.description, 'should be the same description of quiz1')
         assert.equal(secondQuiz.name, quiz2.name, 'should be the same name for quiz 2')
         assert.equal(secondQuiz.description, quiz2.description, 'should be the same description for quiz 2')
+        // BETTER WAY
+        // assert.deepEqual(firstUser, userAdam, 'first user should be user adam') // DOESNT WORK because sequel obj has additional props
         done()
       } catch (e) {
         done(e)
@@ -66,8 +68,9 @@ describe(title, () => {
     query.findAllVotes().then((result) => {
       // check that its empty
       try {
-        expect(result).to.be.a('array')
-        expect(result).to.be.empty
+        // expect(result).to.be.a('array')
+        // expect(result).to.be.empty
+        assert.deepEqual(result, [], 'should be an empty array of votes')
         done()
       } catch (e) {
         done(e)

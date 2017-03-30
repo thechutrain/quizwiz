@@ -1,38 +1,38 @@
 // App dependencies ---------------------------- /
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const express = require('express')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
 // Create express App ------------------------- /
-const app = module.exports = express(); // for testing purposes 
-const PORT = process.env.PORT || 3000;
+const app = module.exports = express() // for testing purposes
+const PORT = process.env.PORT || 3000
 
 // require models ------------------------- /
-const db = require('./models');
-const apiRouter = require('./controllers/apiRouter');
+const db = require('./models')
+const apiRouter = require('./controllers/apiRouter')
 
 // Logger ------------------------- /
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms')); // for logging
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms')) // for logging
 
 // App middleware ------------------------------ /
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
-//Route config -------------------------------------------/
-app.use('/api', apiRouter);
+// Route config -------------------------------------------/
+app.use('/api', apiRouter)
 
 // Start server ---------------------------------- /
-if (process.env.NODE_ENV == 'development'){
+if (process.env.NODE_ENV === 'development') {
   db.sequelize.sync().then(() => {
-    console.info('Databases are all synced!');
+    console.info('Databases are all synced!')
     app.listen(PORT, (err) => {
-      if (err) console.log(err);
-      console.info(`DEVELOPMENT ENV: Listening on port: ${PORT}`);
-    });
-  }).catch((err) => console.error(err));
+      if (err) console.log(err)
+      console.info(`DEVELOPMENT ENV: Listening on port: ${PORT}`)
+    })
+  }).catch((err) => console.error(err))
 } else {
   app.listen(PORT, (err) => {
-    if (err) console.log(err);
-    console.info(`Listening on port: ${PORT}`);
-  });
+    if (err) console.log(err)
+    console.info(`Listening on port: ${PORT}`)
+  })
 }

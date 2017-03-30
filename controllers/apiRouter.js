@@ -5,7 +5,7 @@ const query = require('./apiQuery')
 
 // ============ EXAMPLE ================
 router.get('/test', (req, res) => {
-  query.test().then((results) =>{
+  query.test().then((results) => {
     res.json(results)
   })
 })
@@ -29,27 +29,27 @@ router.get('/user/:id', (req, res) => {
 })
 
 router.post('/user', (req, res) => {
-  // TO DO: VALIDATOR 
+  // TO DO: VALIDATOR
   query.addUser(req.body).spread((user, created) => {
-    res.json(created);
+    res.json(created)
   })
 })
 
 /** =========== Routes Related to Quiz ==========
- * GET /quiz 
+ * GET /quiz
  * GET /quiz/:id
  * POST /quiz
- * 
+ *
  */
 router.get('/quiz', (req, res) => {
   query.findQuiz().then((result) => {
-    res.json(result);
+    res.json(result)
   })
 })
 
 router.post('/quiz', (req, res) => {
   query.addQuiz(req.body).spread((user, created) => {
-    res.json({user, created});
+    res.json({user, created})
   })
 })
 

@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../models')
 
 // validators
 // TO DO LATER
@@ -6,33 +6,33 @@ const db = require('../models');
 
 module.exports = {
   // User Related Queries
-  findUser: (id) => (id ? db.user.findOne({ where: { id }}) : db.user.findAll()),
+  findUser: (id) => (id ? db.user.findOne({ where: { id } }) : db.user.findAll()),
   addUser: (userObj) => {
-    return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj });
+    return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
   },
 
   // Quiz related queries
-  findQuiz: (id) => (id ? db.quiz.findOne({ where: { id }}) : db.quiz.findAll()),
+  findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   addQuiz: (quizObj) => {
-    return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj });
-  }, 
+    return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj })
+  },
 
   // Vote related queries
-  vote: (voteObj) => {  
+  vote: (voteObj) => {
     return new Promise((resolve, reject) => {
     // first search if there is a vote
-      db.vote.findOne({ 
-        where: { 
-          user_id: voteObj.user_id, 
+      db.vote.findOne({
+        where: {
+          user_id: voteObj.user_id,
           quiz_id: voteObj.quiz_id
         }
       }).then((vote) => {
-        resolve(vote);
+        resolve(vote)
       })
     })
   },
   findAllVotes: () => {
     // TO DO find votes by a quiz id
     return db.vote.findAll()
-  },
+  }
 }

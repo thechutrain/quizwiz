@@ -13,7 +13,8 @@ const query = require('../../controllers/apiQuery')
 const title = `
 ===============================
 Unit test on "user" model
-===============================`
+===============================
+`
 
 describe(title, () => {
   before((done) => {

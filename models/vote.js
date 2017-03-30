@@ -27,7 +27,7 @@ module.exports = function (sequelize, DataTypes) {
     },
       // options
     {
-      underscored: true,
+      // underscored: true,
       freezeTableName: true
     }) // end of define
   return vote

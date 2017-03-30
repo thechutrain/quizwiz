@@ -13,7 +13,7 @@ before_install:
   # - mysql -u root -e "CREATE DATABASE quizwiz_travis_db"
     - mysql -e "CREATE DATABASE quizwiz_travis_db"
 script:
-  - npm run travis-migrate
+  # - npm run travis-migrate
   - npm run travis-test
   - echo $NODE_ENV
 # dist: trusty

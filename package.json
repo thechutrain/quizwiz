@@ -6,13 +6,10 @@
   "scripts": {
     "prestart": "node_modules/.bin/sequelize db:migrate",
     "start": "node server.js",
-
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "dev": "export NODE_ENV='development'; npm run migrate; nodemon server.js",
     "test": "export NODE_ENV='test'; npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
-
     "travis-test": "npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
-    
     "lint": "node_modules/.bin/standard",
     "lint-fix": "node_modules/.bin/standard --fix"
   },
@@ -26,6 +23,10 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "eslint": "^3.18.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
     "mocha": "^3.2.0",
     "sequelize-cli": "^2.7.0",
     "standard": "^9.0.2"

@@ -11,23 +11,23 @@ module.exports = {
     */
     return queryInterface.createTable(
        'user',
-        {
-          id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-          },
-          createdAt: {
-            type: Sequelize.DATE
-          },
-          updatedAt: {
-            type: Sequelize.DATE
-          },
-          username: {
-            type: Sequelize.STRING,
-            allowNull: false
-          }
-          //foreign key usage
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+        },
+        createdAt: {
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          type: Sequelize.DATE
+        },
+        username: {
+          type: Sequelize.STRING,
+          allowNull: false
+        }
+          // foreign key usage
           // attr4: {
           //     type: Sequelize.INTEGER,
           //     references: {
@@ -37,9 +37,9 @@ module.exports = {
           //     onUpdate: 'cascade',
           //     onDelete: 'cascade'
           // }
-        }
+      }
       )
-    // return queryInterface.createTable('user', 
+    // return queryInterface.createTable('user',
     //     {
     //       id: {
     //         type: Sequelize.INTEGER,
@@ -72,6 +72,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('user');
+    return queryInterface.dropTable('user')
   }
 }

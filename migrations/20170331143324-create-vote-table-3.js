@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -16,7 +16,7 @@ module.exports = {
         references: {
           model: 'user',
           key: 'id'
-        },
+        }
       },
       quizId: {
         type: Sequelize.INTEGER,
@@ -24,10 +24,10 @@ module.exports = {
         references: {
           model: 'quiz',
           key: 'id'
-        },
+        }
       },
       stars: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       }
     })
   },
@@ -40,6 +40,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('vote');
+    return queryInterface.dropTable('vote')
   }
-};
+}

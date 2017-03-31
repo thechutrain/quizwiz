@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -9,31 +9,31 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    return queryInterface.createTable('userquiz', 
-    {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id'
+    return queryInterface.createTable('userquiz',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
         },
-      },
-      quizId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'quiz',
-          key: 'id'
+        userId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'user',
+            key: 'id'
+          }
         },
-      },
-      score: {
-        type: Sequelize.DECIMAL(5,2)
-      }
-    })
+        quizId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'quiz',
+            key: 'id'
+          }
+        },
+        score: {
+          type: Sequelize.DECIMAL(5, 2)
+        }
+      })
   },
 
   down: function (queryInterface, Sequelize) {
@@ -44,6 +44,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('userquiz');
+    return queryInterface.dropTable('userquiz')
   }
-};
+}

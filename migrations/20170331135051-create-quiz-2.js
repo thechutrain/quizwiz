@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -26,7 +26,7 @@ module.exports = {
         name: {
           type: Sequelize.STRING,
           allowNull: false
-        }, 
+        },
         description: {
           type: Sequelize.STRING
         },
@@ -38,8 +38,8 @@ module.exports = {
           },
           onUpdate: 'cascade',
           onDelete: 'cascade'
-          }
         }
+      }
     )
   },
 
@@ -51,6 +51,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('quiz');
+    return queryInterface.dropTable('quiz')
   }
-};
+}

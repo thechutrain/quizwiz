@@ -20,8 +20,8 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
       classMethods: {
         associate: function (models) {
-          user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'user_id' })
-          user.hasMany(models.userquiz)
+          user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'userId' })
+          // user.hasMany(models.userquiz)
         }
       } // end classMethods
     }) // end .define

@@ -20,6 +20,19 @@ describe(title, () => {
     })
   })
 
+  it('should be able to find the seeded data', (done) => {
+    try {
+      query.findUser().then((results) => {
+        expect(results).to.be.a('array')
+        expect(results).to.have.lengthOf(2)
+        console.log(results)
+        done()
+      })
+    } catch (e) {
+      done(e)
+    }
+  })
+
   it('Should be an empty user table', (done) => {
     done()
   })

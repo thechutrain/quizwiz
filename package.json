@@ -9,7 +9,7 @@
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "dev": "export NODE_ENV='development'; npm run migrate; nodemon server.js",
-    "test": "export NODE_ENV='test'; npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
+    "test": "export NODE_ENV='test'; npm run migrate; npm run seed; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "travis-test": "npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "lint": "node_modules/.bin/standard",
     "lint-fix": "node_modules/.bin/standard --fix",

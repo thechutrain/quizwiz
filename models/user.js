@@ -5,14 +5,14 @@ module.exports = function (sequelize, DataTypes) {
       username: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      password: {
-        type: DataTypes.STRING
-      },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
       }
+      // password: {
+      //   type: DataTypes.STRING
+      // },
+      // isAdmin: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: false
+      // }
     },
     // options
     {

@@ -13,7 +13,7 @@
   "test": {
     "username": "foo",
     "password": "bar",
-    "database": "quizwiz_testing_2_db",
+    "database": "quizwiz_testing_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false

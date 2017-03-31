@@ -5,10 +5,10 @@ module.exports = function (sequelize, DataTypes) {
       username: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      password: {
+        type: DataTypes.STRING
       }
-      // password: {
-      //   type: DataTypes.STRING
-      // },
       // isAdmin: {
       //   type: DataTypes.BOOLEAN,
       //   defaultValue: false
@@ -17,13 +17,13 @@ module.exports = function (sequelize, DataTypes) {
     // options
     {
       // underscored: true,
-      freezeTableName: true,
-      classMethods: {
-        associate: function (models) {
-          user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'userId' })
-          // user.hasMany(models.userquiz)
-        }
-      } // end classMethods
+      freezeTableName: true
+      // classMethods: {
+      //   associate: function (models) {
+      //     user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'userId' })
+      //     // user.hasMany(models.userquiz)
+      //   }
+      // } // end classMethods
     }) // end .define
   return user
 }

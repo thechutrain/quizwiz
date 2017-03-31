@@ -11,29 +11,74 @@ const title =
 Unit test on "user" model
 ===============================
 `
+// testing variables
+
+let userTest = {
+  username: 'I_am_a_test',
+  password: 'incorrect'
+}
 
 describe(title, () => {
-  before((done) => {
-    models.sequelize.sync()
-    .then(() => {
+  before(function () {
+    return new Promise((resolve, reject) => {
+      models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(() => {
+        models.sequelize.sync({ force: true }).then(() => {
+          resolve()
+        })
+      })
+    })
+  })
+
+  it('Should be an empty user table', (done) => {
+    query.findUser().then((results) => {
+      try {
+        assert.deepEqual(results, [])
+        done()
+      } catch (e) {
+        done(e)
+      }
+    })
+  })
+
+  it('Should not return a non-existent user', (done) => {
+    query.findUser(-99).then((results) => {
+      expect(results).to.be.a('null')
       done()
     })
   })
 
-  it('should be able to find the seeded data', (done) => {
-    try {
-      query.findUser().then((results) => {
-        expect(results).to.be.a('array')
-        expect(results).to.have.lengthOf(2)
-        console.log(results)
+  it('should be able to create a new user', (done) => {
+    query.addUser(userTest).spread((result, created) => {
+      try {
+        assert.isTrue(created, 'user was created')
         done()
-      })
-    } catch (e) {
-      done(e)
-    }
+      } catch (e) {
+        done(e)
+      }
+    })
   })
 
-  it('Should be an empty user table', (done) => {
-    done()
+  it('should not be able to create the same user twice', (done) => {
+    query.addUser(userTest).spread((result, created) => {
+      try {
+        assert.isNotTrue(created, 'duplicate use should not have been created again')
+        done()
+      } catch (e) {
+        done(e)
+      }
+    })
+  })
+
+  it('should be able to find the user that was created', (done) => {
+    query.findUser(1).then((result) => {
+      try {
+        let user = result.dataValues
+        assert.property(user, 'id', '1', 'user should have an id of one')
+        assert.property(user, 'username', userTest.username, 'user should have an id of one')
+        done()
+      } catch (e) {
+        done(e)
+      }
+    })
   })
 }) // ends describe

@@ -17,6 +17,11 @@ module.exports = {
     return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj })
   },
 
+  // UserQuiz
+  takeQuiz: (dataObj) => {
+    return db.usequiz.create(dataObj)
+  }, // ends takeQUiz
+
   // Vote related queries
   vote: (voteObj) => {
     return new Promise((resolve, reject) => {

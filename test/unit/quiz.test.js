@@ -1,6 +1,6 @@
 /* global it, describe, before */
 const assert = require('chai').assert
-const expect = require('chai').expect
+// const expect = require('chai').expect
 
 const models = require('../../models')
 const query = require('../../controllers/apiQuery')
@@ -49,8 +49,8 @@ describe(title, () => {
   it('should be able to create a new quiz', (done) => {
     query.makeQuiz(quizTest).spread((result, created) => {
       try {
-        let quiz = result.dataValues
-        console.log(quiz)
+        // let quiz = result.dataValues
+        // console.log(quiz)
         assert.equal(created, true, 'created value should be true')
         done()
       } catch (e) {

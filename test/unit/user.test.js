@@ -35,7 +35,7 @@ describe(title, () => {
   it('Should be an empty user table', (done) => {
     query.findUser().then((results) => {
       try {
-        assert.deepEqual(results, [])
+        assert.deepEqual(results, ['will fail!'])
         done()
       } catch (e) {
         done(e)

@@ -4,15 +4,19 @@
     "password": "bar",
     "database": "quizwiz_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
+  },
+  "sqlite": {
+    "dialect": "sqlite",
+    "storage": "./db.development.sqlite"
   },
   "test": {
     "username": "foo",
     "password": "bar",
     "database": "quizwiz_testing_db",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "logging": false
+    "dialect": "mysql"
   },
   "travisTest": {
     "username": "root",

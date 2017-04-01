@@ -8,22 +8,22 @@ module.exports = function (sequelize, DataTypes) {
       },
       password: {
         type: DataTypes.STRING
-      },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
       }
+      // isAdmin: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: false
+      // }
     },
     // options
     {
       // underscored: true,
-      freezeTableName: true,
-      classMethods: {
-        associate: function (models) {
-          user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'user_id' })
-          user.hasMany(models.userquiz)
-        }
-      } // end classMethods
+      freezeTableName: true
+      // classMethods: {
+      //   associate: function (models) {
+      //     user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'userId' })
+      //     // user.hasMany(models.userquiz)
+      //   }
+      // } // end classMethods
     }) // end .define
   return user
 }

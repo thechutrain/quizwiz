@@ -22,12 +22,12 @@ app.use(bodyParser.json())
 app.use('/api', apiRouter)
 
 // Start server ---------------------------------- /
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'travisTest') {
   db.sequelize.sync().then(() => {
     console.info('Databases are all synced!')
     app.listen(PORT, (err) => {
       if (err) console.log(err)
-      console.info(`DEVELOPMENT ENV: Listening on port: ${PORT}`)
+      console.info(`${process.env.NODE_ENV} ENV: Listening on port: ${PORT}`)
     })
   }).catch((err) => console.error(err))
 } else {

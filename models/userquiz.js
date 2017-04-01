@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
           key: 'id'
         }
       },
-      quizID: {
+      quizId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

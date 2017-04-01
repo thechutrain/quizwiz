@@ -14,9 +14,9 @@ module.exports = function (sequelize, DataTypes) {
         references: {
           model: 'user',
           key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+        }
+        // onUpdate: 'cascade',
+        // onDelete: 'cascade'
       }
     },
       // options

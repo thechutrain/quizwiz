@@ -14,6 +14,7 @@
     "lint": "node_modules/.bin/standard",
     "lint-fix": "node_modules/.bin/standard --fix",
     "no-setup": "export NODE_ENV='sqlite'; npm run migrate; node server.js",
+    "no-setup-test": "export NODE_ENV='sqlite'; npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive ",
     "print-env": "echo $NODE_ENV"
   },
   "dependencies": {

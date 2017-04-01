@@ -13,7 +13,7 @@ module.exports = {
 
   // Quiz related queries
   findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
-  addQuiz: (quizObj) => {
+  makeQuiz: (quizObj) => {
     return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj })
   },
 

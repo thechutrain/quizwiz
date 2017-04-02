@@ -4,10 +4,24 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('vote', {
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        reference: {
+          model: 'user',
+          key: 'id'
+          // onUpdate: 'CASCADE',
+          // onDelete: 'RESTRICT'
+        }
       },
       quizId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        reference: {
+          model: 'quiz',
+          key: 'id'
+          // onUpdate: 'CASCADE',
+          // onDelete: 'RESTRICT'
+        }
       },
       stars: {
         type: Sequelize.INTEGER

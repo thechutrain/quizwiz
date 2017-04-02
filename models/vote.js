@@ -3,10 +3,21 @@ module.exports = function (sequelize, DataTypes) {
     // columns of table
     {
       userId: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        reference: {
+          model: 'user',
+          key: 'id'
+          // onDelete: ''
+        }
       },
       quizId: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        reference: {
+          model: 'quiz',
+          key: 'id'
+        }
       },
       stars: {
         type: DataTypes.INTEGER

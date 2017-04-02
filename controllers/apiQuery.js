@@ -27,19 +27,13 @@ module.exports = {
       ? db.userquiz.find({ where: optParamsObj })
       : db.userquiz.findAll()
   },
-
-  // Vote related queries
   vote: (voteObj) => {
-    return new Promise((resolve, reject) => {
-    // first search if there is a vote
-      db.vote.findOne({
-        where: {
-          user_id: voteObj.user_id,
-          quiz_id: voteObj.quiz_id
-        }
-      }).then((vote) => {
-        vote ? resolve(vote) : resolve(null)
-      })
+    return db.vote.findOrCreate({
+      where: {
+        userId: voteObj.userId,
+        quizId: voteObj.quizId
+      },
+      defaults: voteObj
     })
   },
   findAllVotes: () => {

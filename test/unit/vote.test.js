@@ -27,4 +27,17 @@ describe(title, () => {
       }
     })
   })
+
+  it('should be able to make a new vote', (done) => {
+    let testVote = {
+      userId: 1,
+      quizId: 2,
+      stars: 5
+    }
+    query.vote(testVote).spread((result, created) => {
+      console.log(result.dataValues)
+      assert.isTrue(created, 'vote should be created')
+      done()
+    })
+  })
 }) // ends describe

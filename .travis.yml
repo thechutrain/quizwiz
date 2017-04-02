@@ -4,17 +4,8 @@ node_js:
 services:
   - mysql
 before_install:
-#   - echo mysql-apt-config mysql-apt-config/select-server select mysql-5.7 | sudo debconf-set-selections
-#   - wget http://dev.mysql.com/get/mysql-apt-config_0.7.3-1_all.deb
-#   - sudo dpkg --install mysql-apt-config_0.7.3-1_all.deb
-#   - sudo apt-get update -q
-#   - sudo apt-get install -q --force-yes -o Dpkg::Options::=--force-confnew mysql-server
-#   - sudo mysql_upgrade
-  # - mysql -u root -e "CREATE DATABASE quizwiz_travis_db"
     - mysql -e "CREATE DATABASE quizwiz_travis_db"
 script:
-  # - npm run travis-migrate
   - npm run travis-test
-  - echo $NODE_ENV
 # dist: trusty
 # sudo: required

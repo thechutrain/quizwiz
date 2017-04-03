@@ -13,3 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.0.1] - 2017-03-31
 ### Added
 - userquiz table (migration), created models/userquiz, and made 3 tests
+- basic vote migration, queries and tests
+- cleaned up repo of sqlite, HOLD folder
+### Fixes
+- fixed readme.md
+

@@ -27,6 +27,7 @@ module.exports = {
       ? db.userquiz.find({ where: optParamsObj })
       : db.userquiz.findAll()
   },
+  // Vote related queries
   vote: (voteObj) => {
     return db.vote.findOrCreate({
       where: {

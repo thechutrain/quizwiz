@@ -19,6 +19,10 @@ module.exports = {
         username: {
           type: Sequelize.STRING,
           allowNull: false
+        },
+        password: {
+          type: Sequelize.STRING,
+          allowNull: false
         }
           // foreign key usage
           // attr4: {

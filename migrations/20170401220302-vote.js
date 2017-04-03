@@ -6,17 +6,21 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        references: {
+        reference: {
           model: 'user',
           key: 'id'
+          // onUpdate: 'CASCADE',
+          // onDelete: 'RESTRICT'
         }
       },
       quizId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        references: {
+        reference: {
           model: 'quiz',
           key: 'id'
+          // onUpdate: 'CASCADE',
+          // onDelete: 'RESTRICT'
         }
       },
       stars: {

@@ -52,10 +52,13 @@ router.get('/quiz', (req, res) => {
   })
 })
 
-router.post('/quiz', (req, res) => {
-  query.addQuiz(req.body).spread((user, created) => {
-    res.json({user, created})
-  })
-})
+router.post('/quiz',
+  validator(['name', 'description', 'made_by'], true),
+  (req, res) => {
+    query.addQuiz(req.body).spread((user, created) => {
+      res.json({user, created})
+    })
+  }
+)
 
 module.exports = router

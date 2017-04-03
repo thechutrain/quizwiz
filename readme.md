@@ -1,18 +1,19 @@
+# QuizWiz API
 [![Build Status](https://travis-ci.org/thechutrain/quizwiz.svg?branch=master)](https://travis-ci.org/thechutrain/quizwiz)
 
-# Express-API-Boilerplate
-> boilerplate minimal REST api that uses sequelize, and sequelize-router beta for quick deployment
-
-## NPM 
-- "**morgan**" : for logging to console
-- "**mysql**" && "**sequelize**" : for the database
-- `/api` route is set up
-
-## To use
-1) `$ git clone [this_repo]`
-2) `$ rm -rf .git`
+> a RESTful Express.js API built with testing in mind.
 
 ## Demo
+```
+$ git clone git@github.com:thechutrain/quizwiz.git
+$ npm init 
+$ npm start
+```
+
+## Testing
+- Unit and intergration test of the API endpoints were written as the queries were made.
+- Please submit an issue if you find any bugs. [Issues](https://github.com/thechutrain/quizwiz/issues)
+
 
 ## License
 MIT

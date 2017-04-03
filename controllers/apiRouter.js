@@ -2,12 +2,15 @@
 const express = require('express')
 const router = express.Router()
 const query = require('./apiQuery')
+const validator = require('./middleware/validator')
 
 // ============ EXAMPLE ================
-router.get('/test', (req, res) => {
-  query.test().then((results) => {
-    res.json(results)
-  })
+router.get('/test', validator(), (req, res) => {
+  console.log(req.message)
+  res.json({ message: req.message })
+  // query.test().then((results) => {
+  //   res.json(results)
+  // })
 })
 
 /** ========== Routes Related to User ============

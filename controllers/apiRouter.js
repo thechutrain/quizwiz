@@ -31,12 +31,14 @@ router.get('/user/:id', (req, res) => {
   })
 })
 
-router.post('/user', (req, res) => {
-  // TO DO: VALIDATOR
-  query.addUser(req.body).spread((user, created) => {
-    res.json(created)
-  })
-})
+router.post('/user',
+  validator(['username', 'password'], true),
+  (req, res) => {
+    query.addUser(req.body).spread((user, created) => {
+      res.json(created)
+    })
+  }
+)
 
 /** =========== Routes Related to Quiz ==========
  * GET /quiz

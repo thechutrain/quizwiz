@@ -23,6 +23,9 @@ $ npm start
 ## API docs
 to do ...
 
+## API docs
+to do ...
+
 ## Testing
 - Unit and intergration test of the API endpoints were written as the queries were made.
 - Please submit an issue if you find any bugs. [Issues](https://github.com/thechutrain/quizwiz/issues)

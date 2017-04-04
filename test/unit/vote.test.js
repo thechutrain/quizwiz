@@ -35,7 +35,6 @@ describe(title, () => {
       stars: 5
     }
     query.vote(testVote).spread((result, created) => {
-      console.log(result.dataValues)
       assert.isTrue(created, 'vote should be created')
       done()
     })

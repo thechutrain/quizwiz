@@ -30,13 +30,19 @@ let userQuiz = {
   score: 89.12
 }
 
+let userQuizAgain = {
+  userId: 1,
+  quizId: 1,
+  score: 94.32
+}
+
 describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })
   })
 
   it('should be an empty userquiz table', (done) => {
-    query.findUserQuiz().then((results) => {
+    query.findQuizzesTaken().then((results) => {
       try {
         assert.deepEqual(results, [])
         done()
@@ -60,8 +66,23 @@ describe(title, () => {
   })
 
   it('shoud be able to find the new quiz that was taken', (done) => {
-    query.findUserQuiz().then((results) => {
+    query.findQuizzesTaken(1).then((results) => {
       expect(results).to.have.lengthOf(1)
+      done()
+    })
+  })
+
+  it('should be able to take another quiz', (done) => {
+    query.takeQuiz(userQuizAgain).then((result) => {
+      let createdUserQuiz = result.dataValues
+      assert.equal(createdUserQuiz.score, userQuizAgain.score, 'should be the same score')
+      done()
+    })
+  })
+
+  it('should be able to find all the quizzes taken by a user', (done) => {
+    query.findQuizzesTaken(1).then((results) => {
+      expect(results).to.have.lengthOf(2)
       done()
     })
   })

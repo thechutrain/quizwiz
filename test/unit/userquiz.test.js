@@ -19,9 +19,9 @@ let userTest = {
 }
 
 let quizTest = {
-  name: 'US History Testing Quiz',
+  title: 'US History Testing Quiz',
   description: 'A quiz on the history of the United States',
-  made_by: 1
+  madeBy: 1
 }
 
 let userQuiz = {

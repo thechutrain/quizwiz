@@ -18,3 +18,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixes
 - fixed readme.md
 
+## [0.0.2] - 2017-04-04
+### Added
+- validator middleware; checks required and optional parameters in request

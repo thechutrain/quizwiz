@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const errorHandler = require('./controllers/middleware/errorHandler')
 
 // Create express App ------------------------- /
 const app = module.exports = express() // for testing purposes
@@ -20,6 +21,7 @@ app.use(bodyParser.json())
 
 // Route config -------------------------------------------/
 app.use('/api', apiRouter)
+app.use(errorHandler)
 
 // Start server ---------------------------------- /
 if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'travisTest') {

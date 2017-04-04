@@ -2,12 +2,15 @@
 const express = require('express')
 const router = express.Router()
 const query = require('./apiQuery')
+const validator = require('./middleware/validator')
 
 // ============ EXAMPLE ================
-router.get('/test', (req, res) => {
-  query.test().then((results) => {
-    res.json(results)
-  })
+router.get('/test', validator(), (req, res) => {
+  console.log(req.message)
+  res.json({ message: req.message })
+  // query.test().then((results) => {
+  //   res.json(results)
+  // })
 })
 
 /** ========== Routes Related to User ============
@@ -28,12 +31,14 @@ router.get('/user/:id', (req, res) => {
   })
 })
 
-router.post('/user', (req, res) => {
-  // TO DO: VALIDATOR
-  query.addUser(req.body).spread((user, created) => {
-    res.json(created)
-  })
-})
+router.post('/user',
+  validator(['username', 'password']),
+  (req, res) => {
+    query.addUser(req.body).spread((user, created) => {
+      res.json(created)
+    })
+  }
+)
 
 /** =========== Routes Related to Quiz ==========
  * GET /quiz
@@ -47,10 +52,13 @@ router.get('/quiz', (req, res) => {
   })
 })
 
-router.post('/quiz', (req, res) => {
-  query.addQuiz(req.body).spread((user, created) => {
-    res.json({user, created})
-  })
-})
+router.post('/quiz',
+  validator(['name', {key: 'description', optional: true}, 'made_by']),
+  (req, res) => {
+    query.makeQuiz(req.body).spread((user, created) => {
+      res.json({user, created})
+    })
+  }
+)
 
 module.exports = router

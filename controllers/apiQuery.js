@@ -14,7 +14,8 @@ module.exports = {
     return db.user.findOne({
       where: { id },
       include: [
-        { model: db.userquiz }
+        { model: db.userquiz },
+        { model: db.vote }
       ]
     })
   },
@@ -31,7 +32,7 @@ module.exports = {
   // ====== Quiz Queries ==========
   findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   makeQuiz: (quizObj) => {
-    return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj })
+    return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
   },
 
   // ====== UserQuiz Queries ==========

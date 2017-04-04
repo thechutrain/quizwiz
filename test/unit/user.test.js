@@ -33,7 +33,7 @@ describe(title, () => {
   })
 
   it('Should be an empty user table', (done) => {
-    query.findUser().then((results) => {
+    query.findAllUsers().then((results) => {
       try {
         assert.deepEqual(results, [])
         done()
@@ -75,6 +75,8 @@ describe(title, () => {
   it('should be able to find the user that was created', (done) => {
     query.findUser(1).then((result) => {
       try {
+        console.log('============================')
+        console.log(result)
         let user = result.dataValues
         assert.property(user, 'id', '1', 'user should have an id of one')
         assert.property(user, 'username', userTest.username, 'user should have an id of one')

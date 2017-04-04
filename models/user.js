@@ -17,13 +17,13 @@ module.exports = function (sequelize, DataTypes) {
     // options
     {
       // underscored: true,
-      freezeTableName: true
-      // classMethods: {
-      //   associate: function (models) {
-      //     user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'userId' })
-      //     // user.hasMany(models.userquiz)
-      //   }
-      // } // end classMethods
+      freezeTableName: true,
+      classMethods: {
+        associate: function (models) {
+          // user.belongsToMany(models.quiz, { through: 'vote', foreignKey: 'userId' })
+          user.hasMany(models.userquiz)
+        }
+      } // end classMethods
     }) // end .define
   return user
 }

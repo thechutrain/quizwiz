@@ -5,13 +5,24 @@ const db = require('../models')
 // const user_req_fields = ['username'];
 
 module.exports = {
-  // ====== User Queries ==========
+  // ========= User Queries ==========
+  /** finds a specific user in the user table
+   * @param {number} id - the user id
+   */
   findUser: (id) => {
-    if (id) {
-      return db.user.findOne({ where: { id } })
-    } else {
-      return db.user.findAll()
-    }
+    // return db.user.findOne({ where: { id } })
+    return db.user.findOne({
+      where: { id },
+      include: [
+        { model: db.userquiz }
+      ]
+    })
+  },
+  /** findAllUsers() - finds all the users in the database
+   *
+   */
+  findAllUsers: () => {
+    return db.user.findAll()
   },
   addUser: (userObj) => {
     return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
@@ -29,7 +40,6 @@ module.exports = {
   }, // ends takeQUiz
 
   findQuizzesTaken: (userId) => {
-    // TO DO optional optParams
     return userId
       ? db.userquiz.findAll({where: { userId }})
       : db.userquiz.findAll()

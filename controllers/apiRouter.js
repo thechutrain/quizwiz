@@ -32,7 +32,7 @@ router.get('/user/:id', (req, res) => {
 })
 
 router.post('/user',
-  validator(['username', 'password'], true),
+  validator(['username', 'password']),
   (req, res) => {
     query.addUser(req.body).spread((user, created) => {
       res.json(created)

@@ -33,7 +33,13 @@ module.exports = function (sequelize, DataTypes) {
     },
     // options
     {
-      freezeTableName: true
+      freezeTableName: true,
+      classMethods: {
+        associate: function (models) {
+          userquiz.belongsTo(models.quiz)
+          userquiz.belongsTo(models.user)
+        }
+      }
     }) // end .define
   return userquiz
 }

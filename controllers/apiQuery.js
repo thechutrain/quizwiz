@@ -5,26 +5,44 @@ const db = require('../models')
 // const user_req_fields = ['username'];
 
 module.exports = {
-  // User Related Queries
-  findUser: (id) => (id ? db.user.findOne({ where: { id } }) : db.user.findAll()),
+  // ========= User Queries ==========
+  /** finds a specific user in the user table
+   * @param {number} id - the user id
+   */
+  findUser: (id) => {
+    // return db.user.findOne({ where: { id } })
+    return db.user.findOne({
+      where: { id },
+      include: [
+        { model: db.userquiz },
+        { model: db.vote }
+      ]
+    })
+  },
+  /** findAllUsers() - finds all the users in the database
+   *
+   */
+  findAllUsers: () => {
+    return db.user.findAll()
+  },
   addUser: (userObj) => {
     return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
   },
 
-  // Quiz related queries
+  // ====== Quiz Queries ==========
   findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   makeQuiz: (quizObj) => {
-    return db.quiz.findOrCreate({ where: { name: quizObj.name }, defaults: quizObj })
+    return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
   },
 
-  // UserQuiz
+  // ====== UserQuiz Queries ==========
   takeQuiz: (dataObj) => {
     return db.userquiz.create(dataObj)
   }, // ends takeQUiz
-  findUserQuiz: (optParamsObj) => {
-    // TO DO optional optParams
-    return optParamsObj
-      ? db.userquiz.find({ where: optParamsObj })
+
+  findQuizzesTaken: (userId) => {
+    return userId
+      ? db.userquiz.findAll({where: { userId }})
       : db.userquiz.findAll()
   },
   // Vote related queries

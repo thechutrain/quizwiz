@@ -47,13 +47,19 @@ router.post('/user',
  *
  */
 router.get('/quiz', (req, res) => {
-  query.findQuiz().then((result) => {
+  query.findAllQuizzes().then((result) => {
+    res.json(result)
+  })
+})
+
+router.get('/quiz/:id', (req, res) => {
+  query.findQuizById(req.params.id).then((result) => {
     res.json(result)
   })
 })
 
 router.post('/quiz',
-  validator(['name', {key: 'description', optional: true}, 'made_by']),
+  validator(['title', {key: 'description', optional: true}, 'madeBy']),
   (req, res) => {
     query.makeQuiz(req.body).spread((user, created) => {
       res.json({user, created})

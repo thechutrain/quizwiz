@@ -16,7 +16,7 @@ const query = require('../../controllers/apiQuery')
 const title =
 `
 ===============================
-Integration Test '/user' routes
+Integration Test '/quiz' routes
 ===============================
 `
 
@@ -53,9 +53,26 @@ describe(title, () => {
     })
   })
 
-  it('should be an empty list of users @ GET "/api/user"', (done) => {
+  it('should be an empty list of quizzes @ GET "/api/quiz"', (done) => {
     chai.request(server)
-      .get('/api/user')
+      .get('/api/quiz')
+      .end((err, res) => {
+        expect(err).to.be.null()
+        expect(res).to.have.status(200)
+        assert.deepEqual(res.body, [])
+        done()
+      })
+  })
+
+  it('should be able to post a new quiz @ POST "/api/quiz"', (done) => {
+    let newQuiz = {
+      title: 'quizwiz',
+      description: 'a testing quiz from chaiHTTP',
+      madeBy: 1
+    }
+    chai.request(server)
+      .post('/api/quiz')
+      .send(newQuiz)
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
@@ -64,31 +81,19 @@ describe(title, () => {
       })
   })
 
-  it('should be able to create a new user @ POST "/api/user"', (done) => {
-    let newUser = {
-      username: 'alan',
-      password: 'fakePassword'
-    }
-    chai.request(server)
-      .post('/api/user')
-      .send(newUser)
-      .end((err, res) => {
-        expect(err).to.be.null()
-        expect(res).to.have.status(200)
-        // console.log(res.body)
-        done()
-      })
+  it('should be able to make another quiz @ POST "/api/quiz"', (done) => {
+    done()
   })
 
-  it('should be able to get the new user @ GET "/api/user/:id', (done) => {
-    chai.request(server)
-      .get('/api/user/1')
-      .end((err, res) => {
-        expect(err).to.be.null()
-        expect(res).to.have.status(200)
-        let userReturned = res.body
-        expect(userReturned).to.have.all.keys('id', 'username', 'password', 'createdAt', 'updatedAt', 'votes', 'userquizzes')
-        done()
-      })
+  // it('should not be able to another quiz with the same title @ POST "/api/quiz"', (done) => {
+  //   done()
+  // })
+
+  it('should be able to get the all the quizzes @ GET "/api/quiz"', (done) => {
+    done()
+  })
+
+  it('should be able to get a specific quiz by id @ GET "/api/quiz/:id"', (done) => {
+    done()
   })
 })

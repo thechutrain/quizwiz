@@ -32,7 +32,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.0.4] - 2017-04-05
 ### Added
-- chatHttp tests
-- full routes
+- chatHttp tests, for testing routes
+- 
 ### Fixes
 - linting error with expect statements, using 'dirty-chai' now
+- vote query, not updates prior votes

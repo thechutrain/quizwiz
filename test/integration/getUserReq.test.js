@@ -33,4 +33,24 @@ describe(title, () => {
   before(function () {
     return models.sequelize.sync({ force: true })
   })
+
+  it('should be an empty database', (done) => {
+    query.findAllUsers().then((results) => {
+      // console.log('============ RESULTS - users ============')
+      // console.log(results)
+      assert.deepEqual(results, [])
+      return query.findQuizzesTaken()
+    }).then((results) => {
+      // console.log('============ RESULTS - quiz taken ============')
+      // console.log(results)
+      assert.deepEqual(results, [])
+      return query.findQuiz()
+    }).then((results) => {
+      // console.log('============ RESULTS - quizzes made ============')
+      // console.log(results)
+      assert.deepEqual(results, [])
+      done()
+    })
+  })
+
 })

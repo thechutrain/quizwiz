@@ -53,7 +53,7 @@ describe(title, () => {
     })
   })
 
-  it('should be an empty list of users @ GET "/user"', (done) => {
+  it('should be an empty list of users @ GET "/api/user"', (done) => {
     chai.request(server)
       .get('/api/user')
       .end((err, res) => {
@@ -64,7 +64,7 @@ describe(title, () => {
       })
   })
 
-  it('should be able to create a new user @ POST "/user"', (done) => {
+  it('should be able to create a new user @ POST "/api/user"', (done) => {
     let newUser = {
       username: 'alan',
       password: 'fakePassword'
@@ -75,7 +75,19 @@ describe(title, () => {
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
-        console.log(res.body)
+        // console.log(res.body)
+        done()
+      })
+  })
+
+  it('should be able to get the new user @ GET "/api/user/:id', (done) => {
+    chai.request(server)
+      .get('/api/user/1')
+      .end((err, res) => {
+        expect(err).to.be.null()
+        expect(res).to.have.status(200)
+        let userReturned = res.body
+        expect(userReturned).to.have.all.keys('id', 'username', 'password', 'createdAt', 'updatedAt', 'votes', 'userquizzes')
         done()
       })
   })

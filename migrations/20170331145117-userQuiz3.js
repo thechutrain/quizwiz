@@ -30,6 +30,9 @@ module.exports = {
         score: {
           type: Sequelize.DECIMAL(5, 2)
         }
+      },
+      {
+        freezeTableName: true
       })
   },
 

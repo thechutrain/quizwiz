@@ -26,7 +26,10 @@ module.exports = {
       stars: {
         type: Sequelize.INTEGER
       }
-    })
+    },
+      {
+        freezeTableName: true
+      })
   },
 
   down: function (queryInterface, Sequelize) {

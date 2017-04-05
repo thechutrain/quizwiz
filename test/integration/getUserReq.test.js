@@ -5,7 +5,7 @@ const assert = require('chai').assert
 const expect = require('chai').expect
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
-// const server = require('../server');
+const server = require('../../server')
 
 // require the database models
 const models = require('../../models')
@@ -36,21 +36,20 @@ describe(title, () => {
 
   it('should be an empty database', (done) => {
     query.findAllUsers().then((results) => {
-      // console.log('============ RESULTS - users ============')
-      // console.log(results)
       assert.deepEqual(results, [])
       return query.findQuizzesTaken()
     }).then((results) => {
-      // console.log('============ RESULTS - quiz taken ============')
-      // console.log(results)
       assert.deepEqual(results, [])
       return query.findQuiz()
     }).then((results) => {
-      // console.log('============ RESULTS - quizzes made ============')
-      // console.log(results)
+      assert.deepEqual(results, [])
+      // done()
+      return query.findAllVotes()
+    }).then((results) => {
       assert.deepEqual(results, [])
       done()
     })
   })
 
+  // it('should be able to make a request to ')
 })

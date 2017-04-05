@@ -26,7 +26,7 @@ router.get('/user', (req, res) => {
 })
 
 router.get('/user/:id', (req, res) => {
-  query.findUser(req.params.id).then((user) => {
+  query.findUserById(req.params.id).then((user) => {
     res.json(user)
   })
 })

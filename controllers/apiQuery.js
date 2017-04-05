@@ -9,7 +9,7 @@ module.exports = {
   /** finds a specific user in the user table
    * @param {number} id - the user id
    */
-  findUser: (id) => {
+  findUserById: (id) => {
     // return db.user.findOne({ where: { id } })
     return db.user.findOne({
       where: { id },

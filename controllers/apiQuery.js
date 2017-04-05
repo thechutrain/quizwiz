@@ -76,7 +76,6 @@ module.exports = {
           }
         ).then((result) => {
           if (result[0] === 1) {
-            console.log('succcesful update')
             return db.vote.find({
               where: {
                 userId: voteObj.userId,

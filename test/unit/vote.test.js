@@ -37,7 +37,25 @@ describe(title, () => {
     }
     query.vote(testVote).spread((result, created) => {
       assert.isTrue(created, 'vote should be created')
+      console.log(result.dataValues)
       done()
     })
+  })
+
+  it('should be able to update the previous vote', (done) => {
+    let testVote = {
+      userId: 1,
+      quizId: 2,
+      stars: 0
+    }
+    query.vote(testVote).spread((result, created) => {
+      assert.isFalse(created, 'vote should be created')
+      console.log(result)
+      done()
+    })
+    // query.vote(testVote).then((result) => {
+    //   console.log(result)
+    //   done()
+    // })
   })
 }) // ends describe

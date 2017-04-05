@@ -10,7 +10,6 @@ module.exports = {
    * @param {number} id - the user id
    */
   findUserById: (id) => {
-    // return db.user.findOne({ where: { id } })
     return db.user.findOne({
       where: { id },
       include: [
@@ -19,7 +18,8 @@ module.exports = {
       ]
     })
   },
-  /** findAllUsers() - finds all the users in the database
+
+  /**  finds all the users in the database
    *
    */
   findAllUsers: () => {
@@ -57,10 +57,79 @@ module.exports = {
         quizId: voteObj.quizId
       },
       defaults: voteObj
+    }).spread((result, created) => {
+      if (created) {
+        return [result, created]
+      } else {
+        return db.vote.update(
+          {
+            stars: voteObj.stars
+          },
+          { where: {
+            userId: voteObj.userId,
+            quizId: voteObj.quizId
+          }
+          }
+        ).then((result) => {
+          return [result, created]
+        })
+      }
     })
   },
+  // vote: (voteObj) => {
+  //   return db.vote.findOrCreate({
+  //     where: {
+  //       userId: voteObj.userId,
+  //       quizId: voteObj.quizId
+  //     },
+  //     defaults: voteObj
+  //   }).spread((result, created) => {
+  //     if (created) {
+  //       return [result, created]
+  //     } else {
+  //       let cleanResult = result.dataValues
+  //       delete cleanResult.updatedAt
+  //       delete cleanResult.createdAt
+  //       let newVote = Object.assign(cleanResult, voteObj)
+  //       console.log(newVote)
+  //       return db.vote.create(newVote).then((result) => {
+  //         return [result, created]
+  //       })
+  //       // return db.vote.update({
+
+  //       // }).then((result) => {
+  //       //   return [result, created]
+  //       // })
+  //     } // ends else
+  //   })
+  // },
+
   findAllVotes: () => {
     // TO DO find votes by a quiz id
     return db.vote.findAll()
   }
 }
+
+  // vote: (voteObj) => {
+  //   return db.vote.findOrCreate({
+  //     where: {
+  //       userId: voteObj.userId,
+  //       quizId: voteObj.quizId
+  //     },
+  //     defaults: voteObj
+  //   }).spread((result, created) => {
+  //     if (created) {
+  //       Promise.resolve({result, created})
+  //     } else {
+  //       return db.vote.update({
+  //         where: {
+  //           userId: voteObj.userId,
+  //           quizId: voteObj.quizId
+  //         },
+  //         defaults: voteObj
+  //       }).then((result) => {
+  //         return {result, created}
+  //       })
+  //     }
+  //   })
+  // },

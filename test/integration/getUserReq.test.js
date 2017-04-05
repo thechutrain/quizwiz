@@ -42,7 +42,7 @@ describe(title, () => {
       return query.findQuizzesTaken()
     }).then((results) => {
       assert.deepEqual(results, [])
-      return query.findQuiz()
+      return query.findAllQuizzes()
     }).then((results) => {
       assert.deepEqual(results, [])
       // done()

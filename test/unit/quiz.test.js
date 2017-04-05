@@ -34,7 +34,7 @@ describe(title, () => {
   })
 
   it('Should be an empty quiz table', (done) => {
-    query.findQuiz().then((results) => {
+    query.findAllQuizzes().then((results) => {
       try {
         assert.deepEqual(results, [])
         done()

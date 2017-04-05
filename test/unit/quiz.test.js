@@ -20,18 +20,18 @@ let quizTest = {
 }
 
 describe(title, () => {
-  before(function () {
-    return new Promise((resolve, reject) => {
-      models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(() => {
-        models.sequelize.sync({ force: true }).then(() => {
-          resolve()
-        })
-      })
-    })
-  })
   // before(function () {
-  //   return models.sequelize.sync({ force: true })
+  //   return new Promise((resolve, reject) => {
+  //     models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(() => {
+  //       models.sequelize.sync({ force: true }).then(() => {
+  //         resolve()
+  //       })
+  //     })
+  //   })
   // })
+  before(function () {
+    return models.sequelize.sync({ force: true })
+  })
 
   it('Should be an empty quiz table', (done) => {
     query.findQuiz().then((results) => {

@@ -1,3 +1,4 @@
+'use strict'
 /* global it, describe, before */
 const assert = require('chai').assert
 const expect = require('chai').expect

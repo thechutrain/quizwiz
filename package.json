@@ -30,8 +30,7 @@
     "express": "^4.15.2",
     "morgan": "^1.8.1",
     "mysql": "^2.13.0",
-    "sequelize": "^3.30.2",
-    "sqlite3": "^3.1.8"
+    "sequelize": "^3.30.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

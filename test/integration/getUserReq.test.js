@@ -51,5 +51,14 @@ describe(title, () => {
     })
   })
 
-  // it('should be able to make a request to ')
+  it('should be able to get users @ GET "/user"', (done) => {
+    chai.request(server)
+      .get('/api/user')
+      .end((err, res) => {
+        expect(err).to.be.null
+        expect(res).to.have.status(200)
+        console.log(res.body)
+        done()
+      })
+  })
 })

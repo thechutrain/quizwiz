@@ -61,6 +61,7 @@ describe(title, () => {
       let user = result.dataValues
       user.userquizzes = user.userquizzes[0].dataValues
       user.votes = user.votes[0].dataValues
+      console.log(user)
       expect(user).to.have.deep.property('userquizzes.score', newQuizTaken1.score)
       expect(user).to.have.deep.property('votes.stars', newVote1.stars)
       done()

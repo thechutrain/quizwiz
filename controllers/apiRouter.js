@@ -20,7 +20,7 @@ router.get('/test', validator(), (req, res) => {
  *  TODO  .... PUT /user/:id --> TO DO
  */
 router.get('/user', (req, res) => {
-  query.findUser().then((users) => {
+  query.findAllUsers().then((users) => {
     res.json(users)
   })
 })

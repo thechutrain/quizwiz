@@ -29,3 +29,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixes
 - weird naming on the quiz table
 - separated concerns in the api queries
+
+## [0.0.4] - 2017-04-05
+### Added
+- chatHttp tests
+- full routes
+### Fixes
+- linting error with expect statements, using 'dirty-chai' now

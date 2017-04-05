@@ -35,7 +35,7 @@ router.post('/user',
   validator(['username', 'password']),
   (req, res) => {
     query.addUser(req.body).spread((user, created) => {
-      res.json(created)
+      res.json({ user, created })
     })
   }
 )

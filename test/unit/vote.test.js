@@ -1,3 +1,4 @@
+'use strict'
 /* global it, describe, before */
 const assert = require('chai').assert
 const expect = require('chai').expect
@@ -35,7 +36,6 @@ describe(title, () => {
       stars: 5
     }
     query.vote(testVote).spread((result, created) => {
-      console.log(result.dataValues)
       assert.isTrue(created, 'vote should be created')
       done()
     })

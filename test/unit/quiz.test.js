@@ -1,3 +1,4 @@
+'use strict'
 /* global it, describe, before */
 const assert = require('chai').assert
 // const expect = require('chai').expect
@@ -11,10 +12,11 @@ const title =
 Unit test on "quiz" model
 ===============================
 `
+
 let quizTest = {
-  name: 'US History Testing Quiz',
+  title: 'US History Testing Quiz',
   description: 'A quiz on the history of the United States',
-  made_by: 1
+  madeBy: 1
 }
 
 describe(title, () => {

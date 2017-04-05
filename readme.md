@@ -15,6 +15,12 @@ $ npm start
 ```
 
 ## ERD
+
+![erd](.notes/quizwizERD1.png)
+> - rows highlighted in red represent primary or composite keys
+> - rows highlighted in yellow represent foreign keys
+
+## API docs
 to do ...
 
 ## API docs

@@ -16,14 +16,14 @@ module.exports = {
         updatedAt: {
           type: Sequelize.DATE
         },
-        name: {
+        title: {
           type: Sequelize.STRING,
           allowNull: false
         },
         description: {
           type: Sequelize.STRING
         },
-        made_by: {
+        madeBy: {
           type: Sequelize.INTEGER,
           references: {
             model: 'user',

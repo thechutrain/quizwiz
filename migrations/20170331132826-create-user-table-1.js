@@ -8,7 +8,8 @@ module.exports = {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
-          autoIncrement: true
+          autoIncrement: true,
+          allowNull: false
         },
         createdAt: {
           type: Sequelize.DATE

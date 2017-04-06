@@ -37,4 +37,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - linting error with expect statements, using 'dirty-chai' now
 - vote query, not updates prior votes
 ### Bugs
-- no foreign key constraint on madeBy 
+- no foreign key constraint on madeBy
+- sequelize db err: "Error: ER_INVALID_DEFAULT: Invalid default value for 'createdAt'"

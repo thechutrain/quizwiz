@@ -67,4 +67,34 @@ router.post('/quiz',
   }
 )
 
+/** =========== Routes Related to UserQuiz ==========
+ * GET /userquiz --> gets all the instances of quizzes taken
+ * GET /quiz/:quizId/user/:userId --> gets
+ * POST /userquiz --> makes a new quiz instance
+ *
+ */
+
+router.get('/quizzes-taken', (req, res) => {
+  query.findQuizzesTaken().then((results) => {
+    res.json(results)
+  })
+})
+
+router.get('/quizzes-taken/quiz/:quizId', (req, res) => {
+  query.findQuizzesTaken({
+    quizId: req.params.quizId
+  }).then((results) => {
+    res.json(results)
+  })
+})
+
+router.get('/quizzes-taken/quiz/:quizId/user/:userId', (req, res) => {
+  query.findQuizzesTaken({
+    quizId: req.params.quizId,
+    userId: req.params.userId
+  }).then((results) => {
+    res.json(results)
+  })
+})
+
 module.exports = router

@@ -33,9 +33,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.0.4] - 2017-04-05
 ### Added
 - chatHttp tests, for testing routes. All user & quiz endpoints have tests!
+- new routes for quizzesTaken, yet to make tests
 ### Fixes
 - linting error with expect statements, using 'dirty-chai' now
-- vote query, not updates prior votes
+- vote query, now updates prior votes
 ### Bugs
 - no foreign key constraint on madeBy
-- sequelize db err: "Error: ER_INVALID_DEFAULT: Invalid default value for 'createdAt'"

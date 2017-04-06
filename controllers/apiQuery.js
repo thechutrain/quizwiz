@@ -49,7 +49,7 @@ module.exports = {
   findQuizzesTaken: (searchObj = {}) => {
     return Object.keys(searchObj).length === 0
       ? db.userquiz.findAll()
-      : db.userquiz.findAll({where: { searchObj }})
+      : db.userquiz.findAll({where: searchObj})
   },
   // Vote related queries
   /**

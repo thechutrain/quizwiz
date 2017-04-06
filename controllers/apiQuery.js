@@ -1,9 +1,5 @@
 const db = require('../models')
 
-// validators
-// TO DO LATER
-// const user_req_fields = ['username'];
-
 module.exports = {
   // ========= User Queries ==========
   /** finds a specific user in the user table
@@ -29,7 +25,7 @@ module.exports = {
     return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
   },
 
-  // ====== Quiz Queries ==========
+  // ========== Quiz Queries ==========
   // findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   findQuizById: (id) => (db.quiz.findOne({ where: { id } })),
   findAllQuizzes: () => {
@@ -39,7 +35,7 @@ module.exports = {
     return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
   },
 
-  // ====== UserQuiz Queries ==========
+  // ========== UserQuiz Queries ==========
   takeQuiz: (dataObj) => {
     return db.userquiz.create(dataObj)
   }, // ends takeQUiz
@@ -51,7 +47,8 @@ module.exports = {
       ? db.userquiz.findAll()
       : db.userquiz.findAll({where: searchObj})
   },
-  // Vote related queries
+
+  // ========== Vote related queries ==========
   /**
    * @param {obj} voteObj - an object containing userId, quizId, stars etc.
    * @return { result, created } -
@@ -71,10 +68,11 @@ module.exports = {
           {
             stars: voteObj.stars
           },
-          { where: {
-            userId: voteObj.userId,
-            quizId: voteObj.quizId
-          }
+          {
+            where: {
+              userId: voteObj.userId,
+              quizId: voteObj.quizId
+            }
           }
         ).then((result) => {
           if (result[0] === 1) {
@@ -87,7 +85,7 @@ module.exports = {
               return [update.dataValues, created]
             })
           } else {
-            return [{ error: true }, created]
+            return [{ error: true, msg: 'failed to update vote' }, created]
           }
         })
       }
@@ -95,7 +93,6 @@ module.exports = {
   },
 
   findAllVotes: () => {
-    // TO DO find votes by a quiz id
     return db.vote.findAll()
   }
 }

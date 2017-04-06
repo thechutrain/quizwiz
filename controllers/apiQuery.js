@@ -44,10 +44,12 @@ module.exports = {
     return db.userquiz.create(dataObj)
   }, // ends takeQUiz
 
-  findQuizzesTaken: (userId) => {
-    return userId
-      ? db.userquiz.findAll({where: { userId }})
-      : db.userquiz.findAll()
+
+
+  findQuizzesTaken: (searchObj = {}) => {
+    return Object.keys(searchObj).length === 0
+      ? db.userquiz.findAll()
+      : db.userquiz.findAll({where: { searchObj }})
   },
   // Vote related queries
   /**

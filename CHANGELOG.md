@@ -32,8 +32,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.0.4] - 2017-04-05
 ### Added
-- chatHttp tests, for testing routes
-- 
+- chatHttp tests, for testing routes. All user & quiz endpoints have tests!
 ### Fixes
 - linting error with expect statements, using 'dirty-chai' now
 - vote query, not updates prior votes
+### Bugs
+- no foreign key constraint on madeBy 

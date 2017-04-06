@@ -69,6 +69,7 @@ describe(title, () => {
   it('shoud be able to find the new quiz that was taken', (done) => {
     query.findQuizzesTaken(1).then((results) => {
       expect(results).to.have.lengthOf(1)
+      // MORE TESTING CASES HERE?
       done()
     })
   })

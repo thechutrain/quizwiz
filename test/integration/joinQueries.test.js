@@ -57,10 +57,11 @@ describe(title, () => {
   })
 
   it('should be able to find a user and their quizzes taken and votes', (done) => {
-    query.findUser(1).then((result) => {
+    query.findUserById(1).then((result) => {
       let user = result.dataValues
       user.userquizzes = user.userquizzes[0].dataValues
       user.votes = user.votes[0].dataValues
+      // console.log(user)
       expect(user).to.have.deep.property('userquizzes.score', newQuizTaken1.score)
       expect(user).to.have.deep.property('votes.stars', newVote1.stars)
       done()

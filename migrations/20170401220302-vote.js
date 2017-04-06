@@ -25,8 +25,21 @@ module.exports = {
       },
       stars: {
         type: Sequelize.INTEGER
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+        // defaultValue: Sequelize.fn('NOW')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+        // defaultValue: Sequelize.fn('NOW')
       }
-    })
+    },
+      {
+        freezeTableName: true
+      })
   },
 
   down: function (queryInterface, Sequelize) {

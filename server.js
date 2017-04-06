@@ -5,7 +5,7 @@ const morgan = require('morgan')
 const errorHandler = require('./controllers/middleware/errorHandler')
 
 // Create express App ------------------------- /
-const app = module.exports = express() // for testing purposes
+const app = express() // for testing purposes
 const PORT = process.env.PORT || 3000
 
 // require models ------------------------- /
@@ -24,7 +24,7 @@ app.use('/api', apiRouter)
 app.use(errorHandler)
 
 // Start server ---------------------------------- /
-if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'travisTest') {
+if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'travisTest') {
   db.sequelize.sync().then(() => {
     console.info('Databases are all synced!')
     app.listen(PORT, (err) => {
@@ -38,3 +38,4 @@ if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'travisTest') {
     console.info(`Listening on port: ${PORT}`)
   })
 }
+module.exports = app

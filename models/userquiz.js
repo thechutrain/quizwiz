@@ -36,8 +36,18 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
       classMethods: {
         associate: function (models) {
-          userquiz.belongsTo(models.quiz)
-          userquiz.belongsTo(models.user)
+          userquiz.belongsTo(models.quiz, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+              allowNull: false
+            }
+          })
+          userquiz.belongsTo(models.user, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+              allowNull: false
+            }
+          })
         }
       }
     }) // end .define

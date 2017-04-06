@@ -29,7 +29,20 @@ module.exports = {
         },
         score: {
           type: Sequelize.DECIMAL(5, 2)
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+          // defaultValue: Sequelize.fn('NOW')
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+          // defaultValue: Sequelize.fn('NOW')
         }
+      },
+      {
+        freezeTableName: true
       })
   },
 

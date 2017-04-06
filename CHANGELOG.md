@@ -29,3 +29,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixes
 - weird naming on the quiz table
 - separated concerns in the api queries
+
+## [0.0.4] - 2017-04-05
+### Added
+- chatHttp tests, for testing routes. All user & quiz endpoints have tests!
+- new routes for quizzesTaken, yet to make tests
+### Fixes
+- linting error with expect statements, using 'dirty-chai' now
+- vote query, now updates prior votes
+### Bugs
+- no foreign key constraint on madeBy

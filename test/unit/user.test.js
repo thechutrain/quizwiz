@@ -45,7 +45,7 @@ describe(title, () => {
   })
 
   it('Should not return a non-existent user', (done) => {
-    query.findUser(-99).then((results) => {
+    query.findUserById(-99).then((results) => {
       expect(results).to.be.a('null')
       done()
     })
@@ -74,7 +74,7 @@ describe(title, () => {
   })
 
   it('should be able to find the user that was created', (done) => {
-    query.findUser(1).then((result) => {
+    query.findUserById(1).then((result) => {
       try {
         let user = result.dataValues
         // console.log(user)

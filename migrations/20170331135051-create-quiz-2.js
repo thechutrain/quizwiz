@@ -33,6 +33,9 @@ module.exports = {
           // onUpdate: 'cascade',
           // onDelete: 'cascade'
         }
+      },
+      {
+        freezeTableName: true
       }
     )
   },

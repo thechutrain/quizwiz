@@ -1,5 +1,5 @@
 # QuizWiz API
-[![Build Status](https://travis-ci.org/thechutrain/quizwiz.svg?branch=master)](https://travis-ci.org/thechutrain/quizwiz)
+[![Build Status](https://travis-ci.org/thechutrain/quizwizAPI.svg?branch=master)](https://travis-ci.org/thechutrain/quizwiz)
 
 > a RESTful Express.js API built with testing.
 

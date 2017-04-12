@@ -4,6 +4,12 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const errorHandler = require('./controllers/middleware/errorHandler')
 
+// DEVELOPMENT ONLY ------------------------- /
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = require('dotenv')
+  dotenv.load()
+}
+
 // Create express App ------------------------- /
 const app = express() // for testing purposes
 const PORT = process.env.PORT || 3000
@@ -18,6 +24,8 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 // App middleware ------------------------------ /
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+// app.use()
+console.log(process.env.test)
 
 // Route config -------------------------------------------/
 app.use('/api', apiRouter)

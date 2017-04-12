@@ -3,29 +3,13 @@ const bcrypt = require('bcryptjs')
 const LocalStrategy = require('passport-local').Strategy
 
 module.exports = function (passport, User) {
-  // passport.serializeUser((user, done) => {
-  //   let serialized = Object.assign({})
-  //   serialized.username = User.username
-  //   done(null, serialized)
-  // })
   passport.serializeUser((user, done) => {
-    console.log('SERIALIZED CALLED')
-    console.log('===================')
-    console.log(user.dataValues.id)
-    console.log('===================')
-    // User.findById({
-    //   where: { username: user.username }
-    // }).then((user) => {
-    //   done(null, user.id)
-    // })
     done(null, user.dataValues.id)
   })
 
   passport.deserializeUser((id, done) => {
-    console.log('DESERIALIZED CALLED')
-    User.findOne({
-      where: { id }
-    }).then((user) => {
+    User.findOne({ where: { id } })
+    .then((user) => {
       let cleanUser = Object.assign({}, user.dataValues)
       delete cleanUser.password
       done(null, cleanUser)
@@ -90,14 +74,4 @@ module.exports = function (passport, User) {
       })
     })
   )
-
-  // passport.serializeUser((user, done) => {
-  //   done(null, user.id)
-  // })
-
-  // passport.deserializeUser((id, done) => {
-  //   User.findById(id, (err, user) => {
-  //     done(err, user)
-  //   })
-  // })
 }

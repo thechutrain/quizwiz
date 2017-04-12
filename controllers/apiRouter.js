@@ -3,6 +3,9 @@ const express = require('express')
 const router = express.Router()
 const query = require('./apiQuery')
 const validator = require('./middleware/validator')
+const db = require('../models')
+const passport = require('passport')
+require('../config/passport')(passport, db.user)
 
 /** ========== Routes Related to User ============
  *  GET /user --> gets all users
@@ -24,10 +27,9 @@ router.get('/user/:id', (req, res) => {
 
 router.post('/user',
   validator(['username', 'password']),
+  passport.authenticate('local-register'),
   (req, res) => {
-    query.addUser(req.body).spread((user, created) => {
-      res.json({ user, created })
-    })
+    res.send('successful')
   }
 )
 

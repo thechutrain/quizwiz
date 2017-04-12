@@ -1,22 +1,55 @@
 'user strict'
-const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const LocalStrategy = require('passport-local').Strategy
 
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     User.findOne({ username }).then((results, err) => {
-//       if (err) { return done(err) }
-//       if (!user) {
-//         return done(null, false, { message: 'no user found with that username' })
-//       }
-//       if (!user.validPassword(password)) {
-//         return done(null, false, { message: 'incorrect password' })
-//       }
-//       // sanitize user
-//       return done(null, user)
-//     })
-//   }
-// ))
-module.exports = function(passport, user) {
-  
+module.exports = function (passport, User) {
+
+  passport.use('local-register',
+    new LocalStrategy({
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true
+    },
+    (req, username, password, done) => {
+      function hashPassword (inputPassword) {
+        let saltRounds = 10
+        return bcrypt.hash(inputPassword, saltRounds)
+      }
+      User.findOne({
+        where: { username }
+      })
+      .then((user) => {
+        if (user) {
+          console.log(`The username "${username}" is taken`)
+          return done(null, false, { message: `The username "${username}" is taken` })
+        }
+        hashPassword(password).then((hashed) => {
+          let data = {
+            username,
+            password: hashed
+          }
+          User.create(data).then((newUser) => {
+            console.log(newUser)
+            if (newUser) {
+              done(null, newUser)
+            } else {
+              done(null, false)
+            }
+          }).catch((err) => done(err))
+        })
+      })
+    })
+  ) // ends local-login
+
+  // passport.use()
+
+  passport.serializeUser((user, done) => {
+    done(null, user.id)
+  })
+
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+      done(err, user)
+    })
+  })
 }

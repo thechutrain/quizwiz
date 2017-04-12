@@ -20,8 +20,6 @@ Integration Test '/user' routes
 ===============================
 `
 
-
-
 describe(title, () => {
   // before(function () {
   //   return new Promise((resolve, reject) => {
@@ -64,13 +62,13 @@ describe(title, () => {
       })
   })
 
-  it('should be able to create a new user @ POST "/api/user"', (done) => {
+  it('should be able to create a new user @ POST "/api/user/new"', (done) => {
     let newUser = {
       username: 'alan',
       password: 'fakePassword'
     }
     chai.request(server)
-      .post('/api/user')
+      .post('/api/user/new')
       .send(newUser)
       .end((err, res) => {
         expect(err).to.be.null()

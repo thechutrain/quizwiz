@@ -40,8 +40,6 @@ module.exports = {
     return db.userquiz.create(dataObj)
   }, // ends takeQUiz
 
-
-
   findQuizzesTaken: (searchObj = {}) => {
     return Object.keys(searchObj).length === 0
       ? db.userquiz.findAll()

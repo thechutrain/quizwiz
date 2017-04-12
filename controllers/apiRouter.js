@@ -3,6 +3,22 @@ const express = require('express')
 const router = express.Router()
 const query = require('./apiQuery')
 const validator = require('./middleware/validator')
+const db = require('../models')
+const passport = require('passport')
+require('../config/passport')(passport, db.user)
+
+// =========== Testing for user ===========
+const path = require('path')
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'test.html'))
+})
+
+router.get('/test', (req, res) => {
+  console.log(req.user)
+  let user = req.user
+  res.json({ user })
+})
+// =========== END of TEST ===========
 
 /** ========== Routes Related to User ============
  *  GET /user --> gets all users
@@ -22,12 +38,33 @@ router.get('/user/:id', (req, res) => {
   })
 })
 
-router.post('/user',
+router.post('/user/new',
   validator(['username', 'password']),
+  passport.authenticate('local-register'),
   (req, res) => {
-    query.addUser(req.body).spread((user, created) => {
-      res.json({ user, created })
-    })
+    // res.send('successful')
+    res.redirect('/api/')
+  }
+)
+
+router.post('/user/login',
+  validator(['username', 'password']),
+  // passport.authenticate('local-login', {
+  //   sucessRedirect: '/',
+  //   failureRedirect: '/login'
+  // })
+  passport.authenticate('local-login'),
+  (req, res) => {
+    // console.log(req.user)
+    // res.send('successful')
+    res.redirect('/api/test')
+  }
+)
+
+router.post('/user/logout',
+  (req, res) => {
+    // TO DO
+    res.send('successful')
   }
 )
 

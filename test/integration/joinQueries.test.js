@@ -3,6 +3,7 @@
 const assert = require('chai').assert
 const expect = require('chai').expect
 
+// require the database models
 const models = require('../../models')
 const query = require('../../controllers/apiQuery')
 

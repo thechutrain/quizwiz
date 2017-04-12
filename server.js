@@ -30,11 +30,12 @@ app.use(session({
   secret: process.env.APP_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { 
-    secure: true,
+  cookie: {
+    // secure: true,
     maxAge: 6 * 1000 * 1000 * 1000 * 1000
   }
 }))
+// https://stackoverflow.com/questions/11277779/passportjs-deserializeuser-never-called
 app.use(passport.initialize())
 app.use(passport.session())
 

@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 
 // Route config -------------------------------------------/
 app.use('/api', apiRouter)
-app.use(errorHandler)
+// app.use(errorHandler)
 
 // Start server ---------------------------------- /
 if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'travisTest') {

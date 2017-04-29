@@ -11,7 +11,6 @@ const apiRouter = require('./controllers/apiRouter')
 // const passport = require('passport')
 // require('./config/passport')(passport, db.user)
 
-
 // DEVELOPMENT ONLY ------------------------- /
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load()
@@ -21,7 +20,6 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express() // for testing purposes
 app.disable('x-powered-by')
 const PORT = process.env.PORT || 3000
-
 
 // Logger ------------------------- /
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms')) // for logging

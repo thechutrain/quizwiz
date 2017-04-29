@@ -28,6 +28,7 @@ module.exports = function (sequelize, DataTypes) {
           // quiz.belongsToMany(models.user, { through: 'vote', foreignKey: 'quizId' })
           quiz.hasMany(models.userquiz)
           quiz.hasMany(models.vote)
+          quiz.hasMany(models.question)
         }
       } // end classMethods
     }

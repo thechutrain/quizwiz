@@ -29,7 +29,11 @@ module.exports = {
   // findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   findQuizById: (id) => (db.quiz.findOne({ where: { id } })),
   findAllQuizzes: () => {
-    return db.quiz.findAll()
+    return db.quiz.findAll({
+      include: [
+        { model: db.question }
+      ]
+    })
   },
   makeQuiz: (quizObj) => {
     return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })

@@ -7,9 +7,10 @@ const expect = require('chai').expect
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 chai.use(dirtyChai)
-const server = require('../../server/server')
+
 
 // require the database models
+const server = require('../../server/server')
 const models = require('../../server/models')
 const query = require('../../server/controllers/apiQuery')
 

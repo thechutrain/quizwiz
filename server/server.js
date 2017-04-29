@@ -1,17 +1,27 @@
 // App dependencies ---------------------------- /
 const express = require('express')
 const bodyParser = require('body-parser')
+// const session = require('express-session')
 const morgan = require('morgan')
 // const errorHandler = require('./controllers/middleware/errorHandler')
+
+const db = require('./models')
+const apiRouter = require('./controllers/apiRouter')
+// const errorHandler = require('./controllers/middleware/errorHandler')
+// const passport = require('passport')
+// require('./config/passport')(passport, db.user)
+
+
+// DEVELOPMENT ONLY ------------------------- /
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load()
+}
 
 // Create express App ------------------------- /
 const app = express() // for testing purposes
 app.disable('x-powered-by')
 const PORT = process.env.PORT || 3000
 
-// require models ------------------------- /
-const db = require('./models')
-const apiRouter = require('./controllers/apiRouter')
 
 // Logger ------------------------- /
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms')) // for logging
@@ -19,6 +29,17 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 // App middleware ------------------------------ /
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+// app.use(session({
+//   secret: process.env.APP_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     secure: true,
+//     maxAge: 6 * 1000 * 1000 * 1000 * 1000
+//   }
+// }))
+// app.use(passport.initialize())
+// app.use(passport.session())
 
 // Route config -------------------------------------------/
 app.use('/api', apiRouter)

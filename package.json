@@ -13,7 +13,11 @@
     "undo-all-test": "export NODE_ENV='test'; sequelize db:migrate:undo:all",
     "undo-all-dev": "export NODE_ENV='development'; sequelize db:migrate:undo:all",
     "seed": "node_modules/.bin/sequelize db:seed:all",
+<<<<<<< HEAD
     "dev": "export NODE_ENV='development'; nodemon server/server.js",
+=======
+    "dev": "export NODE_ENV='development'; nodemon server.js",
+>>>>>>> master
     "dev-migrate": "export NODE_ENV='development'; npm run migrate; nodemon server.js",
     "test": "export NODE_ENV='test'; export PORT='8080'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "travis-test": "npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
@@ -28,11 +32,21 @@
   },
   "dependencies": {
     "body-parser": "^1.17.1",
+<<<<<<< HEAD
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
+=======
+    "dotenv": "^4.0.0",
+>>>>>>> master
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "morgan": "^1.8.1",
     "mysql": "^2.13.0",
+<<<<<<< HEAD
+=======
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+>>>>>>> master
     "sequelize": "^3.30.2"
   },
   "devDependencies": {

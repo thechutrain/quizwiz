@@ -2,10 +2,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const errorHandler = require('./controllers/middleware/errorHandler')
+// const errorHandler = require('./controllers/middleware/errorHandler')
 
 // Create express App ------------------------- /
 const app = express() // for testing purposes
+app.disable('x-powered-by')
 const PORT = process.env.PORT || 3000
 
 // require models ------------------------- /

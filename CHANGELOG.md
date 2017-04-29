@@ -43,3 +43,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.0] - 2017-04-29
 ### Added
 - eslinting, cleaner project set up with `server/`
+
+## [0.1.1] - 2017-04-29
+### Added

@@ -6,10 +6,6 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "sqlite": {
-    "dialect": "sqlite",
-    "storage": "./db.development.sqlite"
-  },
   "test": {
     "username": "foo",
     "password": "bar",

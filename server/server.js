@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 // const errorHandler = require('./controllers/middleware/errorHandler')
 
-const db = require('./models')
+const db = require('./db/models')
 const apiRouter = require('./controllers/apiRouter')
 // const errorHandler = require('./controllers/middleware/errorHandler')
 // const passport = require('passport')

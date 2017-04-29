@@ -3,8 +3,8 @@
 const assert = require('chai').assert
 // const expect = require('chai').expect
 
-const models = require('../../server/models')
-const query = require('../../server/controllers/apiQuery')
+const models = require('../../server/db/models')
+const query = require('../../server/queryAPI/apiQuery')
 
 const title =
 `

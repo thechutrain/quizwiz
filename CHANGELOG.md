@@ -39,3 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - vote query, now updates prior votes
 ### Bugs
 - no foreign key constraint on madeBy
+
+## [0.1.0] - 2017-04-29
+### Added
+- eslinting, cleaner project set up with `server/`

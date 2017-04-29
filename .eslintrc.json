@@ -3,5 +3,11 @@
     "plugins": [
         "standard",
         "promise"
-    ]
+    ],
+   "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "rules": {
+        "camelcase": [0, {"properties": "never"}]
+    }
 }

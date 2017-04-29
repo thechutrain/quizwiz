@@ -16,14 +16,7 @@
     "dev": "export NODE_ENV='development'; nodemon server/server.js",
     "test": "export NODE_ENV='test'; export PORT='8080'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "travis-test": "npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
-    "lint": "node_modules/.bin/eslint --fix ./server",
-    "lint-fix": "node_modules/.bin/standard --fix",
-    "no-setup": "export NODE_ENV='sqlite'; npm run migrate; node server.js",
-    "no-setup-test": "export NODE_ENV='sqlite'; npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive ",
-    "set-TEST": "export NODE_ENV='test'; echo $NODE_ENV",
-    "set-SQLITE": "export NODE_ENV='sqlite'; echo $NODE_ENV",
-    "set-DEV": "export NODE_ENV='development'; echo $NODE_ENV",
-    "print-env": "echo $NODE_ENV"
+    "lint": "node_modules/.bin/eslint --fix ./server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

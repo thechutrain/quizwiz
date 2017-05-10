@@ -2,31 +2,42 @@ const db = require('../db/models')
 
 module.exports = {
   // ========= User Queries ==========
-  /** finds a specific user in the user table
-   * @param {number} id - the user id
-   */
+  // @return - null, if none found. User object if found.
   findUserById: (id) => {
     return db.user.findOne({
       where: { id },
+      attributes: {
+        exclude: ['password']
+      },
       include: [
         { model: db.userquiz },
         { model: db.vote }
       ]
     })
   },
-
-  /**  finds all the users in the database
-   *
-   */
+  // This query should be used for log in only!
+  findUserByUsername: (username) => {
+    return db.user.findOne({
+      where: { username }
+    })
+  },
+  // @return [], either empty or of all users as obj.
   findAllUsers: () => {
-    return db.user.findAll()
+    return db.user.findAll({
+      attributes: {
+        exclude: ['password']
+      },
+      include: [
+        { model: db.userquiz },
+        { model: db.vote }
+      ]
+    })
   },
   addUser: (userObj) => {
     return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
   },
 
   // ========== Quiz Queries ==========
-  // findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   findQuizById: (id) => (db.quiz.findOne({ where: { id } })),
   findAllQuizzes: () => {
     return db.quiz.findAll({
@@ -56,7 +67,6 @@ module.exports = {
    * @param {obj} voteObj - an object containing userId, quizId, stars etc.
    * @return { result, created } -
    */
-  // v1
   vote: (voteObj) => {
     return db.vote.findOrCreate({
       where: {
@@ -100,7 +110,6 @@ module.exports = {
       return [{ error: true, msg: err }, false]
     })
   },
-  // },
 
   findAllVotes: () => {
     return db.vote.findAll()

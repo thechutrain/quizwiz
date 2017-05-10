@@ -3,8 +3,8 @@
 const assert = require('chai').assert
 const expect = require('chai').expect
 
-const models = require('../../server/models')
-const query = require('../../server/controllers/apiQuery')
+const models = require('../../server/db/models')
+const query = require('../../server/queryAPI/apiQuery')
 
 const title =
 `
@@ -30,17 +30,28 @@ describe(title, () => {
   //   })
   // })
   before(() => {
+    // return models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true})
+    // .then(() => {
+    //   return models.sequelize.sync({ force: true })
+    // })
     return models.sequelize.sync({ force: true })
-  })
-
-  it('Should be an empty user table', (done) => {
-    query.findAllUsers().then((results) => {
-      try {
-        assert.deepEqual(results, [])
-        done()
-      } catch (e) {
-        done(e)
-      }
+    .then(() => {
+      return Promise.all([
+        query.findAllUsers(),
+        query.findAllQuizzes(),
+        query.findAllVotes(),
+        query.findQuizzesTaken()
+      ])
+    })
+    .then((promiseArray) => {
+      promiseArray.forEach((searchResult) => {
+        assert.deepEqual(searchResult, [])
+      })
+    })
+    .then(() => {
+      // add data into other tables HERE
+      // console.log('Add other queries here')
+      // console.log('=====================')
     })
   })
 
@@ -77,7 +88,7 @@ describe(title, () => {
     query.findUserById(1).then((result) => {
       try {
         let user = result.dataValues
-        // console.log(user)
+        console.log(user)
         assert.property(user, 'id', '1', 'user should have an id of one')
         assert.property(user, 'username', userTest.username, 'user should have an id of one')
         done()

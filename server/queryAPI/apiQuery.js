@@ -1,4 +1,4 @@
-const db = require('../models')
+const db = require('../db/models')
 
 module.exports = {
   // ========= User Queries ==========
@@ -29,7 +29,11 @@ module.exports = {
   // findQuiz: (id) => (id ? db.quiz.findOne({ where: { id } }) : db.quiz.findAll()),
   findQuizById: (id) => (db.quiz.findOne({ where: { id } })),
   findAllQuizzes: () => {
-    return db.quiz.findAll()
+    return db.quiz.findAll({
+      include: [
+        { model: db.question }
+      ]
+    })
   },
   makeQuiz: (quizObj) => {
     return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
@@ -51,6 +55,7 @@ module.exports = {
    * @param {obj} voteObj - an object containing userId, quizId, stars etc.
    * @return { result, created } -
    */
+  // v1
   vote: (voteObj) => {
     return db.vote.findOrCreate({
       where: {
@@ -88,7 +93,13 @@ module.exports = {
         })
       }
     })
+    .catch((err) => {
+      // Catch foreign constraint errors
+      console.log(`ERROR in making vote ${err}`)
+      return [{ error: true, msg: err }, false]
+    })
   },
+  // },
 
   findAllVotes: () => {
     return db.vote.findAll()

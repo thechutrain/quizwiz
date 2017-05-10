@@ -3,7 +3,7 @@
 
 > a RESTful Express.js API built with testing.
 
-- A refactored backend of a previous project made using `sequelize`. 
+- A refactored backend of a previous project made using `sequelize`.
 - Built along with `mocha` and `chai` testing libraries.
 
 

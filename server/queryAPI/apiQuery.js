@@ -55,6 +55,7 @@ module.exports = {
    * @param {obj} voteObj - an object containing userId, quizId, stars etc.
    * @return { result, created } -
    */
+  // v1
   vote: (voteObj) => {
     return db.vote.findOrCreate({
       where: {
@@ -92,7 +93,13 @@ module.exports = {
         })
       }
     })
+    .catch((err) => {
+      // Catch foreign constraint errors
+      console.log(`ERROR in making vote ${err}`)
+      return [{ error: true, msg: err }, false]
+    })
   },
+  // },
 
   findAllVotes: () => {
     return db.vote.findAll()

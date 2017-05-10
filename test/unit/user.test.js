@@ -31,18 +31,36 @@ describe(title, () => {
   // })
   before(() => {
     return models.sequelize.sync({ force: true })
-  })
-
-  it('Should be an empty user table', (done) => {
-    query.findAllUsers().then((results) => {
-      try {
-        assert.deepEqual(results, [])
-        done()
-      } catch (e) {
-        done(e)
-      }
+    .then(() => {
+      return Promise.all([
+        query.findAllUsers(),
+        query.findAllQuizzes(),
+        query.findAllVotes(),
+        query.findQuizzesTaken()
+      ])
+    })
+    .then((promiseArray) => {
+      promiseArray.forEach((searchResult) => {
+        assert.deepEqual(searchResult, [])
+      })
+    })
+    .then(() => {
+      console.log('Add other queries here')
+      console.log('=====================')
     })
   })
+
+
+  // it('Should be an empty user table', (done) => {
+  //   query.findAllUsers().then((results) => {
+  //     try {
+  //       assert.deepEqual(results, [])
+  //       done()
+  //     } catch (e) {
+  //       done(e)
+  //     }
+  //   })
+  // })
 
   it('Should not return a non-existent user', (done) => {
     query.findUserById(-99).then((results) => {

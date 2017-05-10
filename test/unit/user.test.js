@@ -30,6 +30,10 @@ describe(title, () => {
   //   })
   // })
   before(() => {
+    // return models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true})
+    // .then(() => {
+    //   return models.sequelize.sync({ force: true })
+    // })
     return models.sequelize.sync({ force: true })
     .then(() => {
       return Promise.all([
@@ -45,22 +49,11 @@ describe(title, () => {
       })
     })
     .then(() => {
-      console.log('Add other queries here')
-      console.log('=====================')
+      // add data into other tables HERE
+      // console.log('Add other queries here')
+      // console.log('=====================')
     })
   })
-
-
-  // it('Should be an empty user table', (done) => {
-  //   query.findAllUsers().then((results) => {
-  //     try {
-  //       assert.deepEqual(results, [])
-  //       done()
-  //     } catch (e) {
-  //       done(e)
-  //     }
-  //   })
-  // })
 
   it('Should not return a non-existent user', (done) => {
     query.findUserById(-99).then((results) => {
@@ -95,7 +88,7 @@ describe(title, () => {
     query.findUserById(1).then((result) => {
       try {
         let user = result.dataValues
-        // console.log(user)
+        console.log(user)
         assert.property(user, 'id', '1', 'user should have an id of one')
         assert.property(user, 'username', userTest.username, 'user should have an id of one')
         done()

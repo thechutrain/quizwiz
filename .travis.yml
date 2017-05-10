@@ -4,7 +4,10 @@ node_js:
 services:
   - mysql
 before_install:
-    - mysql -e "CREATE DATABASE quizwiz_travis_db"
+  -  chmod +x ./scripts/*
+  - ./script/travis_mysql_5.7.sh
+  - ./script/mysql-reset-root-password.sh
+  - mysql -e "CREATE DATABASE quizwiz_travis_db"
 script:
   - npm run travis-test
 # dist: trusty

@@ -37,6 +37,7 @@ module.exports = {
   },
   makeQuiz: (quizObj) => {
     return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
+    .catch((err) => err)
   },
 
   // ========== UserQuiz Queries ==========
@@ -44,7 +45,7 @@ module.exports = {
     return db.userquiz.create(dataObj)
   }, // ends takeQUiz
 
-  findQuizzesTaken: (searchObj = {}) => {
+  findAllQuizzesTaken: (searchObj = {}) => {
     return Object.keys(searchObj).length === 0
       ? db.userquiz.findAll()
       : db.userquiz.findAll({where: searchObj})

@@ -36,27 +36,29 @@ describe(title, () => {
     // })
     return models.sequelize.sync({ force: true })
     .then(() => {
+    // 1. Make FIND ALL queries into all tables
       return Promise.all([
         query.findAllUsers(),
         query.findAllQuizzes(),
         query.findAllVotes(),
-        query.findQuizzesTaken()
+        query.findAllQuizzesTaken()
       ])
     })
     .then((promiseArray) => {
+    // 2. check all queries to see if they are empty []
       promiseArray.forEach((searchResult) => {
         assert.deepEqual(searchResult, [])
       })
     })
     .then(() => {
-      // add data into other tables HERE
-      // console.log('Add other queries here')
-      // console.log('=====================')
+    // 3. add data into other tables HERE
     })
   })
 
   it('Should not return a non-existent user', (done) => {
     query.findUserById(-99).then((results) => {
+      console.log(results)
+      console.log('======== non-existent')
       expect(results).to.be.a('null')
       done()
     })

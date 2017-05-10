@@ -1,7 +1,7 @@
 'use strict'
 /* global it, describe, before */
 const assert = require('chai').assert
-// const expect = require('chai').expect
+const expect = require('chai').expect
 
 const models = require('../../server/db/models')
 const query = require('../../server/queryAPI/apiQuery')
@@ -17,6 +17,12 @@ let quizTest = {
   title: 'US History Testing Quiz',
   description: 'A quiz on the history of the United States',
   madeBy: 1
+}
+
+let invalidQuiz = {
+  title: 'not valid',
+  description: 'foreign key constraint with madeBy',
+  madeBy: -2
 }
 
 let user1 = {
@@ -57,16 +63,49 @@ describe(title, () => {
   /** ================== Actual Tests Begin Here ========================
    *
    */
+  it('should not be able to find a non-existent quiz', (done) => {
+    // done()
+    query.findQuizById(-99).then((rawResult) => {
+      let result = JSON.parse(JSON.stringify(rawResult))
+      // console.log(result)
+      expect(result).to.be.a('null')
+      done()
+    })
+  })
+
   it('should be able to create a new quiz', (done) => {
-    query.makeQuiz(quizTest).spread((result, created) => {
+    query.makeQuiz(quizTest).then((resultArray) => {
+      const [result, created, error] = resultArray
       try {
-        // let quiz = result.dataValues
-        // console.log(quiz)
+        let quiz = JSON.parse(JSON.stringify(result))
+        expect(quiz).to.include.keys([
+          'id', 'title', 'description', 'madeBy', 'createdAt', 'updatedAt'
+        ])
         assert.equal(created, true, 'created value should be true')
+        expect(error).to.be.a('undefined')
         done()
       } catch (e) {
         done(e)
       }
     })
   })
+
+  it('should not be able to create a quiz with an invalid foreign key of madeby', (done) => {
+    query.makeQuiz(invalidQuiz).then((resultArray) => {
+      const [result, created, err] = resultArray
+      console.log('===============')
+      assert.deepEqual(result, {}, 'Error should result in empty obj')
+      assert.isFalse(created, 'it should not have created a new quiz with duplic name')
+      expect(err.name).to.equal('SequelizeForeignKeyConstraintError')
+      // console.log(err)
+      done()
+    })
+  })
+
+  // it('should not create another quiz with the same title', (done) => {
+  //   query.makeQuiz(quizTest).spread((result, created) => {
+  //     console.log(created)
+  //     done()
+  //   })
+  // })
 }) // ends describe

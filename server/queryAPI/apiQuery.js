@@ -1,7 +1,15 @@
 const db = require('../db/models')
 
 module.exports = {
-  // ========= User Queries ==========
+  /** ========= User Queries ==========
+   *
+   */
+  findUserByUsername: (username) => {
+    // used for login purpose, which is why password hash not excluded
+    return db.user.findOne({
+      where: { username }
+    })
+  },
   // @return - null, if none found. User object if found.
   findUserById: (id) => {
     return db.user.findOne({
@@ -13,12 +21,6 @@ module.exports = {
         { model: db.userquiz },
         { model: db.vote }
       ]
-    })
-  },
-  // This query should be used for log in only!
-  findUserByUsername: (username) => {
-    return db.user.findOne({
-      where: { username }
     })
   },
   // @return [], either empty or of all users as obj.
@@ -37,7 +39,9 @@ module.exports = {
     return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
   },
 
-  // ========== Quiz Queries ==========
+  /**  ========== Quiz Queries ==========
+   *
+   */
   findQuizById: (id) => (db.quiz.findOne({ where: { id } })),
   findAllQuizzes: () => {
     return db.quiz.findAll({
@@ -48,10 +52,12 @@ module.exports = {
   },
   makeQuiz: (quizObj) => {
     return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
-    .catch((err) => err)
+    .catch((err) => [{}, false, err])
   },
 
-  // ========== UserQuiz Queries ==========
+  /** ========== UserQuiz Queries ==========
+   *
+   */
   takeQuiz: (dataObj) => {
     return db.userquiz.create(dataObj)
   }, // ends takeQUiz
@@ -62,7 +68,9 @@ module.exports = {
       : db.userquiz.findAll({where: searchObj})
   },
 
-  // ========== Vote related queries ==========
+  /** ========== Vote related queries ==========
+   *
+   */
   /**
    * @param {obj} voteObj - an object containing userId, quizId, stars etc.
    * @return { result, created } -

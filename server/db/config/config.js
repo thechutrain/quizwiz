@@ -24,6 +24,7 @@ module.exports = {
   'production': {
     'use_env_variable': process.env.DATABASE_URL,
     'dialect': 'postgres',
+    'port': 5432,
     'ssl': true,
     'dialectOptions': {
       'ssl': { 'required': true }

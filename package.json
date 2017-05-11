@@ -15,7 +15,7 @@
     "undo-last-dev": "export NODE_ENV='development'; node_modules/.bin/sequelize db:migrate:undo",
     "dev": "export NODE_ENV='development'; nodemon server/server.js",
     "test": "export NODE_ENV='test'; export PORT='8080'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
-    "pretravis-test": "mysql -V",
+    "pretravis-test": "postgres --version",
     "travis-test": "npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "lint": "node_modules/.bin/eslint --fix ./server"
   },

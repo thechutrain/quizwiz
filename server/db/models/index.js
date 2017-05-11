@@ -8,15 +8,12 @@ var env = process.env.NODE_ENV || 'test'
 var config = require(path.join(__dirname, '/..', '/config/config.js'))[env]
 var db = {}
 
-// console.log('==== TESTING !!!!!! =======')
 var sequelize
 // if (config.use_env_variable) {
 if (env === 'production') {
-  // console.log('in production')
   sequelize = new Sequelize(config.database, config.username, config.password, config)
   // sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
-  // console.log('not in production')
   sequelize = new Sequelize(config.database, config.username, config.password, config)
 }
 

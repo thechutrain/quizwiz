@@ -10,15 +10,14 @@
 ## To Do:
 ----------------------
 #### User
--------------------
 
 
-| Status | HTTP | URL  | description |
-| : ----: | : ----: | :------------| --------------- |
-| <ul><li>[ ] </li></ul> | `GET`     |  `user/id/:id`      | Gets all info on a specific the user |
-| <ul><li>[ ] </li></ul> | `GET`     |  `user/all`      | Gets all user in the database |
-| <ul><li>[ ] </li></ul> | `POST`     |  `user/new`      | Creates a new user |
-| <ul><li>[ ] </li></ul> | `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
+| HTTP | URL  | description |
+| : ---- : | :------------| --------------- |
+| `GET`     |  `user/id/:id`      | Gets all info on a specific the user |
+| `GET`     |  `user/all`      | Gets all user in the database |
+| `POST`     |  `user/new`      | Creates a new user |
+| `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
 
 
 #### Quiz

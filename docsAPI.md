@@ -1,10 +1,24 @@
 ## Table Test:
 ----------------
 
-| Header Column | Another Header | Description header |
-| :---:         | :------        | :------            |
-|  `GET`         | `some/url`        |      hello world   |
+### User
 
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+|  `GET`         | `user/id/:id`        |      Gets all info on a specific the user |
+| `GET`     |  `user/all`      | Gets all user in the database |
+| `POST`     |  `user/new`      | Creates a new user |
+| `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
+
+---------------
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+|  `GET`         | `user/id/:id`        |      Gets all info on a specific the user |
+| `GET`     |  `user/all`      | Gets all user in the database |
+| `POST`     |  `user/new`      | Creates a new user |
+| `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
 
 
 **Overview**

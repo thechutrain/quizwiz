@@ -10,27 +10,27 @@
 ## To Do:
 #### User
 
-| Status | HTTP      | URL  | description     |
-| : ----: | : ----: | :------------| ---------------|
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `GET`     |  `user/id/:id`      | Gets all info on a specific the user |
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `GET`     |  `user/all`      | Gets all user in the database |
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `POST`     |  `user/new`      | Creates a new user |
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
+| Status | HTTP | URL  | description |
+| : ----: | : ----: | :------------| --------------- |
+| <ul><li>[ ] </li></ul> | `GET`     |  `user/id/:id`      | Gets all info on a specific the user |
+| <ul><li>[ ] </li></ul> | `GET`     |  `user/all`      | Gets all user in the database |
+| <ul><li>[ ] </li></ul> | `POST`     |  `user/new`      | Creates a new user |
+| <ul><li>[ ] </li></ul> | `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
 ----------------------
 #### Quiz
 
 | Status | HTTP      | URL  | description     |
 | : ----: | : ----: | :------------| ---------------|
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `GET`     |  `quiz/id/:id`      | Gets all info on a specific quiz |
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `GET`     |  `quiz/all`      | Gets all info on the user |
+| <ul><li>[ ] </li></ul>  | `GET`     |  `quiz/id/:id`      | Gets all info on a specific quiz |
+| <ul><li>[ ] </li></ul>  | `GET`     |  `quiz/all`      | Gets all info on the user |
 
 ----------------------
 
 #### Vote
 | Status | HTTP      | URL  | description     |
 | : ----: | : ----: | :------------| ---------------|
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `POST`  |  `vote/new`      | Makes a new vote|
-| <ul><li>[ ] Written?</li><li>[ ] Tests?</li></ul> | `PUT`   |  `vote/update`      | Updates an already casted vote |
+| <ul><li>[ ] </li></ul> | `POST`  |  `vote/new`      | Makes a new vote|
+| <ul><li>[ ] </li></ul> | `PUT`   |  `vote/update`      | Updates an already casted vote |
 
 ----------------------
 

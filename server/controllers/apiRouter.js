@@ -1,7 +1,7 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const query = require('./apiQuery')
+const query = require('../queryAPI/apiQuery')
 const validator = require('./middleware/validator')
 
 /** ========== Routes Related to User ============

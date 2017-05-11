@@ -3,8 +3,8 @@
 const assert = require('chai').assert
 const expect = require('chai').expect
 
-const models = require('../../server/models')
-const query = require('../../server/controllers/apiQuery')
+const models = require('../../server/db/models')
+const query = require('../../server/queryAPI/apiQuery')
 
 const title =
 `
@@ -14,7 +14,7 @@ Unit test on "user" model
 `
 // testing variables
 
-let userTest = {
+let user1 = {
   username: 'I_am_a_test',
   password: 'incorrect'
 }
@@ -30,17 +30,28 @@ describe(title, () => {
   //   })
   // })
   before(() => {
+    // return models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true})
+    // .then(() => {
+    //   return models.sequelize.sync({ force: true })
+    // })
     return models.sequelize.sync({ force: true })
-  })
-
-  it('Should be an empty user table', (done) => {
-    query.findAllUsers().then((results) => {
-      try {
-        assert.deepEqual(results, [])
-        done()
-      } catch (e) {
-        done(e)
-      }
+    .then(() => {
+    // 1. Make FIND ALL queries into all tables
+      return Promise.all([
+        query.findAllUsers(),
+        query.findAllQuizzes(),
+        query.findAllVotes(),
+        query.findAllQuizzesTaken()
+      ])
+    })
+    .then((promiseArray) => {
+    // 2. check all queries to see if they are empty []
+      promiseArray.forEach((searchResult) => {
+        assert.deepEqual(searchResult, [])
+      })
+    })
+    .then(() => {
+    // 3. add data into other tables HERE
     })
   })
 
@@ -52,7 +63,7 @@ describe(title, () => {
   })
 
   it('should be able to create a new user', (done) => {
-    query.addUser(userTest).spread((result, created) => {
+    query.addUser(user1).spread((result, created) => {
       try {
         assert.isTrue(created, 'user was created')
         done()
@@ -63,7 +74,7 @@ describe(title, () => {
   })
 
   it('should not be able to create the same user twice', (done) => {
-    query.addUser(userTest).spread((result, created) => {
+    query.addUser(user1).spread((result, created) => {
       try {
         assert.isNotTrue(created, 'duplicate use should not have been created again')
         done()
@@ -76,14 +87,37 @@ describe(title, () => {
   it('should be able to find the user that was created', (done) => {
     query.findUserById(1).then((result) => {
       try {
-        let user = result.dataValues
+        let user = JSON.parse(JSON.stringify(result))
+        // let user = result.dataValues
         // console.log(user)
         assert.property(user, 'id', '1', 'user should have an id of one')
-        assert.property(user, 'username', userTest.username, 'user should have an id of one')
+        assert.property(user, 'username', user1.username, 'user should have an id of one')
         done()
       } catch (e) {
         done(e)
       }
     })
   })
+
+
+  it('should be able to check the hash password correctly', (done) => {
+    query.findUserByUsername(user1.username)
+    .then((userResult) => {
+      const incorrectPass = userResult.comparePassword('wrong password')
+      const correctPass = userResult.comparePassword(user1.password)
+      assert.isFalse(incorrectPass, 'should be the incorrect password')
+      assert.isTrue(correctPass, 'should be the correct password')
+      // console.log('Wrong', incorrectPass)
+      // console.log('Right', correctPass)
+      done()
+    })
+  })
+
+  // it('should be able to find all users', (done) => {
+  //   query.findAllUsers().then((rawResults) => {
+  //     let results = JSON.parse(JSON.stringify(rawResults)) // hack!
+  //     console.log(results)
+  //     done()
+  //   })
+  // })
 }) // ends describe

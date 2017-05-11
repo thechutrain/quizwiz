@@ -42,5 +42,10 @@ module.exports = {
 
   down: function (queryInterface, Sequelize) {
     return queryInterface.dropTable('quiz')
+  //   return queryInterface.sequelize.query(
+  //     'ALTER TABLE "quiz" DROP CONSTRAINT madeBy;'
+  //   ).then(() => {
+  //     queryInterface.dropTable('quiz')
+  //   })
   }
 }

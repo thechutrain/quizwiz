@@ -5,19 +5,12 @@ var path = require('path')
 var Sequelize = require('sequelize')
 var basename = path.basename(module.filename)
 var env = process.env.NODE_ENV || 'test'
-var config = require(path.join(__dirname, '/..', '/config/config.js'))[env]
+var config = require(path.join(__dirname, '/..', '/config/config.json'))[env]
 var db = {}
 
 var sequelize
-if (process.env.NODE_ENV == 'production') {
-  console.log('YOU ARE IN THE PRODUCTION ENV')
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    protocol: 'postgres',
-    dialect: 'postgres',
-    dialectOptions: {
-      ssl: true
-    }
-  })
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config)
 }

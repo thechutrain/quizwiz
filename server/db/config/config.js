@@ -1,3 +1,10 @@
+var match
+if (process.env.DATABASE_URL) {
+  match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+} else {
+  match = 'abcdefg'.split('')
+}
+
 module.exports = {
   'development': {
     'username': 'alanchu',
@@ -22,7 +29,16 @@ module.exports = {
     'dialect': 'postgres'
   },
   'production': {
-    'use_env_variable': process.env.DATABASE_URL
+    'database': match[5] || '',
+    'username': match[1] || '',
+    'password': match[2] || '',
+    'host': match[3] || '',
+    'dialect': 'postgres',
+    'port': match[4] || '',
+    dialectOptions: {
+      ssl: true
+    }
+    // 'use_env_variable': process.env.DATABASE_URL
     // 'host': 'ec2-54-225-236-102.compute-1.amazonaws.com',
     // 'database': 'd87vadfblg4tmg',
     // 'username': 'hijqmferltimrk',

@@ -12,18 +12,19 @@ console.log('==== TESTING !!!!!! =======')
 var sequelize
 if (env === 'production') {
   console.log('in production')
+  sequelize = new Sequelize(config.database, config.username, config.password, config)
 // if (config.use_env_variable) {
   // sequelize = new Sequelize(process.env.DATABASE_URL)
-  var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
-  sequelize = new Sequelize(match[5], match[1], match[2], {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    port: match[4],
-    host: match[3],
-    dialectOptions: {
-      ssl: true
-    }
-  })
+  // var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+  // sequelize = new Sequelize(match[5], match[1], match[2], {
+  //   dialect: 'postgres',
+  //   protocol: 'postgres',
+  //   port: match[4],
+  //   host: match[3],
+  //   dialectOptions: {
+  //     ssl: true
+  //   }
+  // })
   // sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
   console.log('not in production')

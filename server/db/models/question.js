@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       question: { type: DataTypes.STRING, allowNull: false },
       choices: { type: DataTypes.JSON, allowNull: false },
-      correctAnswer: { type: DataTypes.INTEGER(1), allowNull: false }
+      correctAnswer: { type: DataTypes.INTEGER, allowNull: false }
     },
       // options
     {

@@ -93,7 +93,6 @@ describe(title, () => {
   it('should not be able to create a quiz with an invalid foreign key of madeby', (done) => {
     query.makeQuiz(invalidQuiz).then((resultArray) => {
       const [result, created, err] = resultArray
-      console.log('===============')
       assert.deepEqual(result, {}, 'Error should result in empty obj')
       assert.isFalse(created, 'it should not have created a new quiz with duplic name')
       expect(err.name).to.equal('SequelizeForeignKeyConstraintError')
@@ -104,6 +103,7 @@ describe(title, () => {
 
   // it('should not create another quiz with the same title', (done) => {
   //   query.makeQuiz(quizTest).spread((result, created) => {
+  // console.log('===============')
   //     console.log(created)
   //     done()
   //   })

@@ -16,13 +16,12 @@ module.exports = {
             model: 'quiz',
             key: 'id'
           }
-        }
-        // ,
-        // question: { type: Sequelize.STRING, allowNull: false },
-        // choices: { type: Sequelize.JSON, allowNull: false },
-        // correctAnswer: { type: Sequelize.INTEGER(1), allowNull: false },
-        // createdAt: { type: Sequelize.DATE },
-        // updatedAt: { type: Sequelize.DATE }
+        },
+        question: { type: Sequelize.STRING, allowNull: false },
+        choices: { type: Sequelize.JSON, allowNull: false },
+        correctAnswer: { type: Sequelize.INTEGER, allowNull: false },
+        createdAt: { type: Sequelize.DATE },
+        updatedAt: { type: Sequelize.DATE }
       },
       {
         freezeTableName: true

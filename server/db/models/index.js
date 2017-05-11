@@ -8,8 +8,10 @@ var env = process.env.NODE_ENV || 'test'
 var config = require(path.join(__dirname, '/..', '/config/config.js'))[env]
 var db = {}
 
+console.log('==== TESTING !!!!!! =======')
 var sequelize
 if (env === 'production') {
+  console.log('in production')
 // if (config.use_env_variable) {
   // sequelize = new Sequelize(process.env.DATABASE_URL)
   var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
@@ -24,6 +26,7 @@ if (env === 'production') {
   })
   // sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
+  console.log('not in production')
   sequelize = new Sequelize(config.database, config.username, config.password, config)
 }
 

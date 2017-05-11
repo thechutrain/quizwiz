@@ -51,4 +51,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Version 2
 --------------
-## [2.0.0] - 2017-04-29
+## [2.0.0] - 2017-05-11
+### Added
+- changed from mysql to postgres database
+- set up testing on travis ci postgres 9.6
+
+## [2.0.1] - 2017-05-11
+### Added

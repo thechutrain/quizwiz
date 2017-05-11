@@ -1,8 +1,9 @@
 // App dependencies ---------------------------- /
 const express = require('express')
 const bodyParser = require('body-parser')
-// const session = require('express-session')
 const morgan = require('morgan')
+require('dotenv').load()
+// const session = require('express-session')
 // const errorHandler = require('./controllers/middleware/errorHandler')
 
 const db = require('./db/models')
@@ -10,11 +11,6 @@ const apiRouter = require('./controllers/apiRouter')
 // const errorHandler = require('./controllers/middleware/errorHandler')
 // const passport = require('passport')
 // require('./config/passport')(passport, db.user)
-
-// DEVELOPMENT ONLY ------------------------- /
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load()
-}
 
 // Create express App ------------------------- /
 const app = express() // for testing purposes
@@ -40,7 +36,7 @@ app.use(bodyParser.json())
 // app.use(passport.session())
 
 // Route config -------------------------------------------/
-app.use('/api', apiRouter)
+app.use('/api/v2', apiRouter)
 // app.use(errorHandler)
 
 // Start server ---------------------------------- /
@@ -52,10 +48,12 @@ if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'travisTest') {
       console.info(`${process.env.NODE_ENV} ENV: Listening on port: ${PORT}`)
     })
   }).catch((err) => console.error(err))
-} else {
-  app.listen(PORT, (err) => {
-    if (err) console.log(err)
-    console.info(`Listening on port: ${PORT}`)
-  })
 }
+// else {
+//   // console.log('THIS IS A TEST')
+//   app.listen(PORT, (err) => {
+//     if (err) console.log(err)
+//     console.info(`Listening on port: ${PORT}`)
+//   })
+// }
 module.exports = app

@@ -9,7 +9,8 @@ var config = require(path.join(__dirname, '/..', '/config/config.js'))[env]
 var db = {}
 
 var sequelize
-if (config.use_env_variable) {
+if (env === 'production') {
+// if (config.use_env_variable) {
   // sequelize = new Sequelize(process.env.DATABASE_URL)
   var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
   sequelize = new Sequelize(match[5], match[1], match[2], {

@@ -12,6 +12,11 @@ const apiRouter = require('./controllers/apiRouter')
 // const passport = require('passport')
 // require('./config/passport')(passport, db.user)
 
+// DEVELOPMENT ONLY ------------------------- /
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load()
+}
+
 // Create express App ------------------------- /
 const app = express() // for testing purposes
 app.disable('x-powered-by')

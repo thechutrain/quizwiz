@@ -7,43 +7,36 @@
 - Built along with `mocha` and `chai` testing libraries.
 
 
-## To Do:
+## API Docs:
 ----------------------
 
 ### User
 
-| complete(y/n) | HTTP Method | URL | Description |
-| :---: | :---:         | :------        | :------            |
-| n |  `GET`         | `user/id/:id`        |      Gets all info on a specific the user |
-| n | `GET`     |  `user/all`      | Gets all user in the database |
-| n | `POST`     |  `user/new`      | Creates a new user |
-| n | `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
-
----------------
-### Quiz
-
-| complete(y/n) | HTTP Method | URL | Description |
-| :---: | :---:         | :------        | :------            |
-| n | `GET`     |  `quiz/id/:id`      | Gets all info on a specific quiz |
-| n | `GET`     |  `quiz/all`      | Gets all info on the user |
-
-
----------------
-### Vote
-
-| complete(y/n) | HTTP Method | URL | Description |
-| :---: | :---:         | :------        | :------            |
-| n | `POST`  |  `vote/new`      | Makes a new vote|
-| n | `PUT`   |  `vote/update`      | Updates an already casted vote |
-
----------------
-### User 2
 | HTTP Method | URL | Description |
 | :---:         | :------        | :------            |
 |  `GET`         | `user/id/:id`        |      Gets all info on a specific the user |
 | `GET`     |  `user/all`      | Gets all user in the database |
 | `POST`     |  `user/new`      | Creates a new user |
 | `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
+
+---------------
+### Quiz
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+| `GET`     |  `quiz/id/:id`      | Gets all info on a specific quiz |
+| `GET`     |  `quiz/all`      | Gets all info on the user |
+
+
+---------------
+### Vote
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+| `POST`  |  `vote/new`      | Makes a new vote|
+| `PUT`   |  `vote/update`      | Updates an already casted vote |
+
+---------------
 
 
 ## ERD

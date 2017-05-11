@@ -58,3 +58,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.0.1] - 2017-05-11
 ### Added
+- changed config.js so it can be deployed to heroku

@@ -18,7 +18,7 @@ module.exports = {
           }
         },
         question: { type: Sequelize.STRING, allowNull: false },
-        choices: { type: Sequelize.JSON, allowNull: false },
+        // choices: { type: Sequelize.JSON, allowNull: false },
         correctAnswer: { type: Sequelize.INTEGER, allowNull: false },
         createdAt: { type: Sequelize.DATE },
         updatedAt: { type: Sequelize.DATE }

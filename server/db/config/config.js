@@ -22,7 +22,7 @@ module.exports = {
     'dialect': 'postgres'
   },
   'production': {
-    'use_env_variable': process.env.DATABASE_URL,
+    'use_env_variable': process.env.DATABASE_URL
     // 'host': 'ec2-54-225-236-102.compute-1.amazonaws.com',
     // 'database': 'd87vadfblg4tmg',
     // 'username': 'hijqmferltimrk',
@@ -30,9 +30,10 @@ module.exports = {
     // 'dialect': 'postgres',
     // 'port': 5432,
     // 'protocol': null,
-    'ssl': true,
-    'dialectOptions': {
-      'ssl': { 'required': true }
-    }
+    // 'ssl': true,
+    // 'dialectOptions': {
+    //   'ssl': { 'required': true }
+    // }
   }
 }
+// postgres://hijqmferltimrk:8b3845e64af86f77addde119cd852a25e3ab58e3c8545b696087caa96a33a85d@ec2-54-225-236-102.compute-1.amazonaws.com:5432/d87vadfblg4tmg

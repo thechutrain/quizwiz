@@ -10,11 +10,19 @@ var db = {}
 
 var sequelize
 if (config.use_env_variable) {
-  console.log('======== using the ENV var ==============')
-  sequelize = new Sequelize(process.env.DATABASE_URL)
+  // sequelize = new Sequelize(process.env.DATABASE_URL)
+  var match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+  sequelize = new Sequelize(match[5], match[1], match[2], {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    port: match[4],
+    host: match[3],
+    dialectOptions: {
+      ssl: true
+    }
+  })
   // sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
-  console.log('======== NOT using the env var WTF? ==============')
   sequelize = new Sequelize(config.database, config.username, config.password, config)
 }
 

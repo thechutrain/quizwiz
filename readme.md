@@ -7,11 +7,40 @@
 - Built along with `mocha` and `chai` testing libraries.
 
 
-## To Do:
-* [ ] add tests for password saving & checking ...
+## API Docs:
+----------------------
+
+### User
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+|  `GET`         | `user/id/:id`        |      Gets all info on a specific the user |
+| `GET`     |  `user/all`      | Gets all user in the database |
+| `POST`     |  `user/new`      | Creates a new user |
+| `POST`     |  `user/take-quiz`      | Creates a new userquiz instance. |
+
+---------------
+### Quiz
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+| `GET`     |  `quiz/id/:id`      | Gets all info on a specific quiz |
+| `GET`     |  `quiz/all`      | Gets all info on the user |
+
+
+---------------
+### Vote
+
+| HTTP Method | URL | Description |
+| :---:         | :------        | :------            |
+| `POST`  |  `vote/new`      | Makes a new vote|
+| `PUT`   |  `vote/update`      | Updates an already casted vote |
+
+---------------
 
 
 ## ERD
+----------------------
 
 ![erd](.notes/quizwizERD1.png)
 > - rows highlighted in red represent primary or composite keys
@@ -19,6 +48,7 @@
 
 
 ## Testing
+----------------------
 - Unit and intergration test of the API endpoints were written as the queries were made.
 - Please submit an issue if you find any bugs. [Issues](https://github.com/thechutrain/quizwiz/issues)
 

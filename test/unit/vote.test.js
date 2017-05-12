@@ -27,7 +27,6 @@
 //     return models.sequelize.sync({ force: true })
 //   })
 
-
 //   it('Should be an empty user, quiz, vote, userquiz table', (done) => {
 //     Promise.all([
 //       query.findAllUsers(),

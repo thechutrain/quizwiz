@@ -21,8 +21,10 @@ router.post('/new',
   validator(['username', 'password']),
   (req, res) => {
     query.newUser(req.body).then((resultArray) => {
-      const [user, created] = resultArray
-      res.json({ user, created }) // "user" here includes password hash
+      const [userRaw, created] = resultArray
+      const user = JSON.parse(JSON.stringify(userRaw))
+      delete user.password
+      res.json({ user, created })
     })
   }
 )

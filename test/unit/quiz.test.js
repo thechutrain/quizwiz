@@ -51,7 +51,7 @@ describe(title, () => {
     .then(() => {
       // 3. add data into other tables HERE
       return Promise.all([
-        query.addUser(user1)
+        query.newUser(user1)
       ])
     })
     .then((insertPromises) => {
@@ -74,7 +74,7 @@ describe(title, () => {
   })
 
   it('should be able to create a new quiz', (done) => {
-    query.makeQuiz(quizTest).then((resultArray) => {
+    query.newQuiz(quizTest).then((resultArray) => {
       const [result, created, error] = resultArray
       try {
         let quiz = JSON.parse(JSON.stringify(result))
@@ -91,7 +91,7 @@ describe(title, () => {
   })
 
   it('should not be able to create a quiz with an invalid foreign key of madeby', (done) => {
-    query.makeQuiz(invalidQuiz).then((resultArray) => {
+    query.newQuiz(invalidQuiz).then((resultArray) => {
       const [result, created, err] = resultArray
       assert.deepEqual(result, {}, 'Error should result in empty obj')
       assert.isFalse(created, 'it should not have created a new quiz with duplic name')

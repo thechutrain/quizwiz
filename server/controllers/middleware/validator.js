@@ -47,7 +47,8 @@ function validator (validKeys) {
     if (valid) {
       next()
     } else {
-      next(new Error(JSON.stringify(errors)))
+      res.json(errors)
+      // next(new Error(JSON.stringify(errors)))
     }
   } // ends middleware function
 } // ends validator

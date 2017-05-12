@@ -24,9 +24,9 @@
 
 | HTTP Method | URL | Description |
 | :---:         | :------        | :------            |
-| `GET`     |  `quiz/id/:id`      | Gets all info on a specific quiz |
-| `GET`     |  `quiz/all`      | Gets all info on the user |
-
+| `GET`     |  `quiz/id/:id`      | Gets info on a specific quiz |
+| `GET`     |  `quiz/all`      | Gets all the quizzes |
+| `POST`     |  `quiz/new`      | creates a new quiz |
 
 ---------------
 ### Vote

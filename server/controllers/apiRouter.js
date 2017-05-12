@@ -53,7 +53,7 @@ router.post('/quiz',
   validator(['title', {key: 'description', optional: true}, 'madeBy']),
   (req, res) => {
     query.makeQuiz(req.body).spread((user, created) => {
-      res.json({user, created})
+      res.json({ user, created })
     })
   }
 )

@@ -1,18 +1,18 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const Query = require('../../queryAPI/apiQuery')
+const query = require('../../queryAPI/apiQuery')
 const validator = require('../middleware/validator')
 
 // =========== USER routes ==================
 router.get('/id/:id', (req, res) => {
-  Query.findUserById(req.params.id).then((user) => {
+  query.findUserById(req.params.id).then((user) => {
     res.json(user)
   })
 })
 
 router.get('/all', (req, res) => {
-  Query.findAllUsers().then((users) => {
+  query.findAllUsers().then((users) => {
     res.json(users)
   })
 })
@@ -20,13 +20,14 @@ router.get('/all', (req, res) => {
 router.post('/new',
   validator(['username', 'password']),
   (req, res) => {
-    Query.addUser(req.body).then((resultArray) => {
+    query.newUser(req.body).then((resultArray) => {
       const [user, created] = resultArray
-      res.json({ user, created })
+      res.json({ user, created }) // "user" here includes password hash
     })
   }
 )
 
+//  ----------- TO DO -----------
 // router.post('/take-quiz', (req, res) => {
 //   res.json({'TODO'})
 // })

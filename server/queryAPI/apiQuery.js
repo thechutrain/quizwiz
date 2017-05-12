@@ -35,7 +35,7 @@ module.exports = {
       ]
     })
   },
-  addUser: (userObj) => {
+  newUser: (userObj) => {
     return db.user.findOrCreate({ where: { username: userObj.username }, defaults: userObj })
   },
 
@@ -50,7 +50,7 @@ module.exports = {
       ]
     })
   },
-  makeQuiz: (quizObj) => {
+  newQuiz: (quizObj) => {
     return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
     .catch((err) => [{}, false, err])
   },

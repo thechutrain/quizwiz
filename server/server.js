@@ -43,6 +43,7 @@ app.use(bodyParser.json())
 // Route config -------------------------------------------/
 // app.use('/api/v2', apiRouter)
 app.use('/api/v2/user', require('./controllers/api/userRouter'))
+app.use('/api/v2/quiz', require('./controllers/api/quizRouter'))
 // app.use(errorHandler)
 
 // Start server ---------------------------------- /

@@ -63,7 +63,7 @@ describe(title, () => {
   })
 
   it('should be able to create a new user', (done) => {
-    query.addUser(user1).spread((result, created) => {
+    query.newUser(user1).spread((result, created) => {
       try {
         assert.isTrue(created, 'user was created')
         done()
@@ -74,7 +74,7 @@ describe(title, () => {
   })
 
   it('should not be able to create the same user twice', (done) => {
-    query.addUser(user1).spread((result, created) => {
+    query.newUser(user1).spread((result, created) => {
       try {
         assert.isNotTrue(created, 'duplicate use should not have been created again')
         done()
@@ -98,7 +98,6 @@ describe(title, () => {
       }
     })
   })
-
 
   it('should be able to check the hash password correctly', (done) => {
     query.findUserByUsername(user1.username)

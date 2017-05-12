@@ -24,6 +24,16 @@ const user1 = {
   username: 'Alan',
   password: 'secret'
 }
+const quiz1 = {
+  title: 'US History Testing Quiz',
+  description: 'A quiz on the history of the United States',
+  madeBy: 1
+}
+const userQuiz1 = {
+  userId: 1,
+  quizId: 1,
+  score: 90
+}
 
 describe(title, () => {
   before(() => {
@@ -77,10 +87,43 @@ describe(title, () => {
       })
   })
 
-  // TO DO
-  // it('should be able to POST @ "/user/take-quiz"', (done) => {
-  //   done()
-  // })
+  it('should not be able to POST @ "/user/take-quiz" without valid quiz', (done) => {
+    chai.request(server)
+      .post('/api/v2/user/take-quiz')
+      .send(userQuiz1)
+      .end((err, res) => {
+        expect(err).to.be.null()
+        expect(res).to.have.status(200)
+        // console.log(res.body)
+        // console.log('==============')
+        assert.deepEqual(res.body, {error: 'Error! Need a valid quiz'}, 'Should not be able to enter quiz without valid quiz')
+        done()
+      })
+  })
+
+  it('should not be able to POST @ "/user/take-quiz" with valid quiz and user id', (done) => {
+    query.newQuiz(quiz1).then((resultArray) => {
+      const [quiz, created] = resultArray
+      assert.isTrue(created)
+      assert.isObject(quiz)
+      // now that quiz is in database --> make request
+      chai.request(server)
+        .post('/api/v2/user/take-quiz')
+        .send(userQuiz1)
+        .end((err, res) => {
+          expect(err).to.be.null()
+          expect(res).to.have.status(200)
+          console.log(res.body)
+          console.log('==============')
+          // assert.deepEqual(res.body, {error: 'Error! Need a valid quiz'}, 'Should not be able to enter quiz without valid quiz')
+          expect(res.body.id).to.equal(1)
+          expect(res.body).to.include.keys([
+            'id', 'userId', 'quizId', 'score', 'updatedAt', 'createdAt'
+          ])
+          done()
+        })
+    })
+  })
 
   it('should be able to get a user @ "/user/id/:id"', (done) => {
     chai.request(server)

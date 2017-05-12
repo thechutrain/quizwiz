@@ -38,11 +38,32 @@ function newUser (userObj) {
 }
 
 function takeQuiz (userQuizObj) {
-  // const { userId, quizId, score } = userQuizObj
-  return this.findUserById(1)
-  // Promise.all([
-  //   this.
-  // ])
+  const { userId, quizId, score } = userQuizObj
+  // check that there is a userId && quizId
+  return Promise.all([
+    findUserById(userId),
+    findQuizById(quizId)
+  ]).then((resultArray) => {
+    const [ user, quiz ] = resultArray
+    if (!user && !quiz) {
+      // console.log('Error! Need a valid user & quiz')
+      return {error: 'Error! Need a valid user & quiz'}
+    } else if (!user) {
+      // console.log('Error! Need a valid user')
+      return {error: 'Error! Need a valid user'}
+    } else if (!quiz) {
+      // console.log('Error! Need a valid quiz')
+      return {error: 'Error! Need a valid quiz'}
+    } else {
+      return db.userquiz.create({ userId, quizId, score })
+        // .then((result) => {
+        //   return { result, created: true }
+        // })
+        // .catch((err) => {
+        //   return {err}
+        // })
+    }
+  })
 }
 
 // ============ Quiz Query ===========
@@ -118,7 +139,6 @@ function vote (voteObj) {
 function findAllVotes () {
   return db.vote.findAll()
 }
-
 
 module.exports = {
   findUserByUsername,

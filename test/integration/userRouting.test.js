@@ -20,6 +20,11 @@ Integration Test '/user' routes
 ===============================
 `
 
+const user1 = {
+  username: 'Alan',
+  password: 'secret'
+}
+
 describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })
@@ -53,74 +58,56 @@ describe(title, () => {
         done()
       })
   })
+
+  it('should be able to post a new user @ POST "/user/new"', (done) => {
+    chai.request(server)
+      .post('/api/v2/user/new')
+      .send(user1)
+      .end((err, res) => {
+        expect(err).to.be.null()
+        expect(res).to.have.status(200)
+        expect(res.body).to.be.an('object')
+        assert.isTrue(res.body.created, 'should have created a new user')
+        // assert.isNotTrue(res.body.created, 'should have created a new user')
+        expect(res.body.user.username).to.equal(user1.username)
+        expect(res.body.user).to.include.keys([
+          'id', 'username', 'updatedAt', 'createdAt'
+        ])
+        done()
+      })
+  })
+
+  // TO DO
+  // it('should be able to POST @ "/user/take-quiz"', (done) => {
+  //   done()
+  // })
+
+  it('should be able to get a user @ "/user/id/:id"', (done) => {
+    chai.request(server)
+      .get('/api/v2/user/id/1') // get first user
+      .end((err, res) => {
+        expect(err).to.be.null()
+        expect(res).to.have.status(200)
+        // console.log(res.body)
+        // console.log('============')
+        expect(res.body).to.be.an('object')
+        expect(res.body).to.include.keys([
+          'id', 'username', 'updatedAt', 'createdAt', 'userquizzes', 'votes'
+        ])
+        done()
+      })
+  })
+
+  it('should be not be able to get a user @ "/user/id/-2"', (done) => {
+    chai.request(server)
+      .get('/api/v2/user/id/-2') // get first user
+      .end((err, res) => {
+        expect(err).to.be.null()
+        expect(res).to.have.status(200)
+        expect(res.body).to.be.null()
+        // console.log(res.body)
+        // console.log('============')
+        done()
+      })
+  })
 })
-// describe(title, () => {
-//   // before(function () {
-//   //   return new Promise((resolve, reject) => {
-//   //     models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(() => {
-//   //       models.sequelize.sync({ force: true }).then(() => {
-//   //         resolve()
-//   //       })
-//   //     })
-//   //   })
-//   // })
-//   before(function () {
-//     return models.sequelize.sync({ force: true })
-//   })
-
-//   it('should be an empty database', (done) => {
-//     query.findAllUsers().then((results) => {
-//       assert.deepEqual(results, [])
-//       return query.findQuizzesTaken()
-//     }).then((results) => {
-//       assert.deepEqual(results, [])
-//       return query.findAllQuizzes()
-//     }).then((results) => {
-//       assert.deepEqual(results, [])
-//       // done()
-//       return query.findAllVotes()
-//     }).then((results) => {
-//       assert.deepEqual(results, [])
-//       done()
-//     })
-//   })
-
-//   it('should be an empty list of users @ GET "/api/user"', (done) => {
-//     chai.request(server)
-//       .get('/api/user')
-//       .end((err, res) => {
-//         expect(err).to.be.null()
-//         expect(res).to.have.status(200)
-//         assert.deepEqual(res.body, [])
-//         done()
-//       })
-//   })
-
-//   it('should be able to create a new user @ POST "/api/user"', (done) => {
-//     let newUser = {
-//       username: 'alan',
-//       password: 'fakePassword'
-//     }
-//     chai.request(server)
-//       .post('/api/user')
-//       .send(newUser)
-//       .end((err, res) => {
-//         expect(err).to.be.null()
-//         expect(res).to.have.status(200)
-//         // console.log(res.body)
-//         done()
-//       })
-//   })
-
-//   it('should be able to get the new user @ GET "/api/user/:id', (done) => {
-//     chai.request(server)
-//       .get('/api/user/1')
-//       .end((err, res) => {
-//         expect(err).to.be.null()
-//         expect(res).to.have.status(200)
-//         let userReturned = res.body
-//         expect(userReturned).to.have.all.keys('id', 'username', 'password', 'createdAt', 'updatedAt', 'votes', 'userquizzes')
-//         done()
-//       })
-//   })
-// })

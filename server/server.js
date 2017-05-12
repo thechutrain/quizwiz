@@ -7,7 +7,7 @@ require('dotenv').load()
 // const errorHandler = require('./controllers/middleware/errorHandler')
 
 const db = require('./db/models')
-const apiRouter = require('./controllers/apiRouter')
+// const apiRouter = require('./controllers/apiRouter')
 // const errorHandler = require('./controllers/middleware/errorHandler')
 // const passport = require('passport')
 // require('./config/passport')(passport, db.user)
@@ -41,7 +41,8 @@ app.use(bodyParser.json())
 // app.use(passport.session())
 
 // Route config -------------------------------------------/
-app.use('/api/v2', apiRouter)
+// app.use('/api/v2', apiRouter)
+app.use('/api/v2/user', require('./controllers/api/userRouter'))
 // app.use(errorHandler)
 
 // Start server ---------------------------------- /

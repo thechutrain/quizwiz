@@ -16,7 +16,8 @@
     "dev": "export NODE_ENV='development'; nodemon server/server.js",
     "test": "export NODE_ENV='test'; export PORT='8080'; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
     "travis-test": "npm run migrate; find ./test -name '*.js' | node_modules/.bin/mocha --recursive",
-    "lint": "node_modules/.bin/eslint --fix ./server"
+    "lint": "node_modules/.bin/eslint --fix ./server",
+    "lint:test": "node_modules/.bin/eslint --fix ./test"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -8,7 +8,6 @@
 // chai.use(chaiHttp)
 // chai.use(dirtyChai)
 
-
 // // require the database models
 // const server = require('../../server/server')
 // const models = require('../../server/db/models')
@@ -111,7 +110,6 @@
 //         done()
 //       })
 //   })
-
 
 //   it('should be able to get the all the quizzes @ GET "/api/quiz"', (done) => {
 //     chai.request(server)

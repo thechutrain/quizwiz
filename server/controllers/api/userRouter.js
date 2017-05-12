@@ -21,15 +21,22 @@ router.post('/new',
   validator(['username', 'password']),
   (req, res) => {
     query.newUser(req.body).then((resultArray) => {
-      const [user, created] = resultArray
-      res.json({ user, created }) // "user" here includes password hash
+      const [userRaw, created] = resultArray
+      const user = JSON.parse(JSON.stringify(userRaw))
+      delete user.password
+      res.json({ user, created })
     })
   }
 )
 
-//  ----------- TO DO -----------
-// router.post('/take-quiz', (req, res) => {
-//   res.json({'TODO'})
-// })
+router.post('/take-quiz',
+  validator(['userId', 'quizId', 'score']),
+  (req, res) => {
+    // const { userId, quizId, score } = req.body
+    query.takeQuiz(req.body).then((result) => {
+      res.json(result)
+    })
+  }
+)
 
 module.exports = router

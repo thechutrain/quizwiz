@@ -59,3 +59,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.0.1] - 2017-05-11
 ### Added
 - changed config.js so it can be deployed to heroku
+
+## [2.0.2] - 2017-05-12
+### Added
+- unit tests for user, quiz, and userquiz table
+- added an integration test for all 4 "/user/" routes

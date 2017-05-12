@@ -29,9 +29,14 @@ router.post('/new',
   }
 )
 
-//  ----------- TO DO -----------
-// router.post('/take-quiz', (req, res) => {
-//   res.json({'TODO'})
-// })
+router.post('/take-quiz',
+  validator(['userId', 'quizId', 'score']),
+  (req, res) => {
+    // const { userId, quizId, score } = req.body
+    query.takeQuiz(req.body).then((result) => {
+      res.json(result)
+    })
+  }
+)
 
 module.exports = router

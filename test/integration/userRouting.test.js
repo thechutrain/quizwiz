@@ -113,8 +113,8 @@ describe(title, () => {
         .end((err, res) => {
           expect(err).to.be.null()
           expect(res).to.have.status(200)
-          console.log(res.body)
-          console.log('==============')
+          // console.log(res.body)
+          // console.log('==============')
           // assert.deepEqual(res.body, {error: 'Error! Need a valid quiz'}, 'Should not be able to enter quiz without valid quiz')
           expect(res.body.id).to.equal(1)
           expect(res.body).to.include.keys([

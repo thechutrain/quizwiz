@@ -64,3 +64,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - unit tests for user, quiz, and userquiz table
 - added an integration test for all 4 "/user/" routes
+
+## [2.0.3] - 2017-05-15
+### Added
+- unit test for vote, question table
+- added "addQuestion" query

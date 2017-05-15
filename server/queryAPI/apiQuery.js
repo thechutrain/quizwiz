@@ -15,7 +15,11 @@ function findUserById (id) {
       exclude: ['password']
     },
     include: [
-      { model: db.userquiz },
+      { model: db.userquiz,
+        include: [
+          { model: db.quiz }
+        ]
+      },
       { model: db.vote }
     ]
   })

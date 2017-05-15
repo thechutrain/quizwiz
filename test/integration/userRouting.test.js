@@ -101,7 +101,7 @@ describe(title, () => {
       })
   })
 
-  it('should not be able to POST @ "/user/take-quiz" with valid quiz and user id', (done) => {
+  it('should be able to POST @ "/user/take-quiz" with valid quiz and user id', (done) => {
     query.newQuiz(quiz1).then((resultArray) => {
       const [quiz, created] = resultArray
       assert.isTrue(created)
@@ -131,9 +131,12 @@ describe(title, () => {
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
-        // console.log(res.body)
+        console.log(res.body)
+        // console.log(res.body[0].quiz)
         // console.log('============')
-        expect(res.body).to.be.an('object')
+        // const test = JSON.parse(JSON.stringify(res.body))
+        // console.log(test.userquizzes)
+        // expect(res.body).to.be.an('object')
         expect(res.body).to.include.keys([
           'id', 'username', 'updatedAt', 'createdAt', 'userquizzes', 'votes'
         ])

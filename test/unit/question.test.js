@@ -9,7 +9,7 @@ const query = require('../../server/queryAPI/apiQuery')
 const title =
 `
 ===============================
-Unit test on "vote" model
+Unit test on "question" model
 ===============================
 `
 
@@ -24,10 +24,18 @@ const user1 = {
   password: 'incorrect'
 }
 
-const validVote = {
-  userId: 1,
+const question1 = {
   quizId: 1,
-  stars: 3
+  question: 'What question number is this?',
+  choices: ['One', 'Two', 'Three'],
+  correctAnswer: 0
+}
+
+const question2 = {
+  quizId: 1,
+  question: 'Is this question number 2?',
+  choices: ['No', 'Yes'],
+  correctAnswer: 1
 }
 
 describe(title, () => {
@@ -67,66 +75,35 @@ describe(title, () => {
     /** ================== Actual Tests Begin Here ========================
    *
    */
-  // it('should be able to find all the votes', (done) => {
-  //   query.findAllVotes().then((results) => {
-  //     // console.log(results)
-
-  //     done()
-  //   })
-  // })
-
-  it('should be able to make a vote', (done) => {
-    query.vote(validVote).then((rawResult) => {
-      const result = JSON.parse(JSON.stringify(rawResult))
-      // console.log(JSON.parse(JSON.stringify(result)))
+  it('should be able add a question to quiz 1', (done) => {
+    query.addQuestion(question1).then((r) => {
+      const result = JSON.parse(JSON.stringify(r))
       // console.log(result)
-      expect(result.vote).to.include.keys([
-        'userId', 'quizId', 'stars'
+      // console.log(typeof result.choices) // object!
+      expect(result).to.include.keys([
+        'id', 'question', 'choices', 'correctAnswer', 'quizId', 'updatedAt'
       ])
-      expect(result.vote.stars).to.equal(3)
-      assert.isTrue(result.created)
       done()
     })
   })
 
-  it('should be able to update a previously entered quiz', (done) => {
-    query.updateVote({
-      quizId: 1,
-      userId: 1,
-      stars: 5
-    }).then((result) => {
+  it('should be able to add another question to quiz 1', (done) => {
+    query.addQuestion(question2).then((r) => {
+      const result = JSON.parse(JSON.stringify(r))
       // console.log(result)
-      // console.log(JSON.parse(JSON.stringify(result)))
-      // assert.isTrue(result.updated)
-      expect(result.updated).to.be.true()
+      expect(result).to.include.keys([
+        'id', 'question', 'choices', 'correctAnswer', 'quizId', 'updatedAt'
+      ])
       done()
     })
   })
 
-  it('should NOT be able to make a vote with invalid userId', (done) => {
-    query.updateVote({
-      quizId: 1,
-      userId: -1,
-      stars: 5
-    }).then((result) => {
+  it('should be able to find both questions of quiz 1', (done) => {
+    // done()
+    query.findQuizById(1).then((rawResult) => {
+      const result = JSON.parse(JSON.stringify(rawResult))
       // console.log(result)
-      // console.log(result.updated)
-      // console.log(JSON.parse(JSON.stringify(result)))
-      // assert.isNotTrue(result.updated)
-      // assert.isTrue(result.updated)
-      // assert.isTrue(false) // NOT WORKING???
-      expect(result.updated).to.be.false()
-      done()
-    })
-  })
-
-  it('should NOT be able to make a vote with invalid quizId', (done) => {
-    query.updateVote({
-      quizId: -1,
-      userId: 1,
-      stars: 5
-    }).then((result) => {
-      expect(result.updated).to.be.false()
+      expect(result.questions).to.have.lengthOf(2)
       done()
     })
   })

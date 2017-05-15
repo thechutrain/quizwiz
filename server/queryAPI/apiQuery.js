@@ -72,7 +72,12 @@ function takeQuiz (userQuizObj) {
 
 // ============ Quiz Query ===========
 function findQuizById (id) {
-  return db.quiz.findOne({ where: { id } })
+  return db.quiz.findOne({
+    where: { id },
+    include: [
+      { model: db.question }
+    ]
+  })
 }
 
 function findAllQuizzes () {
@@ -86,6 +91,19 @@ function findAllQuizzes () {
 function newQuiz (quizObj) {
   return db.quiz.findOrCreate({ where: { title: quizObj.title }, defaults: quizObj })
   .catch((err) => [{}, false, err])
+}
+
+// ================== Question Query =============
+function addQuestion (questionObj) {
+  const { question, choices, correctAnswer, quizId } = questionObj
+  return findQuizById(quizId).then((result) => {
+    if (!result) {
+      // not a valid quizId
+      return {error: 'Not a valid quizId'}
+    }
+    // check that userId is equal to madeBy
+    return db.question.create({ question, choices, correctAnswer, quizId })
+  })
 }
 
 // ================== UserQuiz Query =============
@@ -105,7 +123,7 @@ function vote (voteObj) {
     defaults: voteObj
   }).spread((result, created) => {
     if (created) {
-      return [result, created]
+      return { vote: result, created }
     } else {
       return db.vote.update(
         {
@@ -140,6 +158,26 @@ function vote (voteObj) {
   })
 }
 
+function updateVote (voteObj) {
+  /**
+   * @return ex. { vote: { stars: 5, quizId: 1, userId: -1 }, updated: false }
+   * @return ex. { vote: { stars: 5, quizId: 1, userId: 1 }, updated: true }
+   */
+  const { quizId, userId } = voteObj
+  delete voteObj.quizId
+  delete voteObj.userId
+  return db.vote.update(voteObj, {
+    where: {
+      quizId,
+      userId
+    }
+  }).then((result) => {
+    voteObj.quizId = quizId
+    voteObj.userId = userId
+    return result[0] ? { vote: voteObj, updated: true } : { vote: voteObj, updated: false }
+  })
+}
+
 function findAllVotes () {
   return db.vote.findAll()
 }
@@ -153,7 +191,9 @@ module.exports = {
   findQuizById,
   findAllQuizzes,
   newQuiz,
+  addQuestion,
   findAllQuizzesTaken,
   vote,
+  updateVote,
   findAllVotes
 }

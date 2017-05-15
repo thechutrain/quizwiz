@@ -30,7 +30,6 @@ const quiz1 = {
   madeBy: 1
 }
 
-
 describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })

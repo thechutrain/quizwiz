@@ -1,102 +1,133 @@
-// 'use strict'
-// /* global it, describe, before */
-// const assert = require('chai').assert
-// const expect = require('chai').expect
+'use strict'
+/* global it, describe, before */
+const assert = require('chai').assert
+const expect = require('chai').expect
 
-// const models = require('../../server/db/models')
-// const query = require('../../server/queryAPI/apiQuery')
+const models = require('../../server/db/models')
+const query = require('../../server/queryAPI/apiQuery')
 
-// const title =
-// `
-// ===============================
-// Unit test on "vote" model
-// ===============================
-// `
+const title =
+`
+===============================
+Unit test on "vote" model
+===============================
+`
 
-// describe(title, () => {
-//   // before(function () {
-//   //   return new Promise((resolve, reject) => {
-//   //     models.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true}).then(() => {
-//   //       models.sequelize.sync({ force: true }).then(() => {
-//   //         resolve()
-//   //       })
-//   //     })
-//   //   })
-//   // })
-//   before(() => {
-//     return models.sequelize.sync({ force: true })
-//   })
+const quiz1 = {
+  title: 'US History Testing Quiz',
+  description: 'A quiz on the history of the United States',
+  madeBy: 1
+}
 
-//   it('Should be an empty user, quiz, vote, userquiz table', (done) => {
-//     Promise.all([
-//       query.findAllUsers(),
-//       query.findAllQuizzes(),
-//       query.findAllVotes(),
-//       query.findQuizzesTaken()
-//     ])
-//     .then((promiseArray) => {
-//       // DEBUGGING
-//       // console.log('Users', promiseArray[0])
-//       // console.log('Quizzes', promiseArray[1])
-//       // console.log('Votes', promiseArray[2])
-//       // console.log('Quizzes Taken', promiseArray[3])
-//       promiseArray.forEach((promise) => {
-//         assert.deepEqual(promise, [])
-//       })
-//       done()
-//     })
-//   })
+const user1 = {
+  username: 'I_am_a_test',
+  password: 'incorrect'
+}
 
-//   // it('should be an empty vote table', (done) => {
-//   //   query.findAllVotes().then((results) => {
-//   //     try {
-//   //       assert.deepEqual(results, [])
-//   //       done()
-//   //     } catch (e) {
-//   //       done(e)
-//   //     }
-//   //   })
-//   // })
+const validVote = {
+  userId: 1,
+  quizId: 1,
+  stars: 3
+}
 
-//   it('should not be able to make a new vote without a valid user and quiz id', (done) => {
-//     let testVote = {
-//       userId: 1,
-//       quizId: 2,
-//       stars: 5
-//     }
-//     query.vote(testVote).spread((result, created) => {
-//       // console.log(result)
-//       // console.log(created)
-//       assert.isFalse(created, 'vote should not have been created')
-//       // assert.isTrue(created, 'vote should be created')
-//       // console.log(result.dataValues)
-//       done()
-//     })
-//   })
+describe(title, () => {
+  before(() => {
+    return models.sequelize.sync({ force: true })
+    .then(() => {
+      // 1. Make FIND ALL queries into all tables
+      return Promise.all([
+        query.findAllUsers(),
+        query.findAllQuizzes(),
+        query.findAllVotes(),
+        query.findAllQuizzesTaken()
+      ])
+    })
+    .then((promiseArray) => {
+      // 2. check all queries to see if they are empty []
+      promiseArray.forEach((searchResult) => {
+        assert.deepEqual(searchResult, [])
+      })
+    })
+    .then(() => {
+      // 3. add data into other tables HERE
+      return Promise.all([
+        query.newUser(user1)
+      ])
+    })
+    .then((insertPromises) => {
+      // 4. check that all insertions worked!
+      assert.isTrue(insertPromises[0][1], 'user should be created')
+      // assert.isTrue(insertPromises[1][1], 'quiz should be created')
+      return query.newQuiz(quiz1)
+    })
+    .then((insertPromise) => {
+      assert.isTrue(insertPromise[0][1], 'quiz should be created')
+    })
+  })
+    /** ================== Actual Tests Begin Here ========================
+   *
+   */
+  // it('should be able to find all the votes', (done) => {
+  //   query.findAllVotes().then((results) => {
+  //     // console.log(results)
 
-//   it('should be able to update the previous vote', (done) => {
-//     let testVote = {
-//       userId: 1,
-//       quizId: 2,
-//       stars: 0
-//     }
-//     query.vote(testVote).spread((result, created) => {
-//       assert.isFalse(created, 'vote should not have been created')
-//       // console.log(result)
-//       done()
-//     })
-//   })
+  //     done()
+  //   })
+  // })
 
-//   it('should not be able to update vote with bad params', (done) => {
-//     let badVote = {
-//       userId: 1,
-//       quizId: 2,
-//       error: 'duhhh'
-//     }
-//     query.vote(badVote).spread((result, created) => {
-//       expect(result).to.have.any.keys('error')
-//       assert.isFalse(created, 'vote should not have been created')
-//       done()
-//     })
-//   })
-// }) // ends describe
+  it('should be able to make a vote', (done) => {
+    query.vote(validVote).then((rawResult) => {
+      const result = JSON.parse(JSON.stringify(rawResult))
+      // console.log(JSON.parse(JSON.stringify(result)))
+      // console.log(result)
+      expect(result.vote).to.include.keys([
+        'userId', 'quizId', 'stars'
+      ])
+      expect(result.vote.stars).to.equal(3)
+      assert.isTrue(result.created)
+      done()
+    })
+  })
+
+  it('should be able to update a previously entered quiz', (done) => {
+    query.updateVote({
+      quizId: 1,
+      userId: 1,
+      stars: 5
+    }).then((result) => {
+      // console.log(result)
+      // console.log(JSON.parse(JSON.stringify(result)))
+      // assert.isTrue(result.updated)
+      expect(result.updated).to.be.true()
+      done()
+    })
+  })
+
+  it('should NOT be able to make a vote with invalid userId', (done) => {
+    query.updateVote({
+      quizId: 1,
+      userId: -1,
+      stars: 5
+    }).then((result) => {
+      // console.log(result)
+      // console.log(result.updated)
+      // console.log(JSON.parse(JSON.stringify(result)))
+      // assert.isNotTrue(result.updated)
+      // assert.isTrue(result.updated)
+      // assert.isTrue(false) // NOT WORKING???
+      expect(result.updated).to.be.false()
+      done()
+    })
+  })
+
+  it('should NOT be able to make a vote with invalid quizId', (done) => {
+    query.updateVote({
+      quizId: -1,
+      userId: 1,
+      stars: 5
+    }).then((result) => {
+      expect(result.updated).to.be.false()
+      done()
+    })
+  })
+})

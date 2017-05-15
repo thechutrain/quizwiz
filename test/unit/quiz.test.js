@@ -101,6 +101,17 @@ describe(title, () => {
     })
   })
 
+  it('should not be able to find the quiz by id', (done) => {
+    query.findQuizById(1).then((rawResult) => {
+      let result = JSON.parse(JSON.stringify(rawResult))
+      // console.log(result)
+      expect(result).to.include.keys([
+        'id', 'title', 'description', 'madeBy', 'createdAt', 'updatedAt'
+      ])
+      done()
+    })
+  })
+
   // it('should not create another quiz with the same title', (done) => {
   //   query.makeQuiz(quizTest).spread((result, created) => {
   // console.log('===============')

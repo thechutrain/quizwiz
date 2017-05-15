@@ -131,7 +131,7 @@ describe(title, () => {
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
-        console.log(res.body)
+        // console.log(res.body)
         // console.log(res.body[0].quiz)
         // console.log('============')
         // const test = JSON.parse(JSON.stringify(res.body))

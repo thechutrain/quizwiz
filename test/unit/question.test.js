@@ -78,7 +78,7 @@ describe(title, () => {
   it('should be able add a question to quiz 1', (done) => {
     query.addQuestion(question1).then((r) => {
       const result = JSON.parse(JSON.stringify(r))
-      console.log(result)
+      // console.log(result)
       // console.log(typeof result.choices) // object!
       expect(result).to.include.keys([
         'id', 'question', 'choices', 'correctAnswer', 'quizId', 'updatedAt'
@@ -90,7 +90,7 @@ describe(title, () => {
   it('should be able to add another question to quiz 1', (done) => {
     query.addQuestion(question2).then((r) => {
       const result = JSON.parse(JSON.stringify(r))
-      console.log(result)
+      // console.log(result)
       expect(result).to.include.keys([
         'id', 'question', 'choices', 'correctAnswer', 'quizId', 'updatedAt'
       ])
@@ -99,6 +99,12 @@ describe(title, () => {
   })
 
   it('should be able to find both questions of quiz 1', (done) => {
-    done()
+    // done()
+    query.findQuizById(1).then((rawResult) => {
+      const result = JSON.parse(JSON.stringify(rawResult))
+      // console.log(result)
+      expect(result.questions).to.have.lengthOf(2)
+      done()
+    })
   })
 })

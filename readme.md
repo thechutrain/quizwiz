@@ -1,7 +1,7 @@
 # QuizWiz API
-[![Build Status](https://travis-ci.org/thechutrain/quizwizAPI.svg?branch=master)](https://travis-ci.org/thechutrain/quizwiz)
+[![Build Status](https://travis-ci.org/thechutrain/quizwizAPI.svg?branch=master)](https://travis-ci.org/thechutrain/quizwizAPI)
 
-> a RESTful Express.js API built with testing.
+> a RESTful Express.js API with built with testing.
 
 - A refactored backend of a previous project made using `sequelize`.
 - Built along with `mocha` and `chai` testing libraries.

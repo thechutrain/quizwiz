@@ -69,3 +69,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - unit test for vote, question table
 - added "addQuestion" query
+
+## [2.0.3] - 2017-05-18
+### Added
+- added intergration test for vote table
+- added routes for the vote query

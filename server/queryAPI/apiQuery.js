@@ -60,12 +60,6 @@ function takeQuiz (userQuizObj) {
       return {error: 'Error! Need a valid quiz'}
     } else {
       return db.userquiz.create({ userId, quizId, score })
-        // .then((result) => {
-        //   return { result, created: true }
-        // })
-        // .catch((err) => {
-        //   return {err}
-        // })
     }
   })
 }

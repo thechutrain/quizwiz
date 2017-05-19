@@ -44,6 +44,7 @@ app.use(bodyParser.json())
 // app.use('/api/v2', apiRouter)
 app.use('/api/v2/user', require('./controllers/api/userRouter'))
 app.use('/api/v2/quiz', require('./controllers/api/quizRouter'))
+app.use('/api/v2/vote', require('./controllers/api/voteRouter'))
 // app.use(errorHandler)
 
 // Start server ---------------------------------- /

@@ -74,3 +74,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added intergration test for vote table
 - added routes for the vote query
+
+## [2.0.5] - 2017-05-18
+## Changed
+- changed Question table's column for choices from a JSON datatype to an array of strings
+## Added
+- added a route for posting a new question & updating previous questions

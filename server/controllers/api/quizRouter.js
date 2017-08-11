@@ -53,4 +53,9 @@ router.post('/:quizId/question/new', (req, res) => {
 		})
 })
 
+// TODO - will do later ...
+router.put('/:quizId/question/update', (req, res) => {
+	res.json({ msg: 'TODO ' })
+})
+
 module.exports = router

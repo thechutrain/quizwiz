@@ -4,7 +4,6 @@ const assert = require('chai').assert
 const expect = require('chai').expect
 
 const models = require('../../server/db/models')
-// const query = require('../../server/queryAPI/apiQuery')
 const checkEmptyDatabase = require('../helper').checkEmptyDatabase
 const userQuery = require('../../server/queryAPI').userQuery
 const quizQuery = require('../../server/queryAPI').quizQuery

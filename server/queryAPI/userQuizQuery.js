@@ -4,7 +4,8 @@ const findUserById = require('./userQuery').findUserById
 const findQuizById = require('./quizQuery').findQuizById
 
 module.exports = {
-	createUserQuiz
+	createUserQuiz,
+	findUserQuiz
 }
 
 /** takeQuiz()
@@ -30,4 +31,13 @@ function createUserQuiz(userQuizObj) {
 			console.log(err)
 			return err
 		})
+}
+
+/**
+*
+*/
+function findUserQuiz(searchObj = {}) {
+	return Object.keys(searchObj).length === 0
+		? db.userquiz.findAll()
+		: db.userquiz.findAll({ where: searchObj })
 }

@@ -11,7 +11,10 @@ const server = require('../../server/server')
 
 // // require the database models
 const models = require('../../server/db/models')
-const query = require('../../server/queryAPI/apiQuery')
+const userQuery = require('../../server/queryAPI').userQuery
+const userQuizQuery = require('../../server/queryAPI').userQuizQuery
+const quizQuery = require('../../server/queryAPI').quizQuery
+const voteQuery = require('../../server/queryAPI').voteQuery
 
 const title =
 `
@@ -49,10 +52,14 @@ describe(title, () => {
     .then(() => {
     // 1. Make FIND ALL queries into all tables
       return Promise.all([
-        query.findAllUsers(),
-        query.findAllQuizzes(),
-        query.findAllVotes(),
-        query.findAllQuizzesTaken()
+        // query.findAllUsers(),
+        // query.findAllQuizzes(),
+        // query.findAllVotes(),
+        // query.findAllQuizzesTaken()
+        userQuery.findAllUsers(),
+        quizQuery.findAllQuizzes(),
+        voteQuery.findAllVotes(),
+        models.userquiz.findAll({})
       ])
     })
     .then((promiseArray) => {
@@ -63,11 +70,11 @@ describe(title, () => {
     })
     .then(() => {
     // 3. add data into other tables HERE
-      return query.newUser(user1)
+      return userQuery.createUser(user1)
     }).then((newUserPromise) => {
       assert.isTrue(newUserPromise[1], 'user should be created')
     }).then(() => {
-      return query.newQuiz(quiz1)
+      return quizQuery.createQuiz(quiz1)
     }).then((insertPromise) => {
       assert.isTrue(insertPromise[0][1], 'quiz should be created')
     })

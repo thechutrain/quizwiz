@@ -9,12 +9,11 @@ chai.use(chaiHttp)
 chai.use(dirtyChai)
 const server = require('../../server/server')
 
-// // require the database models
+// require the database models
 const models = require('../../server/db/models')
+const checkEmptyDatabase = require('../helper').checkEmptyDatabase
 const userQuery = require('../../server/queryAPI').userQuery
-const userQuizQuery = require('../../server/queryAPI').userQuizQuery
 const quizQuery = require('../../server/queryAPI').quizQuery
-const voteQuery = require('../../server/queryAPI').voteQuery
 
 const title =
 `
@@ -50,23 +49,7 @@ describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })
     .then(() => {
-    // 1. Make FIND ALL queries into all tables
-      return Promise.all([
-        // query.findAllUsers(),
-        // query.findAllQuizzes(),
-        // query.findAllVotes(),
-        // query.findAllQuizzesTaken()
-        userQuery.findAllUsers(),
-        quizQuery.findAllQuizzes(),
-        voteQuery.findAllVotes(),
-        models.userquiz.findAll({})
-      ])
-    })
-    .then((promiseArray) => {
-    // 2. check all queries to see if they are empty []
-      promiseArray.forEach((searchResult) => {
-        assert.deepEqual(searchResult, [])
-      })
+      checkEmptyDatabase()
     })
     .then(() => {
     // 3. add data into other tables HERE

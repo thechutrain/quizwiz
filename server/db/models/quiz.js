@@ -17,8 +17,6 @@ module.exports = function(sequelize, DataTypes) {
 					key: 'id'
 					// allowNull: false
 				}
-				// onUpdate: 'cascade',
-				// onDelete: 'cascade'
 			}
 		},
 		// options

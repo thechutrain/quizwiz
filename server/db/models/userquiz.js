@@ -27,10 +27,6 @@ module.exports = function(sequelize, DataTypes) {
 			score: {
 				type: DataTypes.DECIMAL(5, 2)
 			}
-			// isAdmin: {
-			//   type: DataTypes.BOOLEAN,
-			//   defaultValue: false
-			// }
 		},
 		// options
 		{

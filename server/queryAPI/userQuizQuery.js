@@ -34,10 +34,10 @@ function createUserQuiz(userQuizObj) {
 }
 
 /**
-*
+* I dont think this is necessary, since we include userQuiz from when we search users
 */
-function findUserQuiz(searchObj = {}) {
-	return Object.keys(searchObj).length === 0
-		? db.userquiz.findAll()
-		: db.userquiz.findAll({ where: searchObj })
-}
+// function findUserQuiz(searchObj = {}) {
+// 	return Object.keys(searchObj).length === 0
+// 		? db.userquiz.findAll()
+// 		: db.userquiz.findAll({ where: searchObj })
+// }

@@ -4,7 +4,11 @@ const assert = require('chai').assert
 const expect = require('chai').expect
 
 const models = require('../../server/db/models')
-const query = require('../../server/queryAPI/apiQuery')
+// const query = require('../../server/queryAPI/apiQuery')
+const checkEmptyDatabase = require('../helper').checkEmptyDatabase
+const userQuery = require('../../server/queryAPI').userQuery
+const quizQuery = require('../../server/queryAPI').quizQuery
+const userQuizQuery = require('../../server/queryAPI').userQuizQuery
 
 const title =
 `
@@ -28,34 +32,19 @@ describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })
     .then(() => {
-      // 1. Make FIND ALL queries into all tables
-      return Promise.all([
-        query.findAllUsers(),
-        query.findAllQuizzes(),
-        query.findAllVotes(),
-        query.findAllQuizzesTaken()
-      ])
-    })
-    .then((promiseArray) => {
-      // 2. check all queries to see if they are empty []
-      promiseArray.forEach((searchResult) => {
-        assert.deepEqual(searchResult, [])
-      })
+      checkEmptyDatabase()
     })
     .then(() => {
-      // 3. add data into other tables HERE
-      return Promise.all([
-        query.newUser(user1)
-      ])
+      return userQuery.createUser(user1)
     })
     .then((insertPromises) => {
       // 4. check that all insertions worked!
-      assert.isTrue(insertPromises[0][1], 'user should be created')
+      assert.isTrue(insertPromises[1], 'user should be created')
       // assert.isTrue(insertPromises[1][1], 'quiz should be created')
-      return query.newQuiz(quiz1)
+      return quizQuery.createQuiz(quiz1)
     })
     .then((insertPromise) => {
-      assert.isTrue(insertPromise[0][1], 'quiz should be created')
+      assert.isTrue(insertPromise[1], 'quiz should be created')
     })
   })
 
@@ -63,7 +52,7 @@ describe(title, () => {
    *
    */
   it('should be able to enter a valid quiz', (done) => {
-    query.takeQuiz({
+    userQuizQuery.createUserQuiz({
       userId: 1,
       quizId: 1,
       score: 5
@@ -80,7 +69,7 @@ describe(title, () => {
   })
 
   it('should be able to take the quiz again', (done) => {
-    query.takeQuiz({
+    userQuizQuery.createUserQuiz({
       userId: 1,
       quizId: 1,
       score: 5
@@ -95,7 +84,7 @@ describe(title, () => {
   })
 
   it('should not be able to enter a quiz-taken with invalid user', (done) => {
-    query.takeQuiz({
+    userQuizQuery.createUserQuiz({
       userId: -1,
       quizId: 1,
       score: 5
@@ -109,7 +98,7 @@ describe(title, () => {
   })
 
   it('should not be able to enter a quiz-taken with invalid quiz', (done) => {
-    query.takeQuiz({
+    userQuizQuery.createUserQuiz({
       userId: 1,
       quizId: -1,
       score: 5

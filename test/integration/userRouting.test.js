@@ -9,9 +9,10 @@ chai.use(chaiHttp)
 chai.use(dirtyChai)
 const server = require('../../server/server')
 
-// // require the database models
+// require the database models
 const models = require('../../server/db/models')
-const query = require('../../server/queryAPI/apiQuery')
+const checkEmptyDatabase = require('../helper').checkEmptyDatabase
+const quizQuery = require('../../server/queryAPI').quizQuery
 
 const title =
 `
@@ -39,19 +40,7 @@ describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })
     .then(() => {
-    // 1. Make FIND ALL queries into all tables
-      return Promise.all([
-        query.findAllUsers(),
-        query.findAllQuizzes(),
-        query.findAllVotes(),
-        query.findAllQuizzesTaken()
-      ])
-    })
-    .then((promiseArray) => {
-    // 2. check all queries to see if they are empty []
-      promiseArray.forEach((searchResult) => {
-        assert.deepEqual(searchResult, [])
-      })
+      checkEmptyDatabase()
     })
     .then(() => {
     // 3. add data into other tables HERE
@@ -102,7 +91,7 @@ describe(title, () => {
   })
 
   it('should be able to POST @ "/user/take-quiz" with valid quiz and user id', (done) => {
-    query.newQuiz(quiz1).then((resultArray) => {
+    quizQuery.createQuiz(quiz1).then((resultArray) => {
       const [quiz, created] = resultArray
       assert.isTrue(created)
       assert.isObject(quiz)

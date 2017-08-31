@@ -74,3 +74,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added intergration test for vote table
 - added routes for the vote query
+
+## [2.0.5] - 2017-05-18
+## Changed
+- changed Question table's column for choices from a JSON datatype to an array of strings
+## Added
+- added a route for posting a new question & updating previous questions
+
+
+# Version 3
+--------------
+## [3.0.1] - 2017-08-31
+## changed
+- upgraded to V4 of sequelize, undid previous migrations, made new database `quizwiz_v3_database`
+- changed how class methods & instance methods were defined in my models, to work with V4
+
+## [3.0.2] - 2017-08-31
+## changed
+- changed queryAPI so it will have an index file & everything else will be imported from it
+- removed `queryApi/apiQuery` file and instead decoupled queries by tables and am importing them into `index.js` which exports them
+## updated
+- updated all the tests that were using `queryAPI/apiQuery` to use specified query files.
+## Added
+- added a `test/helper.js` file, abstracts out the code that checks if all the tables are empty

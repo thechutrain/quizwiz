@@ -5,7 +5,7 @@ const findQuizById = require('./quizQuery').findQuizById
 
 module.exports = {
 	createUserQuiz,
-	findUserQuiz
+	// findUserQuiz
 }
 
 /** takeQuiz()

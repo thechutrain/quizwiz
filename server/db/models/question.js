@@ -21,14 +21,12 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		// options
 		{
-			freezeTableName: true,
-			classMethods: {
-				associate: function(models) {
-					// quiz.belongsToMany(models.user, { through: 'vote', foreignKey: 'quizId' })
-					question.belongsTo(models.quiz, { foreignKey: 'quizId' })
-				}
-			} // end classMethods
+			freezeTableName: true
 		}
-	) // end .define
+	)
+	// Class Methods
+	question.associate = function(models) {
+		question.belongsTo(models.quiz, { foreignKey: 'quizId' })
+	}
 	return question
 }

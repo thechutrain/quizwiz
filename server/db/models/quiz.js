@@ -30,8 +30,8 @@ module.exports = function(sequelize, DataTypes) {
 	// Class Methods
 	quiz.associate = function(models) {
 		quiz.hasMany(models.userquiz)
-		// quiz.hasMany(models.vote)
-		// quiz.hasMany(models.question)
+		quiz.hasMany(models.vote)
+		quiz.hasMany(models.question)
 	}
 	return quiz
 }

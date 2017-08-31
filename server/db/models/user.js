@@ -24,8 +24,8 @@ module.exports = function(sequelize, DataTypes) {
 	)
 	// Class Methods
 	user.associate = function(models) {
-		// user.hasMany(models.userquiz)
-		// user.hasMany(models.vote)
+		user.hasMany(models.userquiz)
+		user.hasMany(models.vote)
 	}
 	user.hashPassword = function(inputPassword) {
 		return new Promise((resolve, reject) => {
@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
 	// hooks
 	user.addHook('beforeCreate', newUser => {
 		const password = JSON.parse(JSON.stringify(newUser)).password
-		return this.hashPassword(password).then(hash => {
+		return user.hashPassword(password).then(hash => {
 			newUser.password = hash
 			return newUser
 		})

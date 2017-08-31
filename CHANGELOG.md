@@ -84,3 +84,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Version 3
 --------------
+## [3.0.1] - 2017-08-31
+## changed
+- upgraded to V4 of sequelize

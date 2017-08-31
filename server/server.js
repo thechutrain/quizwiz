@@ -14,7 +14,7 @@ const db = require('./db/models')
 
 // DEVELOPMENT ONLY ------------------------- /
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load()
+	require('dotenv').load()
 }
 
 // Create express App ------------------------- /
@@ -49,13 +49,16 @@ app.use('/api/v2/vote', require('./controllers/api/voteRouter'))
 
 // Start server ---------------------------------- /
 if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'travisTest') {
-  db.sequelize.sync().then(() => {
-    console.info('Databases are all synced!')
-    app.listen(PORT, (err) => {
-      if (err) console.log(err)
-      console.info(`${process.env.NODE_ENV} ENV: Listening on port: ${PORT}`)
-    })
-  }).catch((err) => console.error(err))
+	db.sequelize
+		.sync()
+		.then(() => {
+			console.info('Databases are all synced!')
+			app.listen(PORT, err => {
+				if (err) console.log(err)
+				console.info(`${process.env.NODE_ENV} ENV: Listening on port: ${PORT}`)
+			})
+		})
+		.catch(err => console.error(err))
 }
 // else {
 //   // console.log('THIS IS A TEST')

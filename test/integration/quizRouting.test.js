@@ -11,14 +11,11 @@ const server = require('../../server/server')
 
 // // require the database models
 const models = require('../../server/db/models')
-// const query = require('../../server/queryAPI/apiQuery')
+const checkEmptyDatabase = require('../helper').checkEmptyDatabase
 const userQuery = require('../../server/queryAPI').userQuery
-const userQuizQuery = require('../../server/queryAPI').userQuizQuery
-const quizQuery = require('../../server/queryAPI').quizQuery
-const voteQuery = require('../../server/queryAPI').voteQuery
 
 const title =
-`
+  `
 ===============================
 Integration Test '/quiz' routes
 ===============================
@@ -37,27 +34,15 @@ const quiz1 = {
 describe(title, () => {
   before(() => {
     return models.sequelize.sync({ force: true })
-    .then(() => {
-    // 1. Make FIND ALL queries into all tables
-      return Promise.all([
-        userQuery.findAllUsers(),
-        quizQuery.findAllQuizzes(),
-        voteQuery.findAllVotes(),
-        models.userquiz.findAll({})
-      ])
-    })
-    .then((promiseArray) => {
-    // 2. check all queries to see if they are empty []
-      promiseArray.forEach((searchResult) => {
-        assert.deepEqual(searchResult, [])
+      .then(() => {
+        checkEmptyDatabase()
       })
-    })
-    .then(() => {
-    // 3. add data into other tables HERE
-      return userQuery.createUser(user1)
-    }).then((newUserPromise) => {
-      assert.isTrue(newUserPromise[1], 'user shoudl be created')
-    })
+      .then(() => {
+        return userQuery.createUser(user1)
+      })
+      .then((newUserPromise) => {
+        assert.isTrue(newUserPromise[1], 'user should be created')
+      })
   })
 
   it('should be an empty list of quizzes @ GET "/quiz/all"', (done) => {

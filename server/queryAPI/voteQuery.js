@@ -2,7 +2,8 @@ const db = require('../db/models')
 
 module.exports = {
   vote,
-  updateVote
+	updateVote,
+	findAllVotes
 }
 
 /**
@@ -18,7 +19,6 @@ function vote(voteObj) {
 			defaults: voteObj
 		}).spread((result, created) => {
 			if (created) {
-				console.log('CREATEEEEED')
 				return { vote: result, created }
 			} else {
 				return db.vote
@@ -85,4 +85,11 @@ function updateVote(voteObj) {
 				? { vote: voteObj, updated: true }
 				: { vote: voteObj, updated: false }
 		})
+}
+
+/**
+*
+*/
+function findAllVotes() {
+	return db.vote.findAll()
 }

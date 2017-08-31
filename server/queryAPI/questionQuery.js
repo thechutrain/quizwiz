@@ -1,4 +1,5 @@
 const db = require('../db/models')
+const findQuizById = require('./quizQuery').findQuizById
 
 module.exports = {
 	createQuestion

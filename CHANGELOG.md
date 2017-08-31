@@ -80,3 +80,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - changed Question table's column for choices from a JSON datatype to an array of strings
 ## Added
 - added a route for posting a new question & updating previous questions
+
+
+# Version 3
+--------------

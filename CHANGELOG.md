@@ -86,4 +86,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 --------------
 ## [3.0.1] - 2017-08-31
 ## changed
-- upgraded to V4 of sequelize
+- upgraded to V4 of sequelize, undid previous migrations, made new database `quizwiz_v3_database`
+- changed how class methods & instance methods were defined in my models, to work with V4

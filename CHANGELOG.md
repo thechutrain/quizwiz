@@ -97,3 +97,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - updated all the tests that were using `queryAPI/apiQuery` to use specified query files.
 ## Added
 - added a `test/helper.js` file, abstracts out the code that checks if all the tables are empty
+
+## [3.0.3] - 2017-08-31
+## changed
+- updated & fixed readme

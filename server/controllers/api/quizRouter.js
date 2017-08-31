@@ -1,10 +1,10 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const query = require('../../queryAPI/apiQuery')
+const validator = require('../middleware/validator')
+// QUeries here:
 const quizQuery = require('../../queryAPI/').quizQuery
 const questionQuery = require('../../queryAPI/').questionQuery
-const validator = require('../middleware/validator')
 
 // =========== QUIZ routes ==================
 router.get('/id/:id', (req, res) => {

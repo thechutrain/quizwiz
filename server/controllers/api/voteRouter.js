@@ -1,13 +1,14 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const query = require('../../queryAPI/apiQuery')
 const validator = require('../middleware/validator')
+// Query here:
+const voteQuery = require('../../queryAPI/').voteQuery
 
 router.post('/new',
   validator(['userId', 'quizId', 'stars']),
   (req, res) => {
-    query.vote(req.body).then((result) => {
+    voteQuery.vote(req.body).then((result) => {
       res.json(result)
     })
   }
@@ -16,7 +17,7 @@ router.post('/new',
 router.put('/update',
   validator(['userId', 'quizId', 'stars']),
   (req, res) => {
-    query.updateVote(req.body).then((result) => {
+    voteQuery.updateVote(req.body).then((result) => {
       res.json(result)
     })
   }

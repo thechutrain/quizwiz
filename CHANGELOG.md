@@ -101,3 +101,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.0.3] - 2017-08-31
 ## changed
 - updated & fixed readme
+## Added
+- `documentation.html` file which is just a static html file server on `/` root of my api, that documents the API

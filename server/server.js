@@ -45,6 +45,12 @@ app.use(bodyParser.json())
 app.use('/api/v2/user', require('./controllers/api/userRouter'))
 app.use('/api/v2/quiz', require('./controllers/api/quizRouter'))
 app.use('/api/v2/vote', require('./controllers/api/voteRouter'))
+if (process.env.NODE_ENV === 'development') {
+	const path = require('path')
+	app.get('/', (req, res) => {
+		res.sendFile(path.join(__dirname, './documentation.html'))
+	})
+}
 // app.use(errorHandler)
 
 // Start server ---------------------------------- /

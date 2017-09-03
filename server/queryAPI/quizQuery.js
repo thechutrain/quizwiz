@@ -24,7 +24,7 @@ function findQuizById(id) {
 
 function findAllQuizzes() {
 	return db.quiz.findAll({
-		include: [{ model: db.question }]
+		// include: [{ model: db.question }] // maybe should only return quiz names instead
 	})
 }
 

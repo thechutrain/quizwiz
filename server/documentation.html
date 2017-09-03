@@ -58,8 +58,8 @@
           <td>
             <pre>@/api/v3/user/new  
 {
-  username: REQUIRED,
-  password: REQUIRED
+  username: 'alan',
+  password: 'password'
 }
             </pre>
           </td>
@@ -185,8 +185,14 @@
 </tr>
 <!-- /api/v3/quiz/:id/question/new -->
 <tr>
-    <td>GET</td>
-    <td><pre>/api/v3/quiz/:id/question/new</pre></td>
+    <td>POST</td>
+    <td><pre>@/api/v3/quiz/:id/question/new
+{
+  "question": "Is this a valid question yo?",
+  "choices": ["yes", "no"],
+  "correctAnswer": 0
+}  
+    </pre></td>
     <td><pre>
 {
   "id": 1,
@@ -201,10 +207,8 @@
   "createdAt": "2017-09-03T17:50:11.420Z"
 }
     </pre></td>
-    <td>
-      <ul>
-        <li>If not a valid quiz, returns an { "error": "Not a valid quizId"}</li>
-      </ul>
+    <td>If not a valid quiz, returns an { "error": "Not a valid quizId"}. If missing any of the required parameters,
+      it will return an array of error messages.
     </td>
   </tr>
 

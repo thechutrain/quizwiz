@@ -114,7 +114,7 @@
 <!-- /api/v3/quiz/id/:id -->
   <tr>
     <td>GET</td>
-    <td><pre>/api/v3/quiz/id/1</pre></td>
+    <td><pre>/api/v3/quiz/all</pre></td>
     <td><pre>
 [
   {
@@ -221,6 +221,73 @@
     <td><pre>"[]"</pre></td>
     <td>heres the description of what it does right?</td>
 </tr> -->
+
+<!-- ======= Vote Router ======== --> 
+<tr>
+    <td><h4>Vote Routes</h4></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<!-- /api/v3/vote/new -->
+<tr>
+  <td>POST</td>
+  <td><pre>@/api/v3/vote/new
+{
+  "userId": 1,
+  "quizId": 2,
+  "stars": 4
+}</pre></td>
+  <td><pre>
+{
+  "vote": {
+      "userId": 1,
+      "quizId": 2,
+      "stars": 4,
+      "updatedAt": "2017-09-03T18:46:08.575Z",
+      "createdAt": "2017-09-03T18:46:08.575Z"
+  },
+  "created": true
+}
+// if user already voted for a quiz
+// created will be false, but gets updated
+  </pre></td>
+  <td>
+    If missing any of the required parameters, returns an array of error message strings. Currently will update
+    the vote if user already voted.
+  </td>
+</tr>
+<!-- /api/v3/vote/new -->
+<tr>
+    <td>POST</td>
+    <td><pre>@/api/v3/vote/update
+{
+  "vote": {
+      "stars": "1",
+      "quizId": "2",
+      "userId": "1"
+  },
+  "updated": true
+}
+</pre></td>
+    <td><pre>
+{
+  "vote": {
+      "stars": "1",
+      "quizId": "2",
+      "userId": "1"
+  },
+  "updated": true
+}
+//*If there is an error, updated will be false
+    </pre></td>
+    <td>
+        If missing any of the required parameters, returns an array of error message strings. This route may be combined
+        with the previous POST a new vote route.
+    </td>
+  </tr>
+
       </tbody>
     </table>
   </div>

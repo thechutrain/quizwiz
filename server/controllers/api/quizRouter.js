@@ -34,26 +34,28 @@ router.post(
 )
 
 // =========== Question routes ==================
-router.post('/:quizId/question/new', (req, res) => {
-	console.log(req.params.quizId)
-	const { question, correctAnswer, choices } = req.body
-	questionQuery
-		.createQuestion({
-			quizId: req.params.quizId,
-			question,
-			correctAnswer,
-			choices
-		})
-		.then(result => {
-			// console.log(result)
-			res.json(result)
-		})
-		.catch(error => {
-			console.log('ERROR!!!')
-			console.log(error)
-			res.json(error)
-		})
-})
+router.post('/:quizId/question/new',
+	validator(['question', 'choices', 'correctAnswer']),
+	(req, res) => {
+		console.log(req.params.quizId)
+		const { question, correctAnswer, choices } = req.body
+		questionQuery
+			.createQuestion({
+				quizId: req.params.quizId,
+				question,
+				correctAnswer,
+				choices
+			})
+			.then(result => {
+				// console.log(result)
+				res.json(result)
+			})
+			.catch(error => {
+				console.log('ERROR!!!')
+				console.log(error)
+				res.json(error)
+			})
+	})
 
 // TODO - will do later ...
 router.put('/:quizId/question/update', (req, res) => {

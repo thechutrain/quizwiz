@@ -42,9 +42,9 @@ app.use(bodyParser.json())
 
 // Route config -------------------------------------------/
 // app.use('/api/v2', apiRouter)
-app.use('/api/v2/user', require('./controllers/api/userRouter'))
-app.use('/api/v2/quiz', require('./controllers/api/quizRouter'))
-app.use('/api/v2/vote', require('./controllers/api/voteRouter'))
+app.use('/api/v3/user', require('./controllers/api/userRouter'))
+app.use('/api/v3/quiz', require('./controllers/api/quizRouter'))
+app.use('/api/v3/vote', require('./controllers/api/voteRouter'))
 if (process.env.NODE_ENV === 'development') {
 	const path = require('path')
 	app.get('/', (req, res) => {

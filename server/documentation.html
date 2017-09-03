@@ -14,7 +14,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Endpoint</th>
           <th>Method</th>
           <th>Sample Request</th>
           <th>Sample Response</th>
@@ -28,10 +27,10 @@
 </tr>
         <!-- GET /api/v3/user/all -->
         <tr>
-          <td><i>/api/v3/user/all</i></td>
           <td>GET</td>
           <td>
-            <pre>/api/v3/user/all</pre>
+            <p>/api/v3/user/all</p>
+            <!-- <i>/api/v3/user/all</i> -->
           </td>
           <td>
             <pre>"[]"</pre>
@@ -42,10 +41,10 @@
         </tr>
         <!-- GET /api/v3/user/id/:id-->
         <tr>
-          <td><i>/api/v3/user/id/:id </i></td>
           <td>GET</td>
           <td>
-            <pre>/api/v3/user/id/2</pre>
+            <p>/api/v3/user/id/:id </p>
+            <i>ex. /api/v3/user/id/2 </i>
           </td>
           <td>
             <pre>"[]"</pre>
@@ -55,13 +54,12 @@
         </tr>
         <!-- POST /api/v3/user/new-->
         <tr>
-          <td><i>/api/v3/user/new </i></td>
           <td>POST</td>
           <td>
-            <pre>/api/v3/user/new  
+            <pre>@/api/v3/user/new  
 {
-    username: 'myNewUsername',
-    password: 'aUniquePassword'
+  username: REQUIRED,
+  password: REQUIRED
 }
             </pre>
           </td>
@@ -76,7 +74,8 @@
   },
   "created": true
 }
-// *"created" will be false, if username is already taken
+// *"created" will be false, 
+//if username is already taken
             </pre>
           </td>
           <td> Required POST keys: "username" & "password". If missing either, you will get an 
@@ -86,10 +85,9 @@
 
       <!-- POST /api/v3/user/take-quiz -->
         <tr>
-          <td><i>/api/v3/user/take-quiz</i></td>
           <td>POST</td>
           <td>
-            <pre>/api/v3/user/take-quiz
+            <pre>@/api/v3/user/take-quiz
   {
     userId: 3,
     quizId: 4,
@@ -104,6 +102,121 @@
             a string (array of error strings). If not a valid quiz or valid user you'll get an object ex. `{"error": "Error! Need a valid quiz"}`
           </td>
         </tr>
+
+<!-- ======= Quiz Router ======== --> 
+<tr>
+    <td><h4>Quiz Routes</h4></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<!-- /api/v3/quiz/id/:id -->
+  <tr>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/id/1</pre></td>
+    <td><pre>
+[
+  {
+    "id": 2,
+    "title": "'this is a test quiz'",
+    "description": null,
+    "madeBy": 1,
+    "createdAt": "2017-09-03T17:29:13.826Z",
+    "updatedAt": "2017-09-03T17:29:13.826Z"
+  }
+]
+  </pre></td>
+    <td>heres the description of what it does right?</td>
+  </tr>
+<!-- /api/v3/quiz/id/:id -->
+  <tr>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/id/:id</pre></td>
+    <td><pre>
+{
+  "id": 2,
+  "title": "'this is a test quiz'",
+  "description": null,
+  "madeBy": 1,
+  "createdAt": "2017-09-03T17:29:13.826Z",
+  "updatedAt": "2017-09-03T17:29:13.826Z",
+  "questions": [
+      {
+          "id": 1,
+          "quizId": 2,
+          "question": "Is this a valid question yo?",
+          "choices": [
+              "yes",
+              "no"
+          ],
+          "correctAnswer": 0,
+          "createdAt": "2017-09-03T17:50:11.420Z",
+          "updatedAt": "2017-09-03T17:50:11.420Z"
+      }
+  ]
+}
+    </pre></td>
+    <td>Returns 'null' if there is no quiz with that id.</td>
+  </tr>
+<!-- /api/v3/quiz/id/:id -->
+<tr>
+    <td>POST</td>
+    <td><pre>@/api/v3/quiz/new
+{
+  "title": 'this is a test quiz',
+  "madeBy": 1 // user Primary Key
+}
+    </pre></td>
+    <td><pre>
+{
+  "quiz": {
+    "id": 2,
+    "title": "'this is a test quiz'",
+    "madeBy": 1,
+    "updatedAt": "2017-09-03T17:29:13.826Z",
+    "createdAt": "2017-09-03T17:29:13.826Z",
+    "description": null
+  },
+  "created": true,
+}
+    </pre></td>
+    <td>If its not created, "quiz" will be an empty object & "created" will be false</td>
+</tr>
+<!-- /api/v3/quiz/:id/question/new -->
+<tr>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/:id/question/new</pre></td>
+    <td><pre>
+{
+  "id": 1,
+  "question": "Is this a valid question yo?",
+  "choices": [
+      "yes",
+      "no"
+  ],
+  "correctAnswer": 0,
+  "quizId": 2,
+  "updatedAt": "2017-09-03T17:50:11.420Z",
+  "createdAt": "2017-09-03T17:50:11.420Z"
+}
+    </pre></td>
+    <td>
+      <ul>
+        <li>If not a valid quiz, returns an { "error": "Not a valid quizId"}</li>
+      </ul>
+    </td>
+  </tr>
+
+<!-- /api/v3/quiz/:id/question/update -->
+<!-- TODO route -->
+<!-- <tr>
+    <td><i>/api/v3/quiz/:id/question/update</i></td>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/id/1</pre></td>
+    <td><pre>"[]"</pre></td>
+    <td>heres the description of what it does right?</td>
+</tr> -->
       </tbody>
     </table>
   </div>

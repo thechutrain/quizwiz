@@ -22,13 +22,16 @@
         </tr>
       </thead>
       <tbody>
-        <!-- ======= User Router ======== -->
-        <!-- GET /api/v2/user/all -->
+<!-- ======= User Router ======== -->
+<tr>
+  <td><h4>User Routes</h4></td>
+</tr>
+        <!-- GET /api/v3/user/all -->
         <tr>
-          <td><i>/api/v2/user/all</i></td>
+          <td><i>/api/v3/user/all</i></td>
           <td>GET</td>
           <td>
-            <pre>/api/v2/user/all</pre>
+            <pre>/api/v3/user/all</pre>
           </td>
           <td>
             <pre>"[]"</pre>
@@ -37,12 +40,12 @@
             gets all the users in the database
           </td>
         </tr>
-        <!-- GET /api/v2/user/id/:id-->
+        <!-- GET /api/v3/user/id/:id-->
         <tr>
-          <td><i>/api/v2/user/id/:id </i></td>
+          <td><i>/api/v3/user/id/:id </i></td>
           <td>GET</td>
           <td>
-            <pre>/api/v2/user/id/2</pre>
+            <pre>/api/v3/user/id/2</pre>
           </td>
           <td>
             <pre>"[]"</pre>
@@ -50,41 +53,55 @@
           <td> returns "null" if there is no user found there.
           </td>
         </tr>
-        <!-- POST /api/v2/user/new-->
+        <!-- POST /api/v3/user/new-->
         <tr>
-          <td><i>/api/v2/user/new </i></td>
+          <td><i>/api/v3/user/new </i></td>
           <td>POST</td>
           <td>
-            <pre>/api/v2/user/new 
-  {
+            <pre>/api/v3/user/new  
+{
     username: 'myNewUsername',
     password: 'aUniquePassword'
-  }
+}
             </pre>
           </td>
           <td>
-            <pre>"[]"</pre>
+            <pre>
+{
+  "user": {
+    "id": 1,
+    "username": "alan",
+    "updatedAt": "2017-09-03T16:12:45.258Z",
+    "createdAt": "2017-09-03T16:12:45.258Z"
+  },
+  "created": true
+}
+// *"created" will be false, if username is already taken
+            </pre>
           </td>
-          <td> returns
+          <td> Required POST keys: "username" & "password". If missing either, you will get an 
+            array of error message strings.
           </td>
         </tr>
-        <!-- POST /api/v2/user/take-quiz -->
+
+      <!-- POST /api/v3/user/take-quiz -->
         <tr>
-          <td><i>/api/v2/user/take-quiz</i></td>
+          <td><i>/api/v3/user/take-quiz</i></td>
           <td>POST</td>
           <td>
-            <pre>/api/v2/user/take-quiz
+            <pre>/api/v3/user/take-quiz
   {
     userId: 3,
     quizId: 4,
-    score: ???
+    score: 95.25
   }
             </pre>
           </td>
           <td>
             <pre>"[]"</pre>
           </td>
-          <td> returns
+          <td> required POST: userId, quizId, score. If you're missing any of the required parameters, then you will get an error message as 
+            a string (array of error strings). If not a valid quiz or valid user you'll get an object ex. `{"error": "Error! Need a valid quiz"}`
           </td>
         </tr>
       </tbody>

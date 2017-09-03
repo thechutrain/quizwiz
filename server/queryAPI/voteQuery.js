@@ -43,7 +43,7 @@ function vote(voteObj) {
 									}
 								})
 								.then(update => {
-									return [update.dataValues, created]
+									return { vote: update, created}
 								})
 						} else {
 							return [{ error: true, msg: 'failed to update vote' }, created]

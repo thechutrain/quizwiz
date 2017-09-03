@@ -84,7 +84,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Version 3
 --------------
-## [3.0.1] - 2017-08-31
+## [3.0.1] - 2017-08-31   
 ## changed
 - upgraded to V4 of sequelize, undid previous migrations, made new database `quizwiz_v3_database`
 - changed how class methods & instance methods were defined in my models, to work with V4
@@ -97,3 +97,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - updated all the tests that were using `queryAPI/apiQuery` to use specified query files.
 ## Added
 - added a `test/helper.js` file, abstracts out the code that checks if all the tables are empty
+
+## [3.0.3] - 2017-09-03
+## changed
+- updated & fixed readme
+- changed url to `api/v3`, and updated integration test routes
+## Added
+- `documentation.html` file which is just a static html file server on `/` root of my api, that documents the API

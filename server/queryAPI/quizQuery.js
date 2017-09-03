@@ -18,13 +18,16 @@ module.exports = {
 function findQuizById(id) {
 	return db.quiz.findOne({
 		where: { id },
-		include: [{ model: db.question }]
+		include: [
+			{ model: db.question },
+			{ model: db.vote } // Gets all of the votes ... could be expensive!
+		]
 	})
 }
 
 function findAllQuizzes() {
 	return db.quiz.findAll({
-		include: [{ model: db.question }]
+		// include: [{ model: db.question }] // maybe should only return quiz names instead
 	})
 }
 

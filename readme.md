@@ -1,10 +1,16 @@
 # QuizWiz API
 [![Build Status](https://travis-ci.org/thechutrain/quizwizAPI.svg?branch=master)](https://travis-ci.org/thechutrain/quizwizAPI)
 
-> a RESTful Express.js API with built with testing.
+> a RESTful Express.js API built with continuous integrated testing.
 
 - A refactored backend of a previous project made using `sequelize`.
 - Built along with `mocha` and `chai` testing libraries.
+
+## Features
+- Node.js & Express.js
+- `chai`, `mocha`, `chai-http` for testing
+-  `Sequelize` (refactored to use Version 4)
+- Postgres database
 
 
 ## API Docs:
@@ -54,4 +60,4 @@
 
 
 ## License
-MIT
+MIT © [Alan Codes](https://alancodes.com)

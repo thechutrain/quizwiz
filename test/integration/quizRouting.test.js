@@ -14,6 +14,7 @@ const models = require('../../server/db/models')
 const checkEmptyDatabase = require('../helper').checkEmptyDatabase
 const userQuery = require('../../server/queryAPI').userQuery
 
+const BASE_URL = '/api/v3/'
 const title =
   `
 ===============================
@@ -47,7 +48,7 @@ describe(title, () => {
 
   it('should be an empty list of quizzes @ GET "/quiz/all"', (done) => {
     chai.request(server)
-      .get('/api/v2/quiz/all')
+      .get(BASE_URL + 'quiz/all')
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
@@ -59,7 +60,7 @@ describe(title, () => {
 
   it('should be able to make a new quiz @ POST "/quiz/new"', (done) => {
     chai.request(server)
-      .post('/api/v2/quiz/new')
+      .post(BASE_URL + 'quiz/new')
       .send(quiz1)
       .end((err, res) => {
         expect(err).to.be.null()
@@ -77,7 +78,7 @@ describe(title, () => {
 
   it('should be able to find the new quiz that was made @ GET "/quiz/id/1"', (done) => {
     chai.request(server)
-      .get('/api/v2/quiz/id/1')
+      .get(BASE_URL + 'quiz/id/1')
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)

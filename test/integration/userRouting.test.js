@@ -14,6 +14,7 @@ const models = require('../../server/db/models')
 const checkEmptyDatabase = require('../helper').checkEmptyDatabase
 const quizQuery = require('../../server/queryAPI').quizQuery
 
+const BASE_URL = '/api/v3/'
 const title =
 `
 ===============================
@@ -49,7 +50,7 @@ describe(title, () => {
 
   it('should be an empty list of users @ GET "/user/all"', (done) => {
     chai.request(server)
-      .get('/api/v2/user/all')
+      .get(BASE_URL + 'user/all')
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
@@ -60,7 +61,7 @@ describe(title, () => {
 
   it('should be able to post a new user @ POST "/user/new"', (done) => {
     chai.request(server)
-      .post('/api/v2/user/new')
+      .post(BASE_URL + 'user/new')
       .send(user1)
       .end((err, res) => {
         expect(err).to.be.null()
@@ -78,7 +79,7 @@ describe(title, () => {
 
   it('should not be able to POST @ "/user/take-quiz" without valid quiz', (done) => {
     chai.request(server)
-      .post('/api/v2/user/take-quiz')
+      .post(BASE_URL + 'user/take-quiz')
       .send(userQuiz1)
       .end((err, res) => {
         expect(err).to.be.null()
@@ -97,7 +98,7 @@ describe(title, () => {
       assert.isObject(quiz)
       // now that quiz is in database --> make request
       chai.request(server)
-        .post('/api/v2/user/take-quiz')
+        .post(BASE_URL + 'user/take-quiz')
         .send(userQuiz1)
         .end((err, res) => {
           expect(err).to.be.null()
@@ -116,7 +117,7 @@ describe(title, () => {
 
   it('should be able to get a user @ "/user/id/:id"', (done) => {
     chai.request(server)
-      .get('/api/v2/user/id/1') // get first user
+      .get(BASE_URL + 'user/id/1') // get first user
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)
@@ -135,7 +136,7 @@ describe(title, () => {
 
   it('should be not be able to get a user @ "/user/id/-2"', (done) => {
     chai.request(server)
-      .get('/api/v2/user/id/-2') // get first user
+      .get(BASE_URL + 'user/id/-2') // get first user
       .end((err, res) => {
         expect(err).to.be.null()
         expect(res).to.have.status(200)

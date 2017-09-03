@@ -1,0 +1,296 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <title>API Documentation</title>
+</head>
+
+<body>
+  <div class="container">
+    <h3>Quizwiz API documentation</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Sample Request</th>
+          <th>Sample Response</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+<!-- ======= User Router ======== -->
+<tr>
+  <td><h4>User Routes</h4></td>
+</tr>
+        <!-- GET /api/v3/user/all -->
+        <tr>
+          <td>GET</td>
+          <td>
+            <p>/api/v3/user/all</p>
+            <!-- <i>/api/v3/user/all</i> -->
+          </td>
+          <td>
+            <pre>"[]"</pre>
+          </td>
+          <td>
+            gets all the users in the database
+          </td>
+        </tr>
+        <!-- GET /api/v3/user/id/:id-->
+        <tr>
+          <td>GET</td>
+          <td>
+            <p>/api/v3/user/id/:id </p>
+            <i>ex. /api/v3/user/id/2 </i>
+          </td>
+          <td>
+            <pre>"[]"</pre>
+          </td>
+          <td> returns "null" if there is no user found there.
+          </td>
+        </tr>
+        <!-- POST /api/v3/user/new-->
+        <tr>
+          <td>POST</td>
+          <td>
+            <pre>@/api/v3/user/new  
+{
+  username: 'alan',
+  password: 'password'
+}
+            </pre>
+          </td>
+          <td>
+            <pre>
+{
+  "user": {
+    "id": 1,
+    "username": "alan",
+    "updatedAt": "2017-09-03T16:12:45.258Z",
+    "createdAt": "2017-09-03T16:12:45.258Z"
+  },
+  "created": true
+}
+// *"created" will be false, 
+//if username is already taken
+            </pre>
+          </td>
+          <td> Required POST keys: "username" & "password". If missing either, you will get an 
+            array of error message strings.
+          </td>
+        </tr>
+
+      <!-- POST /api/v3/user/take-quiz -->
+        <tr>
+          <td>POST</td>
+          <td>
+            <pre>@/api/v3/user/take-quiz
+  {
+    userId: 3,
+    quizId: 4,
+    score: 95.25
+  }
+            </pre>
+          </td>
+          <td>
+            <pre>"[]"</pre>
+          </td>
+          <td> required POST: userId, quizId, score. If you're missing any of the required parameters, then you will get an error message as 
+            a string (array of error strings). If not a valid quiz or valid user you'll get an object ex. `{"error": "Error! Need a valid quiz"}`
+          </td>
+        </tr>
+
+<!-- ======= Quiz Router ======== --> 
+<tr>
+    <td><h4>Quiz Routes</h4></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<!-- /api/v3/quiz/id/:id -->
+  <tr>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/all</pre></td>
+    <td><pre>
+[
+  {
+    "id": 2,
+    "title": "'this is a test quiz'",
+    "description": null,
+    "madeBy": 1,
+    "createdAt": "2017-09-03T17:29:13.826Z",
+    "updatedAt": "2017-09-03T17:29:13.826Z"
+  }
+]
+  </pre></td>
+    <td>heres the description of what it does right?</td>
+  </tr>
+<!-- /api/v3/quiz/id/:id -->
+  <tr>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/id/:id</pre></td>
+    <td><pre>
+{
+  "id": 2,
+  "title": "'this is a test quiz'",
+  "description": null,
+  "madeBy": 1,
+  "createdAt": "2017-09-03T17:29:13.826Z",
+  "updatedAt": "2017-09-03T17:29:13.826Z",
+  "questions": [
+      {
+          "id": 1,
+          "quizId": 2,
+          "question": "Is this a valid question yo?",
+          "choices": [
+              "yes",
+              "no"
+          ],
+          "correctAnswer": 0,
+          "createdAt": "2017-09-03T17:50:11.420Z",
+          "updatedAt": "2017-09-03T17:50:11.420Z"
+      }
+  ]
+}
+    </pre></td>
+    <td>Returns 'null' if there is no quiz with that id.</td>
+  </tr>
+<!-- /api/v3/quiz/id/:id -->
+<tr>
+    <td>POST</td>
+    <td><pre>@/api/v3/quiz/new
+{
+  "title": 'this is a test quiz',
+  "madeBy": 1 // user Primary Key
+}
+    </pre></td>
+    <td><pre>
+{
+  "quiz": {
+    "id": 2,
+    "title": "'this is a test quiz'",
+    "madeBy": 1,
+    "updatedAt": "2017-09-03T17:29:13.826Z",
+    "createdAt": "2017-09-03T17:29:13.826Z",
+    "description": null
+  },
+  "created": true,
+}
+    </pre></td>
+    <td>If its not created, "quiz" will be an empty object & "created" will be false</td>
+</tr>
+<!-- /api/v3/quiz/:id/question/new -->
+<tr>
+    <td>POST</td>
+    <td><pre>@/api/v3/quiz/:id/question/new
+{
+  "question": "Is this a valid question yo?",
+  "choices": ["yes", "no"],
+  "correctAnswer": 0
+}  
+    </pre></td>
+    <td><pre>
+{
+  "id": 1,
+  "question": "Is this a valid question yo?",
+  "choices": [
+      "yes",
+      "no"
+  ],
+  "correctAnswer": 0,
+  "quizId": 2,
+  "updatedAt": "2017-09-03T17:50:11.420Z",
+  "createdAt": "2017-09-03T17:50:11.420Z"
+}
+    </pre></td>
+    <td>If not a valid quiz, returns an { "error": "Not a valid quizId"}. If missing any of the required parameters,
+      it will return an array of error messages.
+    </td>
+  </tr>
+
+<!-- /api/v3/quiz/:id/question/update -->
+<!-- TODO route -->
+<!-- <tr>
+    <td><i>/api/v3/quiz/:id/question/update</i></td>
+    <td>GET</td>
+    <td><pre>/api/v3/quiz/id/1</pre></td>
+    <td><pre>"[]"</pre></td>
+    <td>heres the description of what it does right?</td>
+</tr> -->
+
+<!-- ======= Vote Router ======== --> 
+<tr>
+    <td><h4>Vote Routes</h4></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<!-- /api/v3/vote/new -->
+<tr>
+  <td>POST</td>
+  <td><pre>@/api/v3/vote/new
+{
+  "userId": 1,
+  "quizId": 2,
+  "stars": 4
+}</pre></td>
+  <td><pre>
+{
+  "vote": {
+      "userId": 1,
+      "quizId": 2,
+      "stars": 4,
+      "updatedAt": "2017-09-03T18:46:08.575Z",
+      "createdAt": "2017-09-03T18:46:08.575Z"
+  },
+  "created": true
+}
+// if user already voted for a quiz
+// created will be false, but gets updated
+  </pre></td>
+  <td>
+    If missing any of the required parameters, returns an array of error message strings. Currently will update
+    the vote if user already voted.
+  </td>
+</tr>
+<!-- /api/v3/vote/new -->
+<tr>
+    <td>POST</td>
+    <td><pre>@/api/v3/vote/update
+{
+  "vote": {
+      "stars": "1",
+      "quizId": "2",
+      "userId": "1"
+  },
+  "updated": true
+}
+</pre></td>
+    <td><pre>
+{
+  "vote": {
+      "stars": "1",
+      "quizId": "2",
+      "userId": "1"
+  },
+  "updated": true
+}
+//*If there is an error, updated will be false
+    </pre></td>
+    <td>
+        If missing any of the required parameters, returns an array of error message strings. This route may be combined
+        with the previous POST a new vote route.
+    </td>
+  </tr>
+
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

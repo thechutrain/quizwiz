@@ -15,6 +15,7 @@ const checkEmptyDatabase = require('../helper').checkEmptyDatabase
 const userQuery = require('../../server/queryAPI').userQuery
 const quizQuery = require('../../server/queryAPI').quizQuery
 
+const BASE_URL = '/api/v3/'
 const title =
 `
 ===============================
@@ -70,7 +71,7 @@ describe(title, () => {
   // })
   it('should be able to find the new post', (done) => {
     chai.request(server)
-      .post('/api/v2/vote/new')
+      .post(BASE_URL + 'vote/new')
       .send(vote1)
       .end((err, res) => {
         expect(err).to.be.null()
@@ -85,7 +86,7 @@ describe(title, () => {
 
   it('should not be able to post without valid post body', (done) => {
     chai.request(server)
-      .post('/api/v2/vote/new')
+      .post(BASE_URL + 'vote/new')
       .send({
         // userId: 1,
         stars: 3
@@ -107,7 +108,7 @@ describe(title, () => {
 
   it('should be able to update the new post', (done) => {
     chai.request(server)
-      .put('/api/v2/vote/update')
+      .put(BASE_URL + 'vote/update')
       .send(vote2)
       .end((err, res) => {
         expect(err).to.be.null()
